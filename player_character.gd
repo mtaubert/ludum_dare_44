@@ -1,6 +1,7 @@
 extends Node2D
 
 signal movement_done()
+signal start_encounter()
 
 var type = "Player"
 var dir = Vector2()
@@ -70,7 +71,10 @@ func toggle_stats_view():
 	target.x = stats_pos
 	stats_tween.interpolate_property(the_man, "rect_position", the_man.rect_position,  target, 0.5, Tween.TRANS_SINE, Tween.EASE_OUT)
 	stats_tween.start()
-	
 
 func _on_AudioStreamPlayer2D_finished():
 	$AudioStreamPlayer2D.play()
+
+func play_encounter_start():
+	yield(get_tree().create_timer(0.5), "timeout")
+	emit_signal("start_encounter")
