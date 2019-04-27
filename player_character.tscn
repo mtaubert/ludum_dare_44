@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://player_character.gd" type="Script" id=1]
+[ext_resource path="res://character_model/default_player.png" type="Texture" id=2]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 33.4641
+height = 41.883
+
+[node name="player_character" type="Node2D"]
+script = ExtResource( 1 )
+speed = 400
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="KinematicBody2D"]
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 145, 100, 300, 520 )
+
