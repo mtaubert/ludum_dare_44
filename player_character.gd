@@ -85,7 +85,10 @@ func _on_AudioStreamPlayer2D_finished():
 	$AudioStreamPlayer2D.play()
 
 func play_encounter_start():
-	yield(get_tree().create_timer(0.5), "timeout")
+	$KinematicBody2D/Character_Effect/AnimationPlayer.play("demon_rising")
+	
+
+func _on_demon_rising_finished(anim_name):
 	emit_signal("start_encounter")
 
 
