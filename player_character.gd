@@ -9,6 +9,9 @@ export var limits = [0, 0, 1280, 1024]
 onready var sprite = get_node("KinematicBody2D/Sprite")
 onready var stats_tween = get_node("Camera2D/CanvasLayer/stats_tween")
 var stats_pos = -80
+var can_open_menu = true
+
+export var blood_count = 100
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Camera2D.limit_left = limits[0]
@@ -61,16 +64,32 @@ func movement_done(object, key):
 	
 #show the man/ hide the man
 func toggle_stats_view():
-	var the_man = $Camera2D/CanvasLayer/the_man_stats
-	var target = the_man.rect_position
-	if stats_pos == -80:
-		stats_pos = 80
-	else:
-		stats_pos = -80
-	target.x = stats_pos
-	stats_tween.interpolate_property(the_man, "rect_position", the_man.rect_position,  target, 0.5, Tween.TRANS_SINE, Tween.EASE_OUT)
-	stats_tween.start()
+	if can_open_menu:
+		can_open_menu = false
+		var the_man = $Camera2D/CanvasLayer/the_man_stats
+		var target = the_man.rect_position
+		if stats_pos == -80:
+			stats_pos = 80
+			the_man.toggle_buttons(true)
+		else:
+			
+			the_man.toggle_buttons(false)
+			stats_pos = -80
+		target.x = stats_pos
+		stats_tween.interpolate_property(the_man, "rect_position", the_man.rect_position,  target, 0.5, Tween.TRANS_SINE, Tween.EASE_OUT)
+		stats_tween.start()
 	
 
 func _on_AudioStreamPlayer2D_finished():
 	$AudioStreamPlayer2D.play()
+
+
+
+func _on_stats_tween_tween_completed(object, key):
+	can_open_menu = true
+
+
+func _on_the_man_stats_blood_paid(ammount):
+	if blood_count > ammount:
+		blood_count -= ammount
+	$Camera2D/CanvasLayer/the_man_stats.set_blood(blood_count)

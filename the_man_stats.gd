@@ -7,6 +7,9 @@ onready var toe = load("res://character_model/man_toes.png")
 onready var soul = load("res://character_model/man_soul.png")
 onready var default = load("res://character_model/the_man_Stats.png")
 onready var tween = get_node("Tween")
+
+signal blood_paid(ammount)
+
 func set_blood(val):
 	#set the blood pool to a value between 0 and 100
 	tween.interpolate_property($ProgressBar, "value", $ProgressBar.value, val, 0.1, Tween.TRANS_BACK, Tween.EASE_OUT)
@@ -25,3 +28,8 @@ func _ready():
 func update_man(item):
 	print(item.name)
 	$Sprite.texture = get(item.name)
+	
+
+
+func _on_blood_pressed():
+	emit_signal("blood_paid", 5)

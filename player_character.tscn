@@ -2,8 +2,8 @@
 
 [ext_resource path="res://player_character.gd" type="Script" id=1]
 [ext_resource path="res://character_model/player_spritesheet.png" type="Texture" id=2]
-[ext_resource path="res://the_man_stats.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/UI.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/UI.tscn" type="PackedScene" id=3]
+[ext_resource path="res://the_man_stats.tscn" type="PackedScene" id=4]
 [ext_resource path="res://animation/walk_down.tres" type="Animation" id=5]
 [ext_resource path="res://animation/walk_up.tres" type="Animation" id=6]
 [ext_resource path="res://animation/walk_x.tres" type="Animation" id=7]
@@ -43,13 +43,16 @@ layer = 5
 
 [node name="stats_tween" type="Tween" parent="Camera2D/CanvasLayer"]
 
-[node name="the_man_stats" parent="Camera2D/CanvasLayer" instance=ExtResource( 3 )]
+[node name="UI" parent="Camera2D/CanvasLayer" instance=ExtResource( 3 )]
+
+[node name="the_man_stats" parent="Camera2D/CanvasLayer" instance=ExtResource( 4 )]
 margin_left = -80.0
 margin_top = 80.0
 margin_right = -80.0
 margin_bottom = 80.0
 
-[node name="UI" parent="Camera2D/CanvasLayer" instance=ExtResource( 4 )]
+[node name="MarginContainer" parent="Camera2D/CanvasLayer/the_man_stats" index="4"]
+visible = false
 
 [node name="Movement_Tween" type="Tween" parent="."]
 
@@ -66,5 +69,9 @@ autoplay = true
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource( 2 )
 
+[connection signal="tween_completed" from="Camera2D/CanvasLayer/stats_tween" to="." method="_on_stats_tween_tween_completed"]
+[connection signal="blood_paid" from="Camera2D/CanvasLayer/the_man_stats" to="." method="_on_the_man_stats_blood_paid"]
 [connection signal="tween_completed" from="Movement_Tween" to="." method="movement_done"]
 [connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_AudioStreamPlayer2D_finished"]
+
+[editable path="Camera2D/CanvasLayer/the_man_stats"]

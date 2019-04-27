@@ -48,7 +48,6 @@ range_item_cull_mask = 32
 [node name="Tween" type="Tween" parent="."]
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-visible = false
 margin_left = 80.0
 margin_top = -60.0
 margin_right = 180.0
@@ -106,3 +105,4 @@ margin_right = 100.0
 margin_bottom = 200.0
 text = "toe"
 
+[connection signal="pressed" from="MarginContainer/VBoxContainer/blood" to="." method="_on_blood_pressed"]
