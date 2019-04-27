@@ -89,7 +89,7 @@ texture = ExtResource( 3 )
 position = Vector2( -0.793213, -124.073 )
 scale = Vector2( 0.6, 0.6 )
 frames = ExtResource( 4 )
-frame = 2
+frame = 3
 playing = true
 
 [node name="player" type="Sprite" parent="."]
@@ -105,10 +105,10 @@ anims/battle_start = ExtResource( 6 )
 layer = 5
 
 [node name="the_man_stats" parent="CanvasLayer" instance=ExtResource( 7 )]
-margin_left = -70.4344
-margin_top = 70.4344
-margin_right = -70.4344
-margin_bottom = 70.4344
+margin_left = -200.0
+margin_top = 70.434
+margin_right = -200.0
+margin_bottom = 70.434
 
 [node name="man_tween" type="Tween" parent="CanvasLayer/the_man_stats"]
 
