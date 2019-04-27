@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Overworld.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Mansion_Tiles.tres" type="TileSet" id=2]
 [ext_resource path="res://player_character.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Prefabs/Blood_Fountain.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Prefabs/Torch.tscn" type="PackedScene" id=5]
 
 [node name="Bottom_Floor" type="Node2D"]
 position = Vector2( -1, -4 )
@@ -23,4 +24,10 @@ limits = [ 0, 0, 2048, 1792 ]
 [node name="Blood_Fountain" parent="Mansion/Sorter" instance=ExtResource( 4 )]
 position = Vector2( 970.451, 1270.78 )
 scale = Vector2( 0.2, 0.2 )
+
+[node name="Torch" parent="Mansion/Sorter" instance=ExtResource( 5 )]
+position = Vector2( 913.64, 1103.94 )
+
+[node name="Torch2" parent="Mansion/Sorter" instance=ExtResource( 5 )]
+position = Vector2( 1134.09, 1105.53 )
 

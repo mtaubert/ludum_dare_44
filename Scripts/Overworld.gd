@@ -6,6 +6,7 @@ var playerPos
 
 var doors = {}
 var entities = {}
+var torches = []
 var fountainPos
 
 var currentEntity = null
@@ -20,10 +21,11 @@ func _ready():
 	update_entities()
 	place_walls()
 
-#Walls and doors and the exit
+#Walls and doors
 onready var wall = load("res://Scenes/Prefabs/Wall.tscn")
 onready var door = load("res://Scenes/Prefabs/Door.tscn")
 onready var exit = load("res://Scenes/Prefabs/Exit.tscn")
+
 func place_walls():
 	for pos in $Mansion.get_used_cells_by_id(0): #Walls
 		var newWall = wall.instance()
@@ -36,6 +38,18 @@ func place_walls():
 		newDoor.setup([$Mansion.get_cellv(pos+Vector2(1,0)), $Mansion.get_cellv(pos+Vector2(-1,0)), $Mansion.get_cellv(pos+Vector2(0,1)), $Mansion.get_cellv(pos+Vector2(0,-1))])
 		newDoor.position = $Mansion.map_to_world(pos) + tileOffset
 		doors[pos] = newDoor #Adds the door to the entities list
+
+#Updates entities and places exit
+func update_entities():
+	for child in $Mansion/Sorter.get_children():
+		match child.type:
+			"Fountain":
+				fountainPos = $Mansion.world_to_map(child.position)
+				entities[$Mansion.world_to_map(child.position)] = child
+				child.position = $Mansion.map_to_world(fountainPos) + tileOffset
+			"Torch":
+				child.position = $Mansion.map_to_world($Mansion.world_to_map(child.position)) + tileOffset + Vector2(0,-1)
+				torches.append($Mansion.world_to_map(child.position))
 	
 	#Exit placement
 	if $Mansion.get_used_cells_by_id(4).size() > 0:
@@ -47,14 +61,9 @@ func place_walls():
 		#Both exit tiles get the reference to the exit
 		entities[exitLoc] = newExit
 		entities[exitLoc + Vector2(1,0)] = newExit
-
-func update_entities():
-	for child in $Mansion/Sorter.get_children():
-		match child.type:
-			"Fountain":
-				fountainPos = $Mansion.world_to_map(child.position)
-				entities[$Mansion.world_to_map(child.position)] = child
-				child.position = $Mansion.map_to_world(fountainPos) + tileOffset
+	
+	print(entities.keys())
+	Game_Manager.set_random_encounter_locations($Mansion.get_used_cells_by_id(1), entities.keys(), torches)
 
 #Checks for player input
 func _input(event):
@@ -87,6 +96,7 @@ func move_player(direction:Vector2):
 				playerPos = newPlayerPos
 				player.move_player($Mansion.map_to_world(playerPos) + tileOffset, direction)
 				playerMoving = true
+				Game_Manager.encounter_chance(playerPos)
 		2: #Doors
 			playerPos = newPlayerPos
 			doors[playerPos].open_door(direction)
