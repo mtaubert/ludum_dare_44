@@ -8,7 +8,6 @@
 [node name="Bottom_Floor" type="Node2D"]
 position = Vector2( -1, -4 )
 script = ExtResource( 1 )
-playerSpawn = Vector2( 16, 19 )
 
 [node name="Mansion" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )

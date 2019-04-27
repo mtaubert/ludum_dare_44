@@ -1,7 +1,6 @@
 extends Node2D
 
 onready var player = get_node("Mansion/Sorter/player_character")
-export(Vector2) var playerSpawn
 var tileOffset
 var playerPos
 
@@ -14,8 +13,8 @@ var playerMoving = false
 
 func _ready():
 	tileOffset = $Mansion.cell_size/2
-	player.position = $Mansion.map_to_world(playerSpawn) + tileOffset
-	playerPos = playerSpawn
+	player.position = $Mansion.map_to_world(Game_Manager.playerSpawn) + tileOffset
+	playerPos = Game_Manager.playerSpawn
 	player.connect("movement_done", self, "player_movement_done")
 	
 	update_entities()
