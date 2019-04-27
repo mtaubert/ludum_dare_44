@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenery/blood_pit_empty.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Prefabs/Blood_Fountain.gd" type="Script" id=2]
 [ext_resource path="res://Assets/interact_key.png" type="Texture" id=3]
+[ext_resource path="res://Assets/blood_drop.png" type="Texture" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Highlight"
@@ -33,16 +34,44 @@ tracks/1/keys = {
 "values": [ Vector2( 2, 2 ), Vector2( 1.5, 2 ), Vector2( 2, 1.5 ), Vector2( 2, 2 ) ]
 }
 
+[sub_resource type="ParticlesMaterial" id=2]
+emission_shape = 1
+emission_sphere_radius = 1.0
+flag_disable_z = true
+spread = 30.0
+flatness = 1.0
+gravity = Vector3( 98, 0, 0 )
+initial_velocity = 572.7
+angular_velocity = 103.7
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 100.0
+damping = 1100.0
+damping_random = 0.1
+scale = 2.0
+scale_random = 1.0
+
 [node name="Blood_Fountain" type="Sprite"]
 texture = ExtResource( 1 )
 offset = Vector2( 0, -80 )
 script = ExtResource( 2 )
 
 [node name="Highlight" type="Sprite" parent="."]
-position = Vector2( 0, -319.735 )
-scale = Vector2( 2, 1.54995 )
+position = Vector2( 0, -338.919 )
+scale = Vector2( 1.75468, 1.74532 )
 texture = ExtResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Highlight = SubResource( 1 )
+
+[node name="Blood" type="Particles2D" parent="."]
+position = Vector2( -5, -220 )
+rotation = 1.5708
+emitting = false
+amount = 100
+lifetime = 2.0
+draw_order = 1
+process_material = SubResource( 2 )
+texture = ExtResource( 4 )
 

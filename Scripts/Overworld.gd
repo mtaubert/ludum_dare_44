@@ -56,18 +56,25 @@ func _input(event):
 			move_player(Vector2(0,-1))
 		elif Input.is_action_pressed("ui_down"):
 			move_player(Vector2(0,1))
+		elif Input.is_action_pressed("ui_select"):
+			if currentEntity != null:
+				currentEntity.interact()
+		elif Input.is_action_just_released("ui_select"):
+			if currentEntity != null:
+				if currentEntity.type == "Fountain":
+					currentEntity.stop_interact()
 
 #moves player to the next tile
 func move_player(direction:Vector2):
 	var newPlayerPos = playerPos + direction
 	player.set_facing(direction)
 	match $Mansion.get_cellv(newPlayerPos):
-		1: #Floor and doors
-			if not entities.has(newPlayerPos):
+		1: #Floor
+			if not entities.has(newPlayerPos): #Stops player from walking onto entities
 				playerPos = newPlayerPos
 				player.move_player($Mansion.map_to_world(playerPos) + tileOffset, direction)
 				playerMoving = true
-		2:
+		2: #Doors
 			playerPos = newPlayerPos
 			doors[playerPos].open_door(direction)
 			player.move_player($Mansion.map_to_world(playerPos) + tileOffset, direction)
@@ -79,6 +86,7 @@ func move_player(direction:Vector2):
 	
 	check_for_entities(direction)
 
+#Checks the tile the player is facing for an entity
 func check_for_entities(direction:Vector2):
 	var checkLoc = playerPos + direction
 	if entities.has(checkLoc):
