@@ -1,22 +1,12 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://battle.gd" type="Script" id=1]
 [ext_resource path="res://Assets/battle_theme.tres" type="Theme" id=2]
 [ext_resource path="res://scenery/battle_stand.png" type="Texture" id=3]
-[ext_resource path="res://demon_model/spectre1.png" type="Texture" id=4]
-[ext_resource path="res://demon_model/spectre2.png" type="Texture" id=5]
-[ext_resource path="res://demon_model/spectre3.png" type="Texture" id=6]
-[ext_resource path="res://character_model/player_battle_sprite.png" type="Texture" id=7]
-[ext_resource path="res://animation/battle_start.tres" type="Animation" id=8]
-[ext_resource path="res://the_man_stats.tscn" type="PackedScene" id=9]
-
-[sub_resource type="SpriteFrames" id=1]
-animations = [ {
-"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 5 ) ],
-"loop": true,
-"name": "default",
-"speed": 3.0
-} ]
+[ext_resource path="res://demon_model/keeper_demon_sheet.tres" type="SpriteFrames" id=4]
+[ext_resource path="res://character_model/player_battle_sprite.png" type="Texture" id=5]
+[ext_resource path="res://animation/battle_start.tres" type="Animation" id=6]
+[ext_resource path="res://the_man_stats.tscn" type="PackedScene" id=7]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -98,20 +88,20 @@ texture = ExtResource( 3 )
 [node name="enemy" type="AnimatedSprite" parent="Node2D"]
 position = Vector2( -0.793213, -124.073 )
 scale = Vector2( 0.6, 0.6 )
-frames = SubResource( 1 )
+frames = ExtResource( 4 )
 frame = 3
 playing = true
 
 [node name="player" type="Sprite" parent="."]
 position = Vector2( 303.251, 441.985 )
 scale = Vector2( 0.8, 0.8 )
-texture = ExtResource( 7 )
+texture = ExtResource( 5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "battle_start"
-anims/battle_start = ExtResource( 8 )
+anims/battle_start = ExtResource( 6 )
 
-[node name="the_man_stats" parent="." instance=ExtResource( 9 )]
+[node name="the_man_stats" parent="." instance=ExtResource( 7 )]
 position = Vector2( -80, 339.178 )
 
 [node name="man_tween" type="Tween" parent="the_man_stats"]
