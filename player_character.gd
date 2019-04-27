@@ -9,10 +9,10 @@ onready var sprite = get_node("KinematicBody2D/Sprite")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$KinematicBody2D/Camera2D.limit_left = limits[0]
-	$KinematicBody2D/Camera2D.limit_top = limits[1]
-	$KinematicBody2D/Camera2D.limit_right = limits[2]
-	$KinematicBody2D/Camera2D.limit_bottom = limits[3]
+	$Camera2D.limit_left = limits[0]
+	$Camera2D.limit_top = limits[1]
+	$Camera2D.limit_right = limits[2]
+	$Camera2D.limit_bottom = limits[3]
 	set_process(false)
 
 #Moves player to a new location
