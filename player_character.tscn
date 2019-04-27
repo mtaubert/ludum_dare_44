@@ -1,10 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://player_character.gd" type="Script" id=1]
 [ext_resource path="res://character_model/player_spritesheet.png" type="Texture" id=2]
+[ext_resource path="res://animation/walk_down.tres" type="Animation" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 18.9361
+radius = 21.3356
 height = 4.74324
 
 [node name="player_character" type="Node2D"]
@@ -12,7 +13,7 @@ script = ExtResource( 1 )
 speed = 400
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
-position = Vector2( 0, -15 )
+position = Vector2( 0, -45 )
 
 [node name="Camera2D" type="Camera2D" parent="KinematicBody2D"]
 position = Vector2( 0, 45 )
@@ -22,12 +23,17 @@ current = true
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="KinematicBody2D"]
-scale = Vector2( 0.2, 0.2 )
+scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
+flip_h = true
 hframes = 7
+frame = 3
 region_enabled = true
-region_rect = Rect2( 5, 0, 1020, 250 )
+region_rect = Rect2( 5, 0, 1000, 250 )
 
 [node name="Movement_Tween" type="Tween" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/walk_down = ExtResource( 3 )
 
 [connection signal="tween_completed" from="Movement_Tween" to="." method="movement_done"]
