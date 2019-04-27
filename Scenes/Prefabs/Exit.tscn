@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/exit_closed.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Prefabs/Exit.gd" type="Script" id=2]
+[ext_resource path="res://Assets/interact_key.png" type="Texture" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Highlight"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Highlight:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -50 ), Vector2( 0, -70 ), Vector2( 0, -50 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Highlight:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.6, 0.6 ), Vector2( 0.9, 1.2 ), Vector2( 1.2, 0.9 ), Vector2( 0.6, 0.6 ) ]
+}
+
+[node name="Exit" type="Sprite"]
+texture = ExtResource( 1 )
+offset = Vector2( 0, -30 )
+script = ExtResource( 2 )
+
+[node name="Highlight" type="Sprite" parent="."]
+position = Vector2( 0, -69.584 )
+scale = Vector2( 1.06591, 1.14263 )
+texture = ExtResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Highlight = SubResource( 1 )
+
