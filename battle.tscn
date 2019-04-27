@@ -101,9 +101,16 @@ texture = ExtResource( 5 )
 autoplay = "battle_start"
 anims/battle_start = ExtResource( 6 )
 
-[node name="the_man_stats" parent="." instance=ExtResource( 7 )]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 5
 
-[node name="man_tween" type="Tween" parent="the_man_stats"]
+[node name="the_man_stats" parent="CanvasLayer" instance=ExtResource( 7 )]
+margin_left = -70.4344
+margin_top = 70.4344
+margin_right = -70.4344
+margin_bottom = 70.4344
+
+[node name="man_tween" type="Tween" parent="CanvasLayer/the_man_stats"]
 
 [connection signal="pressed" from="battle_menu/VBoxContainer/HBoxContainer/fight" to="." method="_on_fight_pressed"]
 [connection signal="pressed" from="battle_menu/VBoxContainer/HBoxContainer2/sacrifice" to="." method="_on_sacrifice_pressed"]
