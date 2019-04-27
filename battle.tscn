@@ -96,6 +96,7 @@ texture = ExtResource( 4 )
 position = Vector2( -0.793213, -124.073 )
 scale = Vector2( 0.6, 0.6 )
 frames = ExtResource( 5 )
+frame = 1
 playing = true
 
 [node name="player" type="Sprite" parent="."]

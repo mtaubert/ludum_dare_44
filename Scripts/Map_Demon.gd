@@ -1,4 +1,4 @@
-extends Sprite
+extends AnimatedSprite
 
 var type = "Demon"
 
