@@ -19,17 +19,23 @@ func toggle_buttons(visible_in):
 	$MarginContainer.visible = visible_in
 	if not visible_in:
 		$Sprite.texture = default
+		$counter.text = ""
 	
 func _ready():
 	for item in get_tree().get_nodes_in_group("sacrifice_button"):
 		item.connect("focus_entered", self, "update_man", [item])
 		item.connect("mouse_entered", self, "update_man", [item])
+	print(Game_Manager.get_player_var("blood"))
+	$ProgressBar.value = Game_Manager.get_player_var("blood")
 		
 func update_man(item):
 	print(item.name)
 	$Sprite.texture = get(item.name)
+	$counter.text = str(Game_Manager.get_player_var(item.name))
 	
-
+func update_blood():
+	$counter.text = str(Game_Manager.get_player_var("blood"))
 
 func _on_blood_pressed():
 	emit_signal("blood_paid", 5)
+	update_blood()

@@ -5,9 +5,20 @@ var bloodSacrificeLevel = 0
 var currentLevel = 1
 var playerSpawn = Vector2(16,19)
 var blood_fountain_cost = 10
+
+export var blood = 100
+export var heart = 1
+export var soul = 1
+export var mind = 1
+export var finger = 10
+export var toe = 10
+
 func _ready():
 	randomize()
 
+func get_player_var(name):
+	return get(name)
+	
 func go_up():
 	currentLevel += 1
 	match currentLevel:
@@ -68,10 +79,11 @@ func blood_sacrifice():
 	player.open_menu()
 	if player._on_the_man_stats_blood_paid(blood_fountain_cost):
 		bloodSacrificeLevel += 1
+		player.update_blood()
 		return true
 	else:
 		return false
 		
 func can_pay_blood():
-	return player.blood_count > blood_fountain_cost
+	return blood > blood_fountain_cost
 	
