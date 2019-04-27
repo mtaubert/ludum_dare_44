@@ -18,7 +18,8 @@ func _ready():
 
 func get_player_var(name):
 	return get(name)
-	
+
+#Mansion floor movement ---------------------------------------------------------------------------------------------------
 func go_up():
 	currentLevel += 1
 	match currentLevel:
@@ -36,7 +37,9 @@ func go_down():
 		0:
 			playerSpawn = Vector2(10,1)
 	get_tree().change_scene("res://Scenes/" + houseLevels[currentLevel] + ".tscn")
+#Mansion floor movement ---------------------------------------------------------------------------------------------------
 
+#Encounters ---------------------------------------------------------------------------------------------------------------
 var encounterLocations = []
 
 #Initilises the encounter locations for the floor
@@ -54,10 +57,14 @@ func set_random_encounter_locations(floorCells, entityLocations, torchLocations)
 
 var encounterChance = 10
 var player
+var specificEnemy = null
 
 func set_player(p):
 	player = p
 	player.connect("start_encounter", self, "start_encounter")
+
+func update_player_spawn(playerLoc):
+	playerSpawn = playerLoc
 
 #Trigger encounter chance
 func encounter_chance(location:Vector2):
@@ -71,12 +78,21 @@ func encounter_chance(location:Vector2):
 			return false
 			encounterChance +=2
 
+#Starts a random encounter
 func start_encounter():
+	specificEnemy = null
 	get_tree().change_scene("res://battle.tscn")
-	
+
+#Starts a specific encounter
+func start_encounter_against(enemy):
+	specificEnemy = enemy
+	get_tree().change_scene("res://battle.tscn")
+
 func end_encounter():
 	get_tree().change_scene("res://Scenes/" + houseLevels[currentLevel] + ".tscn")
-	
+#Encounters ---------------------------------------------------------------------------------------------------------------
+
+#Sacrifices ---------------------------------------------------------------------------------------------------------------
 func blood_sacrifice():
 	player.open_menu()
 	if player._on_the_man_stats_blood_paid(blood_fountain_cost):
@@ -88,13 +104,17 @@ func blood_sacrifice():
 		
 func can_pay_blood():
 	return blood > blood_fountain_cost
+#Sacrifices ---------------------------------------------------------------------------------------------------------------
 
+
+#Demon chat ---------------------------------------------------------------------------------------------------------------
 #Demon dialog signal
 signal demon_dialog_start()
 signal chat_done()
 
-func start_dialog(demonID, dialog):
-	emit_signal("demon_dialog_start", demonID, dialog)
+func start_dialog(demonName, demonID, dialog):
+	emit_signal("demon_dialog_start", demonName, demonID, dialog)
 
 func dialog_over():
 	emit_signal("chat_done")
+#Demon chat ---------------------------------------------------------------------------------------------------------------

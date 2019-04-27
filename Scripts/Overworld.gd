@@ -39,6 +39,7 @@ func _ready():
 	update_entities()
 	place_walls()
 
+#Setup --------------------------------------------------------------------------------------------------------------------
 #Walls and doors
 onready var wall = load("res://Scenes/Prefabs/Wall.tscn")
 onready var door = load("res://Scenes/Prefabs/Door.tscn")
@@ -59,7 +60,7 @@ func place_walls():
 
 #Updates entities and places exit
 func update_entities():
-	for child in $Mansion/Sorter.get_children():
+	for child in $Mansion/Sorter.get_children(): #Finds all entities already on the tilemap and centers them on the tile
 		match child.type:
 			"Fountain":
 				fountainPos = $Mansion.world_to_map(child.position)
@@ -74,7 +75,7 @@ func update_entities():
 				
 	
 	#Exit placement
-	if $Mansion.get_used_cells_by_id(4).size() > 0:
+	if $Mansion.get_used_cells_by_id(4).size() > 0: #Checks if any exit tiles exists, only needs the first one
 		var exitLoc = $Mansion.get_used_cells_by_id(4)[0]
 		$Mansion.set_cellv(exitLoc + Vector2(1,0), 4) #Sets the cell next to the exit to the exit as well
 		var newExit = exit.instance()
@@ -83,10 +84,11 @@ func update_entities():
 		#Both exit tiles get the reference to the exit
 		entities[exitLoc] = newExit
 		entities[exitLoc + Vector2(1,0)] = newExit
-	
-	print(entities.keys())
-	Game_Manager.set_random_encounter_locations($Mansion.get_used_cells_by_id(1), entities.keys(), torches)
 
+	Game_Manager.set_random_encounter_locations($Mansion.get_used_cells_by_id(1), entities.keys(), torches)
+#Setup --------------------------------------------------------------------------------------------------------------------
+
+#Input and movement -------------------------------------------------------------------------------------------------------
 #Checks for player input
 func _input(event):
 	if currentState == PLAYERSTATE.IDLE:
@@ -99,9 +101,10 @@ func _input(event):
 		elif Input.is_action_pressed("ui_down"):
 			move_player(Vector2(0,1))
 		elif Input.is_action_pressed("ui_select"):
-			if currentEntity != null:
+			if currentEntity != null: #Only works if facing an entity
 				currentEntity.interact()
-				if currentEntity.type == "Demon": #Talking to demon
+				if currentEntity.type == "Demon": #Talking to demon state
+					Game_Manager.update_player_spawn(playerPos) #Safety in case of fight
 					currentState = PLAYERSTATE.TALKING_WITH_DEMON
 		elif Input.is_action_just_released("ui_select"):
 			if currentEntity != null:
@@ -115,9 +118,12 @@ func _input(event):
 func move_player(direction:Vector2):
 	var newPlayerPos = playerPos + direction
 	player.set_facing(direction)
+	
+	check_for_entities(direction) #Checks if the player is moving towards an entity
+	
 	match $Mansion.get_cellv(newPlayerPos):
 		1,3: #Floor and grass
-			if not entities.has(newPlayerPos): #Stops player from walking onto entities
+			if currentEntity == null: #Stops player from walking onto entities
 				playerPos = newPlayerPos
 				player.move_player($Mansion.map_to_world(playerPos) + tileOffset, direction)
 				currentState = PLAYERSTATE.MOVING
@@ -128,14 +134,14 @@ func move_player(direction:Vector2):
 			doors[playerPos].open_door(direction)
 			player.move_player($Mansion.map_to_world(playerPos) + tileOffset, direction)
 			currentState = PLAYERSTATE.MOVING
-			yield(get_tree().create_timer(0.3), "timeout")
+			yield(get_tree().create_timer(0.3), "timeout") #Moves again to get out of doorway
 			move_player(direction)
 		4: #Exit
 			if entities[newPlayerPos].open:
 				playerPos = newPlayerPos
 				player.move_player($Mansion.map_to_world(playerPos) + tileOffset, direction)
 				currentState = PLAYERSTATE.MOVING
-				yield(get_tree().create_timer(0.3), "timeout")
+				yield(get_tree().create_timer(0.3), "timeout") #Moves again to get out of doorway
 				move_player(direction)
 		5: #Stairs up
 			Game_Manager.go_up()
@@ -143,19 +149,17 @@ func move_player(direction:Vector2):
 			Game_Manager.go_down()
 		_:
 			pass
-	
-	check_for_entities(direction)
 
 #Checks the tile the player is facing for an entity
 func check_for_entities(direction:Vector2):
-	var checkLoc = playerPos + direction
-	if entities.has(checkLoc):
-		if currentEntity != entities[checkLoc] and currentEntity != null:
+	var checkLoc = playerPos + direction #Location the player attempted to move
+	if entities.has(checkLoc): #location is marked as containing an entity
+		if currentEntity != entities[checkLoc] and currentEntity != null: #Looking at a new entity, not just the same old one
 			currentEntity.unhighlight()
-		currentEntity = entities[checkLoc]
+		currentEntity = entities[checkLoc] #Sets the entity at the location as current and highlights
 		currentEntity.highlight()
-	else:
-		if currentEntity != null:
+	else: #No entity found
+		if currentEntity != null: #Unhighlights current entity if present
 			currentEntity.unhighlight()
 			currentEntity = null
 
@@ -167,3 +171,4 @@ func player_movement_done():
 #Returns to idle after talking to demon
 func demon_chat_done():
 	currentState = PLAYERSTATE.IDLE
+#Input and movement -------------------------------------------------------------------------------------------------------
