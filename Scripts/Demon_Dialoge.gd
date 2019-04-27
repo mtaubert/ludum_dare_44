@@ -1,6 +1,6 @@
 extends Sprite
 
-onready var demons = [load("res://demon_model/interactable_demons/interactable_demon_1.png")]
+onready var demons = [load("res://demon_model/interactable_demons/interactable_demon_1.png"), load("res://demon_model/interactable_demons/interactable_demon_2.png")]
 var currentDemon = ""
 
 var dialoge = {}
@@ -15,6 +15,7 @@ func _ready():
 
 #Sets the demon to the demon texture and loads the dialoge text, then reads off the opener
 func start_dialog(demonName, demonID, dialogText):
+	show()
 	hide_buttons()
 	$AnimationPlayer.play("demon_arrives")
 	
@@ -60,6 +61,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		if dismissed:
 			$Demon_Talking_Panel/Label.text = ""
 			dismissed = false
+			hide()
 		else:
 			demon_talking()
 

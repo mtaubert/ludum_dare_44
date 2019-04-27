@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/Overworld.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Mansion_Tiles.tres" type="TileSet" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Scenes/Prefabs/Blood_Fountain.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Prefabs/Torch.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Prefabs/Map_Demon.tscn" type="PackedScene" id=6]
+[ext_resource path="res://demon_model/interactable_demons/interactable_demon_2_map.png" type="Texture" id=7]
 
 [node name="Bottom_Floor" type="Node2D"]
 position = Vector2( -1, -4 )
@@ -46,4 +47,9 @@ position = Vector2( 1120.22, 617.086 )
 
 [node name="Map_Demon" parent="Mansion/Sorter" instance=ExtResource( 6 )]
 position = Vector2( 1125.8, 1246.51 )
+
+[node name="Map_Demon2" parent="Mansion/Sorter" instance=ExtResource( 6 )]
+position = Vector2( 1529.24, 525.906 )
+texture = ExtResource( 7 )
+demonID = 2
 

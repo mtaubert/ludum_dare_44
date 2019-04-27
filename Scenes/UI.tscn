@@ -40,6 +40,7 @@ anchor_bottom = 1.0
 mouse_filter = 2
 
 [node name="Demon_Dialoge" type="Sprite" parent="."]
+visible = false
 position = Vector2( 1350, 300 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
