@@ -1,7 +1,6 @@
 extends Node2D
 
 onready var player = get_node("Mansion/Sorter/player_character")
-onready var playerTween = get_node("Mansion/Sorter/player_character/Player_Tween")
 export(Vector2) var playerSpawn
 var playerPos
 

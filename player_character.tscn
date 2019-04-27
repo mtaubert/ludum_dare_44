@@ -12,7 +12,7 @@ script = ExtResource( 1 )
 speed = 400
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
-position = Vector2( 0, -45 )
+position = Vector2( 0, -15 )
 
 [node name="Camera2D" type="Camera2D" parent="KinematicBody2D"]
 position = Vector2( 0, 45 )

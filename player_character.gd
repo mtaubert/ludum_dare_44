@@ -45,5 +45,5 @@ func move_player(location:Vector2, direction:Vector2):
 			sprite.frame = 0
 
 #Called when tween finishes
-func movement_done():
+func movement_done(object, key):
 	emit_signal("movement_done")
