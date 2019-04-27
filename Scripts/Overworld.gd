@@ -21,21 +21,33 @@ func _ready():
 	update_entities()
 	place_walls()
 
-#Walls and doors
+#Walls and doors and the exit
 onready var wall = load("res://Scenes/Prefabs/Wall.tscn")
 onready var door = load("res://Scenes/Prefabs/Door.tscn")
+onready var exit = load("res://Scenes/Prefabs/Exit.tscn")
 func place_walls():
-	for pos in $Mansion.get_used_cells_by_id(0):
+	for pos in $Mansion.get_used_cells_by_id(0): #Walls
 		var newWall = wall.instance()
 		$Mansion/Sorter.add_child(newWall)
 		newWall.position = $Mansion.map_to_world(pos) + tileOffset
-	for pos in $Mansion.get_used_cells_by_id(2):
+	for pos in $Mansion.get_used_cells_by_id(2): #Doors
 		var newDoor = door.instance()
 		$Mansion/Sorter.add_child(newDoor)
 		#Initialises door with the surrounding tile ids
 		newDoor.setup([$Mansion.get_cellv(pos+Vector2(1,0)), $Mansion.get_cellv(pos+Vector2(-1,0)), $Mansion.get_cellv(pos+Vector2(0,1)), $Mansion.get_cellv(pos+Vector2(0,-1))])
 		newDoor.position = $Mansion.map_to_world(pos) + tileOffset
 		doors[pos] = newDoor #Adds the door to the entities list
+	
+	#Exit placement
+	if $Mansion.get_used_cells_by_id(4).size() > 0:
+		var exitLoc = $Mansion.get_used_cells_by_id(4)[0]
+		$Mansion.set_cellv(exitLoc + Vector2(1,0), 4) #Sets the cell next to the exit to the exit as well
+		var newExit = exit.instance()
+		$Mansion/Sorter.add_child(newExit)
+		newExit.position = $Mansion.map_to_world(exitLoc) + tileOffset
+		#Both exit tiles get the reference to the exit
+		entities[exitLoc] = newExit
+		entities[exitLoc + Vector2(1,0)] = newExit
 
 func update_entities():
 	for child in $Mansion/Sorter.get_children():
@@ -71,7 +83,7 @@ func move_player(direction:Vector2):
 	var newPlayerPos = playerPos + direction
 	player.set_facing(direction)
 	match $Mansion.get_cellv(newPlayerPos):
-		1: #Floor
+		1,3: #Floor and grass
 			if not entities.has(newPlayerPos): #Stops player from walking onto entities
 				playerPos = newPlayerPos
 				player.move_player($Mansion.map_to_world(playerPos) + tileOffset, direction)
@@ -83,6 +95,17 @@ func move_player(direction:Vector2):
 			playerMoving = true
 			yield(get_tree().create_timer(0.3), "timeout")
 			move_player(direction)
+		4: #Exit
+			if entities[newPlayerPos].open:
+				playerPos = newPlayerPos
+				player.move_player($Mansion.map_to_world(playerPos) + tileOffset, direction)
+				playerMoving = true
+				yield(get_tree().create_timer(0.3), "timeout")
+				move_player(direction)
+		5: #Stairs up
+			Game_Manager.go_up()
+		6: #Stairs down
+			Game_Manager.go_down()
 		_:
 			pass
 	
@@ -92,6 +115,8 @@ func move_player(direction:Vector2):
 func check_for_entities(direction:Vector2):
 	var checkLoc = playerPos + direction
 	if entities.has(checkLoc):
+		if currentEntity != entities[checkLoc] and currentEntity != null:
+			currentEntity.unhighlight()
 		currentEntity = entities[checkLoc]
 		currentEntity.highlight()
 	else:

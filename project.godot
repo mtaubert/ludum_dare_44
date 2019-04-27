@@ -19,11 +19,16 @@ config/name="Ludum Dare 44 Project"
 run/main_scene="res://Scenes/Bottom_Floor.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Game_Manager="*res://Scripts/Game_Manager.gd"
+
 [input]
 
-menu={
+ui_select={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777218,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":70,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":3,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
 
