@@ -23,7 +23,7 @@ func _process(delta):
 	$KinematicBody2D.move_and_slide(dir * speed)
 
 #Moves player to a new location
-func move_player(location:Vector2):
+func move_player(location:Vector2, direction:Vector2):
 	$Movement_Tween.interpolate_property(self, "position", self.position, location, 0.3, 4, 2)
 	$Movement_Tween.start()
 
