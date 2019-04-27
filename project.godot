@@ -23,6 +23,10 @@ config/icon="res://icon.png"
 
 Game_Manager="*res://Scripts/Game_Manager.gd"
 
+[display]
+
+window/size/resizable=false
+
 [input]
 
 menu={
