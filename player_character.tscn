@@ -1,11 +1,11 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://player_character.gd" type="Script" id=1]
-[ext_resource path="res://character_model/default_player.png" type="Texture" id=2]
+[ext_resource path="res://character_model/player_spritesheet.png" type="Texture" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 33.4641
-height = 41.883
+radius = 18.9361
+height = 4.74324
 
 [node name="player_character" type="Node2D"]
 script = ExtResource( 1 )
@@ -24,8 +24,9 @@ shape = SubResource( 1 )
 [node name="Sprite" type="Sprite" parent="KinematicBody2D"]
 scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 2 )
+hframes = 7
 region_enabled = true
-region_rect = Rect2( 145, 100, 300, 520 )
+region_rect = Rect2( 5, 0, 1020, 250 )
 
 [node name="Movement_Tween" type="Tween" parent="."]
 
