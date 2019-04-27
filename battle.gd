@@ -28,3 +28,7 @@ func _on_fight_pressed():
 	blood_val += 20
 	blood_val = blood_val %101
 	$CanvasLayer/the_man_stats.set_blood(blood_val)
+
+
+func _on_flee_pressed():
+	Game_Manager.end_encounter()

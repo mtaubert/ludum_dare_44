@@ -89,7 +89,7 @@ texture = ExtResource( 3 )
 position = Vector2( -0.793213, -124.073 )
 scale = Vector2( 0.6, 0.6 )
 frames = ExtResource( 4 )
-frame = 3
+frame = 2
 playing = true
 
 [node name="player" type="Sprite" parent="."]
@@ -114,3 +114,4 @@ margin_bottom = 70.4344
 
 [connection signal="pressed" from="battle_menu/VBoxContainer/HBoxContainer/fight" to="." method="_on_fight_pressed"]
 [connection signal="pressed" from="battle_menu/VBoxContainer/HBoxContainer2/sacrifice" to="." method="_on_sacrifice_pressed"]
+[connection signal="pressed" from="battle_menu/VBoxContainer/HBoxContainer2/flee" to="." method="_on_flee_pressed"]
