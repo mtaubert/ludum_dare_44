@@ -11,6 +11,7 @@ var fountainPos
 
 var currentEntity = null
 var playerMoving = false
+var playerWaitingForEncounter = false
 
 func _ready():
 	tileOffset = $Mansion.cell_size/2
@@ -69,7 +70,7 @@ func update_entities():
 
 #Checks for player input
 func _input(event):
-	if not playerMoving:
+	if not playerMoving and not playerWaitingForEncounter:
 		if Input.is_action_pressed("ui_right"):
 			move_player(Vector2(1,0))
 		elif Input.is_action_pressed("ui_left"):
@@ -98,7 +99,7 @@ func move_player(direction:Vector2):
 				playerPos = newPlayerPos
 				player.move_player($Mansion.map_to_world(playerPos) + tileOffset, direction)
 				playerMoving = true
-				Game_Manager.encounter_chance(playerPos)
+				playerWaitingForEncounter = Game_Manager.encounter_chance(playerPos)
 		2: #Doors
 			playerPos = newPlayerPos
 			doors[playerPos].open_door(direction)

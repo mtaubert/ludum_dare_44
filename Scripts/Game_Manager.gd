@@ -55,7 +55,9 @@ func encounter_chance(location:Vector2):
 			playerSpawn = location
 			player.play_encounter_start()
 			encounterChance = 10
+			return true
 		else:
+			return false
 			encounterChance +=2
 
 func start_encounter():
