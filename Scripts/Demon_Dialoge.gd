@@ -15,6 +15,9 @@ func _ready():
 
 #Sets the demon to the demon texture and loads the dialoge text, then reads off the opener
 func start_dialog(demon, dialogText):
+	$Demon_Talking_Panel/Accept.mouse_filter = Control.MOUSE_FILTER_STOP
+	$Demon_Talking_Panel/Decline.mouse_filter = Control.MOUSE_FILTER_STOP
+	
 	$AnimationPlayer.play("demon_arrives")
 	dialoge.clear()
 	texture = demons[demon-1]
@@ -30,9 +33,6 @@ func demon_talking():
 	for c in dialoge[currentDialogKey]["text"]:
 		$Demon_Talking_Panel/Label.text += c
 		yield(get_tree().create_timer(0.01), "timeout")
-	
-	$Demon_Talking_Panel/Accept.disabled = false
-	$Demon_Talking_Panel/Decline.disabled = false
 
 #Animation player done, cleans up the labal if dialog is over
 func _on_AnimationPlayer_animation_finished(anim_name):
