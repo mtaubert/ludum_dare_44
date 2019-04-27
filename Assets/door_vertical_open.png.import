@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/blood_pit_empty.png-c36ea050145647820bad09e46e3cf29d.stex"
+path="res://.import/door_vertical_open.png-0a135a9666822f3b89e41d229098becb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenery/blood_pit_empty.png"
-dest_files=[ "res://.import/blood_pit_empty.png-c36ea050145647820bad09e46e3cf29d.stex" ]
+source_file="res://Assets/door_vertical_open.png"
+dest_files=[ "res://.import/door_vertical_open.png-0a135a9666822f3b89e41d229098becb.stex" ]
 
 [params]
 

@@ -2,6 +2,7 @@ extends Node2D
 
 signal movement_done()
 
+var type = "Player"
 var dir = Vector2()
 export var speed = 1000
 export var limits = [0, 0, 1280, 1024]
@@ -19,7 +20,7 @@ func _ready():
 func move_player(location:Vector2, direction:Vector2):
 	$Movement_Tween.interpolate_property(self, "position", self.position, location, 0.3, 4, 2)
 	$Movement_Tween.start()
-	set_facing(direction)
+	#set_facing(direction)
 	#look in the direction moved
 	if direction.x:
 		$AnimationPlayer.play("walk_x")
