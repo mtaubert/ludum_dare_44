@@ -102,7 +102,6 @@ autoplay = "battle_start"
 anims/battle_start = ExtResource( 6 )
 
 [node name="the_man_stats" parent="." instance=ExtResource( 7 )]
-position = Vector2( -80, 339.178 )
 
 [node name="man_tween" type="Tween" parent="the_man_stats"]
 

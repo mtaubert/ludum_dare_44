@@ -63,6 +63,8 @@ func _input(event):
 			if currentEntity != null:
 				if currentEntity.type == "Fountain":
 					currentEntity.stop_interact()
+		elif Input.is_action_pressed("menu"):
+			$Mansion/Sorter/player_character.toggle_stats_view()
 
 #moves player to the next tile
 func move_player(direction:Vector2):

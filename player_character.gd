@@ -7,7 +7,8 @@ var dir = Vector2()
 export var speed = 1000
 export var limits = [0, 0, 1280, 1024]
 onready var sprite = get_node("KinematicBody2D/Sprite")
-
+onready var stats_tween = get_node("Camera2D/CanvasLayer/stats_tween")
+var stats_pos = -80
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Camera2D.limit_left = limits[0]
@@ -57,3 +58,19 @@ func movement_done(object, key):
 	emit_signal("movement_done")
 	$AnimationPlayer.stop()
 	set_facing(dir)
+	
+#show the man/ hide the man
+func toggle_stats_view():
+	var the_man = $Camera2D/CanvasLayer/the_man_stats
+	var target = the_man.rect_position
+	if stats_pos == -80:
+		stats_pos = 80
+	else:
+		stats_pos = -80
+	target.x = stats_pos
+	stats_tween.interpolate_property(the_man, "rect_position", the_man.rect_position,  target, 0.5, Tween.TRANS_SINE, Tween.EASE_OUT)
+	stats_tween.start()
+	
+
+func _on_AudioStreamPlayer2D_finished():
+	$AudioStreamPlayer2D.play()
