@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Overworld.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Mansion_Tiles.tres" type="TileSet" id=2]
 [ext_resource path="res://player_character.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Prefabs/Blood_Fountain.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Prefabs/Torch.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Prefabs/Map_Demon.tscn" type="PackedScene" id=6]
 
 [node name="Bottom_Floor" type="Node2D"]
 position = Vector2( -1, -4 )
@@ -30,4 +31,19 @@ position = Vector2( 913.64, 1103.94 )
 
 [node name="Torch2" parent="Mansion/Sorter" instance=ExtResource( 5 )]
 position = Vector2( 1134.09, 1105.53 )
+
+[node name="Torch3" parent="Mansion/Sorter" instance=ExtResource( 5 )]
+position = Vector2( 1189.55, 758.262 )
+
+[node name="Torch4" parent="Mansion/Sorter" instance=ExtResource( 5 )]
+position = Vector2( 859.301, 747.548 )
+
+[node name="Torch5" parent="Mansion/Sorter" instance=ExtResource( 5 )]
+position = Vector2( 927.368, 615.196 )
+
+[node name="Torch6" parent="Mansion/Sorter" instance=ExtResource( 5 )]
+position = Vector2( 1120.22, 617.086 )
+
+[node name="Map_Demon" parent="Mansion/Sorter" instance=ExtResource( 6 )]
+position = Vector2( 1125.8, 1246.51 )
 

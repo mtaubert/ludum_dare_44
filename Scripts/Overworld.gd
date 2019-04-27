@@ -53,6 +53,10 @@ func update_entities():
 			"Torch":
 				child.position = $Mansion.map_to_world($Mansion.world_to_map(child.position)) + tileOffset + Vector2(0,-1)
 				torches.append($Mansion.world_to_map(child.position))
+			"Demon":
+				child.position = $Mansion.map_to_world($Mansion.world_to_map(child.position)) + tileOffset
+				entities[$Mansion.world_to_map(child.position)] = child
+				
 	
 	#Exit placement
 	if $Mansion.get_used_cells_by_id(4).size() > 0:

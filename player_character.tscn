@@ -76,6 +76,7 @@ layer = 5
 [node name="UI" parent="Camera2D/CanvasLayer" instance=ExtResource( 5 )]
 
 [node name="the_man_stats" parent="Camera2D/CanvasLayer" instance=ExtResource( 6 )]
+editor/display_folded = true
 margin_left = -80.0
 margin_top = 80.0
 margin_right = -80.0

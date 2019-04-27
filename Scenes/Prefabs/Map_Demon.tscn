@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Assets/exit_closed.png" type="Texture" id=1]
-[ext_resource path="res://Scripts/Exit.gd" type="Script" id=2]
+[ext_resource path="res://demon_model/interactable_demons/interactable_demon_1_map.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Map_Demon.gd" type="Script" id=2]
 [ext_resource path="res://Assets/interact_key.png" type="Texture" id=3]
 
 [sub_resource type="Animation" id=1]
@@ -18,11 +18,11 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1, 2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 32, -50 ), Vector2( 32, -70 ), Vector2( 32, -50 ) ]
+"values": [ Vector2( 0, -80 ), Vector2( 0, -100 ), Vector2( 0, -80 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Highlight:scale")
-tracks/1/interp = 2
+tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
@@ -30,19 +30,25 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.5, 1.5, 2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0.6, 0.6 ), Vector2( 0.9, 1.2 ), Vector2( 1.2, 0.9 ), Vector2( 0.6, 0.6 ) ]
+"values": [ Vector2( 0.5, 0.5 ), Vector2( 0.75, 1 ), Vector2( 1, 0.75 ), Vector2( 0.5, 0.5 ) ]
 }
 
-[node name="Exit" type="Sprite"]
+[sub_resource type="OccluderPolygon2D" id=2]
+polygon = PoolVector2Array( -7, 0, -16, 1, -18, 5, -14, 8, -8, 9, -2, 9, 5, 7, 9, 6, 9, 3, 5, 1 )
+
+[node name="Map_Demon" type="Sprite"]
 texture = ExtResource( 1 )
-offset = Vector2( 32, -30 )
+offset = Vector2( 0, -36 )
 script = ExtResource( 2 )
 
 [node name="Highlight" type="Sprite" parent="."]
-position = Vector2( 32, -50 )
-scale = Vector2( 0.6, 0.6 )
+position = Vector2( 0, -88.0716 )
+scale = Vector2( 0.885169, 0.692585 )
 texture = ExtResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Highlight = SubResource( 1 )
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource( 2 )
 
