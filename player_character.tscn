@@ -23,9 +23,8 @@ shape = SubResource( 1 )
 [node name="Sprite" type="Sprite" parent="KinematicBody2D"]
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
-flip_h = true
 hframes = 7
-frame = 1
+frame = 3
 region_enabled = true
 region_rect = Rect2( 5, 0, 1000, 250 )
 

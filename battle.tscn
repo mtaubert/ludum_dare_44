@@ -8,7 +8,7 @@
 [ext_resource path="res://demon_model/spectre3.png" type="Texture" id=6]
 [ext_resource path="res://character_model/player_battle_sprite.png" type="Texture" id=7]
 [ext_resource path="res://animation/battle_start.tres" type="Animation" id=8]
-[ext_resource path="res://character_model/the_man_stats.png" type="Texture" id=9]
+[ext_resource path="res://the_man_stats.tscn" type="PackedScene" id=9]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -99,7 +99,7 @@ texture = ExtResource( 3 )
 position = Vector2( -0.793213, -124.073 )
 scale = Vector2( 0.6, 0.6 )
 frames = SubResource( 1 )
-frame = 1
+frame = 3
 playing = true
 
 [node name="player" type="Sprite" parent="."]
@@ -111,10 +111,10 @@ texture = ExtResource( 7 )
 autoplay = "battle_start"
 anims/battle_start = ExtResource( 8 )
 
-[node name="body_stats" type="Sprite" parent="."]
-visible = false
-position = Vector2( 157.701, 145.585 )
-scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 9 )
+[node name="the_man_stats" parent="." instance=ExtResource( 9 )]
+position = Vector2( -80, 339.178 )
 
+[node name="man_tween" type="Tween" parent="the_man_stats"]
+
+[connection signal="pressed" from="battle_menu/VBoxContainer/HBoxContainer/fight" to="." method="_on_fight_pressed"]
 [connection signal="pressed" from="battle_menu/VBoxContainer/HBoxContainer2/sacrifice" to="." method="_on_sacrifice_pressed"]
