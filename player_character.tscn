@@ -7,7 +7,7 @@
 [ext_resource path="res://animation/walk_x.tres" type="Animation" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 21.3356
+radius = 18.9361
 height = 4.74324
 
 [node name="player_character" type="Node2D"]
@@ -15,11 +15,7 @@ script = ExtResource( 1 )
 speed = 400
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
-position = Vector2( 0, -45 )
-
-[node name="Camera2D" type="Camera2D" parent="KinematicBody2D"]
-position = Vector2( 0, 45 )
-current = true
+position = Vector2( 0, -15 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
 shape = SubResource( 1 )
@@ -29,9 +25,12 @@ scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
 flip_h = true
 hframes = 7
-frame = 6
+frame = 1
 region_enabled = true
 region_rect = Rect2( 5, 0, 1000, 250 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
 
 [node name="Movement_Tween" type="Tween" parent="."]
 
