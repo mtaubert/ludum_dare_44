@@ -18,7 +18,7 @@ func _ready():
 
 #Moves player to a new location
 func move_player(location:Vector2, direction:Vector2):
-	$Movement_Tween.interpolate_property(self, "position", self.position, location, 0.2,Tween.TRANS_LINEAR, Tween.EASE_IN)
+	$Movement_Tween.interpolate_property(self, "position", self.position, location, 0.3, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	$Movement_Tween.start()
 	#set_facing(direction)
 	#look in the direction moved
