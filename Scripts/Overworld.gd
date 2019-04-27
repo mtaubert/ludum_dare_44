@@ -39,14 +39,15 @@ func place_walls():
 		doors[pos] = newDoor #Adds the door to the entities list
 	
 	#Exit placement
-	var exitLoc = $Mansion.get_used_cells_by_id(4)[0]
-	$Mansion.set_cellv(exitLoc + Vector2(1,0), 4) #Sets the cell next to the exit to the exit as well
-	var newExit = exit.instance()
-	$Mansion/Sorter.add_child(newExit)
-	newExit.position = $Mansion.map_to_world(exitLoc) + tileOffset
-	#Both exit tiles get the reference to the exit
-	entities[exitLoc] = newExit
-	entities[exitLoc + Vector2(1,0)] = newExit
+	if $Mansion.get_used_cells_by_id(4).size() > 0:
+		var exitLoc = $Mansion.get_used_cells_by_id(4)[0]
+		$Mansion.set_cellv(exitLoc + Vector2(1,0), 4) #Sets the cell next to the exit to the exit as well
+		var newExit = exit.instance()
+		$Mansion/Sorter.add_child(newExit)
+		newExit.position = $Mansion.map_to_world(exitLoc) + tileOffset
+		#Both exit tiles get the reference to the exit
+		entities[exitLoc] = newExit
+		entities[exitLoc + Vector2(1,0)] = newExit
 
 func update_entities():
 	for child in $Mansion/Sorter.get_children():
@@ -99,6 +100,10 @@ func move_player(direction:Vector2):
 				playerMoving = true
 				yield(get_tree().create_timer(0.3), "timeout")
 				move_player(direction)
+		5: #Stairs up
+			Game_Manager.go_up()
+		6: #Stairs down
+			Game_Manager.go_down()
 		_:
 			pass
 	
