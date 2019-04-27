@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://battle.gd" type="Script" id=1]
 [ext_resource path="res://Assets/battle_theme.tres" type="Theme" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://character_model/player_battle_sprite.png" type="Texture" id=5]
 [ext_resource path="res://animation/battle_start.tres" type="Animation" id=6]
 [ext_resource path="res://the_man_stats.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/audio/ableton_battle.wav" type="AudioStream" id=8]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -89,6 +90,7 @@ texture = ExtResource( 3 )
 position = Vector2( -0.793213, -124.073 )
 scale = Vector2( 0.6, 0.6 )
 frames = ExtResource( 4 )
+frame = 3
 playing = true
 
 [node name="player" type="Sprite" parent="."]
@@ -110,6 +112,11 @@ margin_right = -200.0
 margin_bottom = 70.434
 
 [node name="man_tween" type="Tween" parent="CanvasLayer/the_man_stats"]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 8 )
+volume_db = -5.0
+autoplay = true
 
 [connection signal="pressed" from="battle_menu/VBoxContainer/HBoxContainer/fight" to="." method="_on_fight_pressed"]
 [connection signal="pressed" from="battle_menu/VBoxContainer/HBoxContainer2/sacrifice" to="." method="_on_sacrifice_pressed"]
