@@ -46,5 +46,4 @@ position = Vector2( 1120.22, 617.086 )
 
 [node name="Map_Demon" parent="Mansion/Sorter" instance=ExtResource( 6 )]
 position = Vector2( 1125.8, 1246.51 )
-frame = 0
 
