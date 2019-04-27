@@ -88,4 +88,13 @@ func blood_sacrifice():
 		
 func can_pay_blood():
 	return blood > blood_fountain_cost
-	
+
+#Demon dialog signal
+signal demon_dialog_start()
+signal chat_done()
+
+func start_dialog(demonID, dialog):
+	emit_signal("demon_dialog_start", demonID, dialog)
+
+func dialog_over():
+	emit_signal("chat_done")
