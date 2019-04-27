@@ -24,3 +24,10 @@ func go_down():
 			get_tree().change_scene("res://Scenes/" + houseLevels[2] + ".tscn")
 			playerSpawn = Vector2(10,1)
 	currentLevel -=1
+	
+func start_encounter(location: Vector2):
+	get_tree().change_scene("res://Scenes/battle.tscn")
+	playerSpawn = location
+	
+func end_encounter():
+	get_tree().change_scene("res://Scenes/" + houseLevels[currentLevel] + ".tscn")
