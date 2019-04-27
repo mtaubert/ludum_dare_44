@@ -22,10 +22,11 @@ func move_player(location:Vector2, direction:Vector2):
 	set_facing(direction)
 	#look in the direction moved
 	if direction.x:
+		$AnimationPlayer.play("walk_x")
 		if direction.x > 0:
-			pass
+			sprite.flip_h = true
 		else:
-			pass
+			sprite.flip_h = false
 			
 	if direction.y:
 		if direction.y > 0:
