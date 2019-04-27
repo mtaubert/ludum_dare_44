@@ -1,5 +1,7 @@
 extends Node2D
 
+signal movement_done()
+
 var dir = Vector2()
 export var speed = 1000
 export var limits = [0, 0, 1280, 1024]
@@ -19,3 +21,12 @@ func _process(delta):
 	dir.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	dir = dir.normalized()
 	$KinematicBody2D.move_and_slide(dir * speed)
+
+#Moves player to a new location
+func move_player(location:Vector2):
+	$Movement_Tween.interpolate_property(self, "position", self.position, location, 0.3, 4, 2)
+	$Movement_Tween.start()
+
+#Called when tween finishes
+func movement_done():
+	emit_signal("movement_done")

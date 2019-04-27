@@ -27,3 +27,6 @@ texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 145, 100, 300, 520 )
 
+[node name="Movement_Tween" type="Tween" parent="."]
+
+[connection signal="tween_completed" from="Movement_Tween" to="." method="movement_done"]

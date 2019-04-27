@@ -1,6 +1,7 @@
 extends Node2D
 
 onready var player = get_node("Mansion/Sorter/player_character")
+onready var playerTween = get_node("Mansion/Sorter/player_character/Player_Tween")
 export(Vector2) var playerSpawn
 var playerPos
 
@@ -22,5 +23,6 @@ func _process(delta):
 	pass
 
 func move_player(direction:Vector2):
-	playerPos += direction
-	player.position = $Mansion.map_to_world(playerPos)
+	var newPlayerPos = playerPos + direction
+	playerPos = newPlayerPos
+	player.move_player($Mansion.map_to_world(playerPos))
