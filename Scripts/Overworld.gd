@@ -10,17 +10,32 @@ var torches = []
 var fountainPos
 
 var currentEntity = null
+
+var currentState
+ 
+enum PLAYERSTATE {
+	IDLE,
+	MOVING,
+	WAITING_FOR_ENCOUNTER,
+	TALKING_WITH_DEMON
+}
+
 var playerMoving = false
 var playerWaitingForEncounter = false
 
 func _ready():
 	tileOffset = $Mansion.cell_size/2
+	
+	#Player setup
 	player.position = $Mansion.map_to_world(Game_Manager.playerSpawn) + tileOffset
 	playerPos = Game_Manager.playerSpawn
 	player.connect("movement_done", self, "player_movement_done")
+	Game_Manager.connect("chat_done", self, "demon_chat_done")
 	
 	Game_Manager.set_player(player)
+	currentState = PLAYERSTATE.IDLE
 	
+	#entity and wall setup
 	update_entities()
 	place_walls()
 
@@ -74,7 +89,7 @@ func update_entities():
 
 #Checks for player input
 func _input(event):
-	if not playerMoving and not playerWaitingForEncounter:
+	if currentState == PLAYERSTATE.IDLE:
 		if Input.is_action_pressed("ui_right"):
 			move_player(Vector2(1,0))
 		elif Input.is_action_pressed("ui_left"):
@@ -86,12 +101,15 @@ func _input(event):
 		elif Input.is_action_pressed("ui_select"):
 			if currentEntity != null:
 				currentEntity.interact()
+				if currentEntity.type == "Demon": #Talking to demon
+					currentState = PLAYERSTATE.TALKING_WITH_DEMON
 		elif Input.is_action_just_released("ui_select"):
 			if currentEntity != null:
 				if currentEntity.type == "Fountain":
 					currentEntity.stop_interact()
-		elif Input.is_action_pressed("menu"):
-			$Mansion/Sorter/player_character.toggle_stats_view()
+	
+	if Input.is_action_pressed("menu"):
+		$Mansion/Sorter/player_character.toggle_stats_view()
 
 #moves player to the next tile
 func move_player(direction:Vector2):
@@ -102,20 +120,21 @@ func move_player(direction:Vector2):
 			if not entities.has(newPlayerPos): #Stops player from walking onto entities
 				playerPos = newPlayerPos
 				player.move_player($Mansion.map_to_world(playerPos) + tileOffset, direction)
-				playerMoving = true
-				playerWaitingForEncounter = Game_Manager.encounter_chance(playerPos)
+				currentState = PLAYERSTATE.MOVING
+				if Game_Manager.encounter_chance(playerPos):
+					currentState = PLAYERSTATE.WAITING_FOR_ENCOUNTER
 		2: #Doors
 			playerPos = newPlayerPos
 			doors[playerPos].open_door(direction)
 			player.move_player($Mansion.map_to_world(playerPos) + tileOffset, direction)
-			playerMoving = true
+			currentState = PLAYERSTATE.MOVING
 			yield(get_tree().create_timer(0.3), "timeout")
 			move_player(direction)
 		4: #Exit
 			if entities[newPlayerPos].open:
 				playerPos = newPlayerPos
 				player.move_player($Mansion.map_to_world(playerPos) + tileOffset, direction)
-				playerMoving = true
+				currentState = PLAYERSTATE.MOVING
 				yield(get_tree().create_timer(0.3), "timeout")
 				move_player(direction)
 		5: #Stairs up
@@ -142,4 +161,9 @@ func check_for_entities(direction:Vector2):
 
 #Enables next movement input
 func player_movement_done():
-	playerMoving = false
+	if currentState != PLAYERSTATE.WAITING_FOR_ENCOUNTER:
+		currentState = PLAYERSTATE.IDLE
+
+#Returns to idle after talking to demon
+func demon_chat_done():
+	currentState = PLAYERSTATE.IDLE
