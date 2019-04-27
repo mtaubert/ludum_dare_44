@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://player_character.gd" type="Script" id=1]
 [ext_resource path="res://character_model/player_spritesheet.png" type="Texture" id=2]
@@ -12,6 +12,9 @@
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 18.9361
 height = 4.74324
+
+[sub_resource type="OccluderPolygon2D" id=2]
+polygon = PoolVector2Array( -2.2178, -1.68722, -7.34684, -1.16385, -10.2777, -0.0124321, -10.2777, 2.81377, -7.34684, 5.01194, -3.57857, 5.74466, 0.29438, 6.3727, 3.64396, 5.95401, 7.30756, 4.48856, 9.81974, 2.81377, 9.61039, 0.301594, 7.62158, -1.16385, -0.0196457, -1.89657 )
 
 [node name="player_character" type="Node2D"]
 script = ExtResource( 1 )
@@ -59,6 +62,9 @@ anims/walk_x = ExtResource( 7 )
 stream = ExtResource( 8 )
 volume_db = -10.0
 autoplay = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource( 2 )
 
 [connection signal="tween_completed" from="Movement_Tween" to="." method="movement_done"]
 [connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_AudioStreamPlayer2D_finished"]
