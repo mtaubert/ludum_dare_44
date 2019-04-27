@@ -13,7 +13,7 @@ onready var backdrop_1 = load("res://Assets/battle_backdrop_2.png")
 func _ready():
 	$CanvasLayer/the_man_stats.set_blood(blood_count)
 	randomize()
-	$Node2D/enemy.frames = get("enemy_" + str(randi() % 2))
+	$enemy_character/enemy.frames = get("enemy_" + str(randi() % 2))
 	print("enemy_" + str(randi() % 2))
 	$TextureRect.texture = get("backdrop_" + str(randi() % 2))
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -37,7 +37,7 @@ func _on_sacrifice_pressed():
 	tween.start()
 
 func _on_fight_pressed():
-	pass
+	hit_enemy(13)
 	#blood_count += 20
 	#blood_val = blood_val %101
 	#$CanvasLayer/the_man_stats.set_blood(blood_val)
@@ -51,3 +51,16 @@ func _on_the_man_stats_blood_paid(ammount):
 	if blood_count > ammount:
 		blood_count -= ammount
 	$CanvasLayer/the_man_stats.set_blood(blood_count)
+
+func hit_enemy(damage):
+	$enemy_character/enemy_health/damage_tween.interpolate_property($enemy_character/enemy_health, "value", $enemy_character/enemy_health.value,  $enemy_character/enemy_health.value - damage, 0.2, Tween.TRANS_BACK, Tween.EASE_IN)
+	$enemy_character/enemy_health/damage_tween.start()
+
+func _on_damage_tween_tween_completed(object, key):
+	#check enemy health for low health or death
+	print($enemy_character/enemy_health.value)
+	if $enemy_character/enemy_health.value <= 0:
+		Game_Manager.end_encounter()
+	if $enemy_character/enemy_health.value <= 10:
+		$enemy_character/enemy_health/AnimationPlayer.play("low_health_enemy")
+	

@@ -50,7 +50,7 @@ polygon = PoolVector2Array( -7, 0, -16, 1, -18, 5, -14, 8, -8, 9, -2, 9, 5, 7, 9
 [node name="Map_Demon" type="AnimatedSprite"]
 frames = SubResource( 1 )
 animation = "interactible_demon_1_idle"
-frame = 2
+frame = 4
 playing = true
 offset = Vector2( 0, -36 )
 script = ExtResource( 6 )

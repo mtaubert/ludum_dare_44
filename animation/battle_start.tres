@@ -4,7 +4,7 @@
 resource_name = "battle_start"
 length = 2.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("Node2D:position")
+tracks/0/path = NodePath("enemy_character:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false

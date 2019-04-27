@@ -1,14 +1,16 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://battle.gd" type="Script" id=1]
 [ext_resource path="res://Assets/battle_backdrop.png" type="Texture" id=2]
 [ext_resource path="res://Assets/battle_theme.tres" type="Theme" id=3]
-[ext_resource path="res://scenery/battle_stand.png" type="Texture" id=4]
-[ext_resource path="res://demon_model/keeper_demon_sheet.tres" type="SpriteFrames" id=5]
-[ext_resource path="res://character_model/player_battle_sprite.png" type="Texture" id=6]
-[ext_resource path="res://animation/battle_start.tres" type="Animation" id=7]
-[ext_resource path="res://the_man_stats.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Assets/audio/ableton_battle.wav" type="AudioStream" id=9]
+[ext_resource path="res://scenery/health_radial.png" type="Texture" id=4]
+[ext_resource path="res://animation/low_health_enemy.tres" type="Animation" id=5]
+[ext_resource path="res://scenery/battle_stand.png" type="Texture" id=6]
+[ext_resource path="res://demon_model/keeper_demon_sheet.tres" type="SpriteFrames" id=7]
+[ext_resource path="res://character_model/player_battle_sprite.png" type="Texture" id=8]
+[ext_resource path="res://animation/battle_start.tres" type="Animation" id=9]
+[ext_resource path="res://the_man_stats.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Assets/audio/ableton_battle.wav" type="AudioStream" id=11]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -85,33 +87,51 @@ margin_bottom = 98.0
 size_flags_horizontal = 3
 text = "flee"
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="enemy_character" type="Node2D" parent="."]
 position = Vector2( 769.953, 278.92 )
 
-[node name="battle_stand" type="Sprite" parent="Node2D"]
-position = Vector2( -1.72449, -2.02316 )
-texture = ExtResource( 4 )
+[node name="enemy_health" type="TextureProgress" parent="enemy_character"]
+margin_left = -303.601
+margin_top = -300.277
+margin_right = 296.399
+margin_bottom = 299.723
+value = 100.0
+texture_under = ExtResource( 4 )
+texture_progress = ExtResource( 4 )
+fill_mode = 5
+tint_under = Color( 0, 0, 0, 1 )
+tint_over = Color( 0, 0, 0, 1 )
+tint_progress = Color( 1, 0, 0, 1 )
 
-[node name="enemy" type="AnimatedSprite" parent="Node2D"]
+[node name="damage_tween" type="Tween" parent="enemy_character/enemy_health"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="enemy_character/enemy_health"]
+anims/low_health_enemy = ExtResource( 5 )
+
+[node name="battle_stand" type="Sprite" parent="enemy_character"]
+position = Vector2( -1.72449, -2.02316 )
+texture = ExtResource( 6 )
+
+[node name="enemy" type="AnimatedSprite" parent="enemy_character"]
 position = Vector2( -0.793213, -124.073 )
 scale = Vector2( 0.6, 0.6 )
-frames = ExtResource( 5 )
-frame = 1
+frames = ExtResource( 7 )
+frame = 3
 playing = true
 
 [node name="player" type="Sprite" parent="."]
 position = Vector2( 303.251, 441.985 )
 scale = Vector2( 0.8, 0.8 )
-texture = ExtResource( 6 )
+texture = ExtResource( 8 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "battle_start"
-anims/battle_start = ExtResource( 7 )
+anims/battle_start = ExtResource( 9 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 5
 
-[node name="the_man_stats" parent="CanvasLayer" instance=ExtResource( 8 )]
+[node name="the_man_stats" parent="CanvasLayer" instance=ExtResource( 10 )]
 margin_left = -200.0
 margin_top = 70.434
 margin_right = -200.0
@@ -120,11 +140,12 @@ margin_bottom = 70.434
 [node name="man_tween" type="Tween" parent="CanvasLayer/the_man_stats"]
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 9 )
+stream = ExtResource( 11 )
 volume_db = -5.0
 autoplay = true
 
 [connection signal="pressed" from="battle_menu/VBoxContainer/HBoxContainer/fight" to="." method="_on_fight_pressed"]
 [connection signal="pressed" from="battle_menu/VBoxContainer/HBoxContainer2/sacrifice" to="." method="_on_sacrifice_pressed"]
 [connection signal="pressed" from="battle_menu/VBoxContainer/HBoxContainer2/flee" to="." method="_on_flee_pressed"]
+[connection signal="tween_completed" from="enemy_character/enemy_health/damage_tween" to="." method="_on_damage_tween_tween_completed"]
 [connection signal="blood_paid" from="CanvasLayer/the_man_stats" to="." method="_on_the_man_stats_blood_paid"]
