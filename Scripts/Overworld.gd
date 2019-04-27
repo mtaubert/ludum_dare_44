@@ -18,6 +18,8 @@ func _ready():
 	playerPos = Game_Manager.playerSpawn
 	player.connect("movement_done", self, "player_movement_done")
 	
+	Game_Manager.set_player(player)
+	
 	update_entities()
 	place_walls()
 

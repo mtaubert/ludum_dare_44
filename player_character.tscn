@@ -34,6 +34,8 @@ frame = 3
 region_enabled = true
 region_rect = Rect2( 5, 0, 1000, 250 )
 
+[node name="Character_Effect" type="Sprite" parent="KinematicBody2D/Sprite"]
+
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 zoom = Vector2( 0.5, 0.5 )
