@@ -5,8 +5,7 @@
 [ext_resource path="res://Assets/interact_key.png" type="Texture" id=3]
 [ext_resource path="res://Assets/blood_drop.png" type="Texture" id=4]
 
-
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=1]
 resource_name = "Highlight"
 length = 2.0
 loop = true
@@ -64,7 +63,7 @@ scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Highlight = SubResource( 3 )
+anims/Highlight = SubResource( 1 )
 
 [node name="Blood" type="Particles2D" parent="."]
 position = Vector2( -5, -220 )

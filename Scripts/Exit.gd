@@ -9,7 +9,13 @@ func _ready():
 	$Highlight.hide()
 
 func interact():
-	texture = doorTextures[1]
+	if not open:
+		if Game_Manager.bloodSacrificeLevel >= 20:
+			open = true
+			texture = doorTextures[1]
+	else:
+		open = false
+		texture = doorTextures[0]
 
 func highlight():
 	$Highlight.show()

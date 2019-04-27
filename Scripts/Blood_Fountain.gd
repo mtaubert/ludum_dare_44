@@ -1,7 +1,6 @@
 extends Sprite
 
 var type = "Fountain"
-var bloodLevel = 0
 var stage = [load("res://scenery/blood_pit_empty.png"), load("res://scenery/blood_pit_low.png"), load("res://scenery/blood_pit_mid.png"), load("res://scenery/blood_pit_full.png")]
 
 func _ready():
@@ -23,8 +22,8 @@ func _process(delta):
 	secondsSinceInteract += delta
 	
 	if secondsSinceInteract > 0.5:
-		bloodLevel += 1
-		var bloodStage = int(bloodLevel/5)
+		Game_Manager.bloodSacrificeLevel += 1
+		var bloodStage = int(Game_Manager.bloodSacrificeLevel/5)
 		if bloodStage <= 3:
 			texture = stage[bloodStage]
 		else:

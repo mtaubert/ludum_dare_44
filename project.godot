@@ -19,6 +19,10 @@ config/name="Ludum Dare 44 Project"
 run/main_scene="res://Scenes/Bottom_Floor.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Game_Manager="*res://Scripts/Game_Manager.gd"
+
 [input]
 
 ui_select={
