@@ -1,7 +1,7 @@
 [gd_resource type="Animation" format=2]
 
 [resource]
-resource_name = "walk_down"
+resource_name = "walk_up"
 length = 0.3
 loop = true
 tracks/0/type = "value"
@@ -14,7 +14,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 3 ]
+"values": [ 4 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("KinematicBody2D/Sprite:flip_h")

@@ -31,7 +31,7 @@ func move_player(location:Vector2, direction:Vector2):
 		if direction.y > 0:
 			$AnimationPlayer.play("walk_down")
 		else:
-			pass
+			$AnimationPlayer.play("walk_up")
 	
 	dir = direction
 	
