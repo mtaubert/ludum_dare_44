@@ -4,7 +4,7 @@ var houseLevels = ["Basement", "Bottom_Floor", "Top_Floor"]
 var bloodSacrificeLevel = 0
 var currentLevel = 1
 var playerSpawn = Vector2(16,19)
-
+var blood_fountain_cost = 10
 func _ready():
 	randomize()
 
@@ -63,3 +63,15 @@ func start_encounter():
 	
 func end_encounter():
 	get_tree().change_scene("res://Scenes/" + houseLevels[currentLevel] + ".tscn")
+	
+func blood_sacrifice():
+	player.open_menu()
+	if player._on_the_man_stats_blood_paid(blood_fountain_cost):
+		bloodSacrificeLevel += 1
+		return true
+	else:
+		return false
+		
+func can_pay_blood():
+	return player.blood_count > blood_fountain_cost
+	

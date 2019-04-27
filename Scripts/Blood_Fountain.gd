@@ -9,8 +9,9 @@ func _ready():
 	set_process(false)
 
 func interact():
-	set_process(true)
-	$Blood.emitting = true
+	if Game_Manager.can_pay_blood():
+		set_process(true)
+		$Blood.emitting = true
 
 func stop_interact():
 	set_process(false)
@@ -22,7 +23,8 @@ func _process(delta):
 	secondsSinceInteract += delta
 	
 	if secondsSinceInteract > 0.5:
-		Game_Manager.bloodSacrificeLevel += 1
+		if not Game_Manager.blood_sacrifice():
+			stop_interact()
 		var bloodStage = int(Game_Manager.bloodSacrificeLevel/5)
 		if bloodStage <= 3:
 			texture = stage[bloodStage]

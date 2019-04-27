@@ -94,6 +94,17 @@ func _on_stats_tween_tween_completed(object, key):
 
 
 func _on_the_man_stats_blood_paid(ammount):
+	var can_pay = blood_count > ammount 
 	if blood_count > ammount:
 		blood_count -= ammount
 	$Camera2D/CanvasLayer/the_man_stats.set_blood(blood_count)
+	if can_pay:
+		return true
+
+func open_menu():
+	var the_man = $Camera2D/CanvasLayer/the_man_stats
+	var target = the_man.rect_position
+	target.x = 80
+	stats_tween.interpolate_property(the_man, "rect_position", the_man.rect_position,  target, 0.5, Tween.TRANS_SINE, Tween.EASE_OUT)
+	stats_tween.start()
+	$Camera2D/CanvasLayer/the_man_stats.toggle_buttons(true)
