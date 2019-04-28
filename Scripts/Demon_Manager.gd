@@ -7,14 +7,16 @@ var demons = {
 		"dialog_animations": load("res://demon_model/interactable_demons/interactable_demon_1.png"),
 		"map_animations": load("res://demon_model/interactable_demons/interactible_demon_1.tres"),
 		"name": "Wiggles",
-		"encounter_animations": load("res://demon_model/wiggles_sheet.tres")
+		"encounter_animations": load("res://demon_model/wiggles_sheet.tres"),
+		"bargain_items": ["Finger Sickle", "Toe Knife", "Blood Scepter"]
 	},
 	"2": {
 		"dialog": {},
 		"dialog_animations": load("res://demon_model/interactable_demons/interactable_demon_2.png"),
 		"map_animations": load("res://demon_model/interactable_demons/interactible_demon_2.tres"),
 		"name": "Wranque",
-		"encounter_animations": null
+		"encounter_animations": null,
+		"bargain_items": []
 	}
 }
 
