@@ -1,39 +1,15 @@
 extends AnimatedSprite
 
 export var demonID = 1
-export var demonName = "wiggles"
 var type = "Demon"
 
-var dialog = {
-	"opener": {
-		"text": "Puny mortal, why did you come here?",
-		"accept": "follow_up",
-		"decline": null,
-		"accept_text": "What?",
-		"decline_text": null,
-	},
-	"follow_up": {
-		"text": "Whay are you here? Did you want to fight me?",
-		"accept": 1,
-		"decline": "final",
-		"accept_text": "Sure, thing",
-		"decline_text": "I'm good",
-	},
-	"final": {
-		"text": "Fine, then leave me.",
-		"accept": null,
-		"decline": null,
-		"accept_text": null,
-		"decline_text": null,
-	}
-}
 
 func _ready():
 	$Highlight.hide()
-	frames = load("res://demon_model/interactable_demons/interactible_demon_" + String(demonID) + ".tres")
+	frames = Demon_Manager.demons[String(demonID)]["map_animations"]
 
 func interact():
-	Game_Manager.start_dialog(demonName, demonID, dialog)
+	Game_Manager.start_dialog(demonID)
 
 func highlight():
 	$Highlight.show()

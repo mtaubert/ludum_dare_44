@@ -3,13 +3,6 @@ extends Control
 var show_the_man = false
 onready var tween = get_node("CanvasLayer/the_man_stats/man_tween")
 
-onready var enemy_0 = load("res://demon_model/commandeer_sheet.tres")
-onready var enemy_1 = load("res://demon_model/keeper_demon_sheet.tres")
-onready var enemy_2 = load("res://demon_model/beholder_sheet.tres")
-
-#Predefiened enemies
-onready var wiggles = load("res://demon_model/wiggles_sheet.tres")
-
 onready var backdrop_0 = load("res://Assets/battle_backdrop.png")
 onready var backdrop_1 = load("res://Assets/battle_backdrop_2.png")
 # Called when the node enters the scene tree for the first time.
@@ -25,9 +18,14 @@ func _ready():
 	randomize()
 	
 	if Game_Manager.specificEnemy == null:
-		$enemy_character/enemy.frames = get("enemy_" + str(randi() % 3))
+		var randomDemon = String((randi()%(Demon_Manager.randomEncounterDemons.size()))+1)
+		print(randomDemon)
+		$enemy_character/enemy.frames = Demon_Manager.randomEncounterDemons[randomDemon]["encounter_animations"]
+		$enemy_character/enemy.animation = "default"
 	else:
-		$enemy_character/enemy.frames = get(Game_Manager.specificEnemy)
+		#Grabs the current demon and loads their encounter frames
+		$enemy_character/enemy.frames = Demon_Manager.demons[String(Game_Manager.specificEnemy)]["encounter_animations"]
+		$enemy_character/enemy.animation = "default"
 	
 	$TextureRect.texture = get("backdrop_" + str(randi() % 2))
 	
