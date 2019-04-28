@@ -78,7 +78,7 @@ func match_current_key():
 	match currentDialogKey:
 		null: #Conversation is over
 			end_dialog()
-		1, "1": #Fight
+		1.0, 1, "1": #Fight, dunno what type this comes out as so here's all of them
 			Game_Manager.start_encounter_against(currentDemon)
 		_:
 			demon_talking()
