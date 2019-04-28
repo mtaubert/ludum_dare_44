@@ -60,7 +60,6 @@ func battle_action(action):
 	#excecute the chosen battle action then pass the turn
 	
 func show_details(action):
-	print(action)
 	if action in Game_Manager.talk_actions:
 		$talk_menu.show_details(action)
 	if action in Game_Manager.attack_actions:
@@ -107,6 +106,7 @@ func _on_fight_pressed():
 
 
 func _on_flee_pressed():
+	hide_the_man()
 	end_battle()
 
 
@@ -142,14 +142,12 @@ func _on_talk_pressed():
 
 
 func _on_talk_menu_back(this):
-	print(this)
 	hide_menu("talk")
 	menu_queue.append("battle")
 
 
 
 func _on_fight_menu_back(this):
-	print(this)
 	hide_menu("fight")
 	menu_queue.append("battle")
 
@@ -258,17 +256,22 @@ func _on_combat_animator_animation_finished(anim_name):
 		"enemy_defeated":
 			end_battle()
 		_:
+			combat.handle_enemy_action(anim_name)
 			pass_turn()
 
 #process the player attack and pass the turn
 func _on_player_combat_animator_animation_finished(anim_name):
-	match anim_name:
+	var dmg = combat.handle_player_action(anim_name)
+	if dmg:
+		hit_enemy(dmg)
+	"""match anim_name:
 		"struggle":
 			hit_enemy(13)
 		"dodge":
 			pass
 		_:
 			pass
+	"""
 	pass_turn()
 
 
