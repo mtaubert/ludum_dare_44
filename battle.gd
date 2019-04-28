@@ -5,6 +5,7 @@ onready var tween = get_node("CanvasLayer/the_man_stats/man_tween")
 
 onready var enemy_0 = load("res://demon_model/commandeer_sheet.tres")
 onready var enemy_1 = load("res://demon_model/keeper_demon_sheet.tres")
+onready var enemy_2 = load("res://demon_model/beholder_sheet.tres")
 
 #Predefiened enemies
 onready var wiggles = load("res://demon_model/wiggles_sheet.tres")
@@ -21,7 +22,7 @@ func _ready():
 	randomize()
 	
 	if Game_Manager.specificEnemy == null:
-		$enemy_character/enemy.frames = get("enemy_" + str(randi() % 2))
+		$enemy_character/enemy.frames = get("enemy_" + str(randi() % 3))
 	else:
 		$enemy_character/enemy.frames = get(Game_Manager.specificEnemy)
 	
