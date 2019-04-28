@@ -25,6 +25,10 @@ Game_Manager="*res://Scripts/Game_Manager.gd"
 Demon_Manager="*res://Scripts/Demon_Manager.gd"
 combat="*res://Scripts/combat.gd"
 
+[display]
+
+window/size/resizable=false
+
 [input]
 
 ui_select={
