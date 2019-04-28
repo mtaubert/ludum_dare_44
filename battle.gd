@@ -2,7 +2,6 @@ extends Control
 
 var show_the_man = false
 onready var tween = get_node("CanvasLayer/the_man_stats/man_tween")
-export var blood_count = 100
 
 onready var enemy_0 = load("res://demon_model/commandeer_sheet.tres")
 onready var enemy_1 = load("res://demon_model/keeper_demon_sheet.tres")
@@ -14,7 +13,6 @@ onready var backdrop_0 = load("res://Assets/battle_backdrop.png")
 onready var backdrop_1 = load("res://Assets/battle_backdrop_2.png")
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$CanvasLayer/the_man_stats.set_blood(blood_count)
 	randomize()
 	
 	if Game_Manager.specificEnemy == null:
@@ -52,9 +50,9 @@ func _on_flee_pressed():
 
 
 func _on_the_man_stats_blood_paid(ammount):
-	if blood_count > ammount:
-		blood_count -= ammount
-	$CanvasLayer/the_man_stats.set_blood(blood_count)
+	if Game_Manager.blood > ammount:
+		Game_Manager.blood -= ammount
+	$CanvasLayer/the_man_stats.set_blood(Game_Manager.blood)
 
 func hit_enemy(damage):
 	$enemy_character/enemy_health/damage_tween.interpolate_property($enemy_character/enemy_health, "value", $enemy_character/enemy_health.value,  $enemy_character/enemy_health.value - damage, 0.2, Tween.TRANS_BACK, Tween.EASE_IN)
