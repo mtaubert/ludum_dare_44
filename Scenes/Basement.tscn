@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Overworld.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Mansion_Tiles.tres" type="TileSet" id=2]
 [ext_resource path="res://player_character.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Prefabs/Torch.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Prefabs/Portal.tscn" type="PackedScene" id=5]
 
 [node name="Basement" type="Node2D"]
 script = ExtResource( 1 )
@@ -20,4 +21,7 @@ position = Vector2( 673.318, 102.096 )
 
 [node name="Torch" parent="Mansion/Sorter" instance=ExtResource( 4 )]
 position = Vector2( 675.406, 165.556 )
+
+[node name="Portal" parent="Mansion/Sorter" instance=ExtResource( 5 )]
+position = Vector2( 995.824, 759.223 )
 

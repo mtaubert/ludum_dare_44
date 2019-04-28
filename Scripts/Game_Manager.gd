@@ -59,7 +59,7 @@ func set_random_encounter_locations(floorCells, entityLocations, torchLocations)
 			floorCells.erase(neighbor)
 	encounterLocations = floorCells
 
-var encounterChance = 100
+var encounterChance = 0
 var player
 var specificEnemy = null
 
@@ -80,7 +80,7 @@ func encounter_chance(location:Vector2):
 			return true
 		else:
 			return false
-			encounterChance +=2
+			encounterChance +=0
 
 #Starts a random encounter
 func start_encounter():

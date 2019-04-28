@@ -70,9 +70,11 @@ func update_entities():
 				child.position = $Mansion.map_to_world($Mansion.world_to_map(child.position)) + tileOffset + Vector2(0,-1)
 				torches.append($Mansion.world_to_map(child.position))
 			"Demon":
-				child.position = $Mansion.map_to_world($Mansion.world_to_map(child.position)) + tileOffset
+				child.position = $Mansion.map_to_world($Mansion.world_to_map(child.position)) + tileOffset + Vector2(0,-1)
 				entities[$Mansion.world_to_map(child.position)] = child
-				
+			"Portal":
+				child.position = $Mansion.map_to_world($Mansion.world_to_map(child.position)) + tileOffset + Vector2(0,-1)
+				entities[$Mansion.world_to_map(child.position)] = child
 	
 	#Exit placement
 	if $Mansion.get_used_cells_by_id(4).size() > 0: #Checks if any exit tiles exists, only needs the first one
