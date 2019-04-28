@@ -14,6 +14,7 @@ var can_open_menu = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	fade_in()
 	$Camera2D.limit_left = limits[0]
 	$Camera2D.limit_top = limits[1]
 	$Camera2D.limit_right = limits[2]
@@ -127,3 +128,9 @@ func open_menu():
 	stats_tween.interpolate_property(the_man, "rect_position", the_man.rect_position,  target, 0.5, Tween.TRANS_SINE, Tween.EASE_OUT)
 	stats_tween.start()
 	$Camera2D/CanvasLayer/the_man_stats.toggle_buttons(true)
+	
+func fade_in():
+	$Camera2D/CanvasLayer/swipe/scene_animator.play("fade_in")
+	
+func fade_out():
+	$Camera2D/CanvasLayer/swipe/scene_animator.play("fade_out")

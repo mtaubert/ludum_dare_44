@@ -57,7 +57,12 @@ func go_up():
 			playerSpawn = Vector2(19,10)
 		0:
 			playerSpawn = Vector2(14,11)
+	player.fade_out()
+	yield(get_tree().create_timer(1), "timeout")
+	
 	get_tree().change_scene("res://Scenes/" + houseLevels[currentLevel] + ".tscn")
+	
+	
 
 func go_down():
 	currentLevel -= 1
@@ -66,12 +71,20 @@ func go_down():
 			playerSpawn = Vector2(12,10)
 		0:
 			playerSpawn = Vector2(10,1)
+			
+	player.fade_out()
+	yield(get_tree().create_timer(1), "timeout")
 	get_tree().change_scene("res://Scenes/" + houseLevels[currentLevel] + ".tscn")
+	
 
 func go_to_hell():
 	currentLevel -= 1
 	playerSpawn = Vector2(13,10)
+	player.fade_out()
+	yield(get_tree().create_timer(1), "timeout")
+	
 	get_tree().change_scene("res://Scenes/Hell.tscn")
+	
 #Mansion floor movement ---------------------------------------------------------------------------------------------------
 
 #Encounters ---------------------------------------------------------------------------------------------------------------
@@ -116,15 +129,22 @@ func encounter_chance(location:Vector2):
 #Starts a random encounter
 func start_encounter():
 	specificEnemy = null
+	player.fade_out()
+	yield(get_tree().create_timer(1), "timeout")
 	get_tree().change_scene("res://battle.tscn")
 
 #Starts a specific encounter
 func start_encounter_against(demonID):
 	specificEnemy = demonID
+	player.fade_out()
+	yield(get_tree().create_timer(1), "timeout")
 	get_tree().change_scene("res://battle.tscn")
 
 func end_encounter():
 	get_tree().change_scene("res://Scenes/" + houseLevels[currentLevel] + ".tscn")
+	
+	yield(get_tree().create_timer(1), "timeout")
+	player.fade_in()
 #Encounters ---------------------------------------------------------------------------------------------------------------
 
 #Sacrifices ---------------------------------------------------------------------------------------------------------------

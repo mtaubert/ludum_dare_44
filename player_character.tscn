@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://player_character.gd" type="Script" id=1]
 [ext_resource path="res://Assets/smoke.png" type="Texture" id=2]
@@ -6,10 +6,11 @@
 [ext_resource path="res://character_model/player_spritesheet.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/UI.tscn" type="PackedScene" id=5]
 [ext_resource path="res://the_man_stats.tscn" type="PackedScene" id=6]
-[ext_resource path="res://animation/walk_down.tres" type="Animation" id=7]
-[ext_resource path="res://animation/walk_up.tres" type="Animation" id=8]
-[ext_resource path="res://animation/walk_x.tres" type="Animation" id=9]
-[ext_resource path="res://Assets/audio/ambient.wav" type="AudioStream" id=10]
+[ext_resource path="res://animation/fade_in.tres" type="Animation" id=7]
+[ext_resource path="res://animation/walk_down.tres" type="Animation" id=8]
+[ext_resource path="res://animation/walk_up.tres" type="Animation" id=9]
+[ext_resource path="res://animation/walk_x.tres" type="Animation" id=10]
+[ext_resource path="res://Assets/audio/ambient.wav" type="AudioStream" id=11]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 18.9361
@@ -31,6 +32,21 @@ damping = 20.0
 scale = 0.3
 scale_random = 0.16
 color = Color( 0.0941176, 0.0941176, 0.0941176, 1 )
+
+[sub_resource type="Animation" id=4]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ) ]
+}
 
 [sub_resource type="OccluderPolygon2D" id=3]
 polygon = PoolVector2Array( -2.2178, -1.68722, -7.34684, -1.16385, -10.2777, -0.0124321, -10.2777, 2.81377, -7.34684, 5.01194, -3.57857, 5.74466, 0.29438, 6.3727, 3.64396, 5.95401, 7.30756, 4.48856, 9.81974, 2.81377, 9.61039, 0.301594, 7.62158, -1.16385, -0.0196457, -1.89657 )
@@ -85,15 +101,25 @@ margin_bottom = 80.0
 [node name="MarginContainer" parent="Camera2D/CanvasLayer/the_man_stats" index="4"]
 visible = false
 
+[node name="swipe" type="ColorRect" parent="Camera2D/CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+
+[node name="scene_animator" type="AnimationPlayer" parent="Camera2D/CanvasLayer/swipe"]
+anims/fade_in = ExtResource( 7 )
+anims/fade_out = SubResource( 4 )
+
 [node name="Movement_Tween" type="Tween" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/walk_down = ExtResource( 7 )
-anims/walk_up = ExtResource( 8 )
-anims/walk_x = ExtResource( 9 )
+anims/walk_down = ExtResource( 8 )
+anims/walk_up = ExtResource( 9 )
+anims/walk_x = ExtResource( 10 )
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 10 )
+stream = ExtResource( 11 )
 volume_db = -10.0
 autoplay = true
 
