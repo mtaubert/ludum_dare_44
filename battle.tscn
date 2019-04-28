@@ -130,8 +130,7 @@ texture = ExtResource( 7 )
 position = Vector2( -0.793213, -124.073 )
 scale = Vector2( 0.6, 0.6 )
 frames = ExtResource( 8 )
-animation = "beholder_sheet"
-frame = 3
+frame = 4
 playing = true
 
 [node name="player" type="Sprite" parent="."]

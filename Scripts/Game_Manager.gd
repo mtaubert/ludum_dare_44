@@ -55,7 +55,7 @@ func set_random_encounter_locations(floorCells, entityLocations, torchLocations)
 			floorCells.erase(neighbor)
 	encounterLocations = floorCells
 
-var encounterChance = 10
+var encounterChance = 100
 var player
 var specificEnemy = null
 

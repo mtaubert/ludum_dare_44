@@ -15,10 +15,14 @@ func _ready():
 	randomize()
 	
 	if Game_Manager.specificEnemy == null:
-		$enemy_character/enemy.frames = Demon_Manager.randomEncounterDemons[String((randi()%2)+1)]["encounter_animations"]
+		var randomDemon = String((randi()%(Demon_Manager.randomEncounterDemons.size()))+1)
+		print(randomDemon)
+		$enemy_character/enemy.frames = Demon_Manager.randomEncounterDemons[randomDemon]["encounter_animations"]
+		$enemy_character/enemy.animation = "default"
 	else:
 		#Grabs the current demon and loads their encounter frames
 		$enemy_character/enemy.frames = Demon_Manager.demons[String(Game_Manager.specificEnemy)]["encounter_animations"]
+		$enemy_character/enemy.animation = "default"
 	
 	$TextureRect.texture = get("backdrop_" + str(randi() % 2))
 

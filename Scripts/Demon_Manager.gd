@@ -24,6 +24,9 @@ var randomEncounterDemons = {
 	},
 	"2": {
 		"encounter_animations": load("res://demon_model/keeper_demon_sheet.tres")
+	},
+	"3": {
+		"encounter_animations": load("res://demon_model/beholder_sheet.tres")
 	}
 }
 
@@ -40,6 +43,7 @@ var defaultDialog = {
 var dialogJSON = "res://Assets/demon_data.json"
 
 func _ready():
+	print(randomEncounterDemons)
 	load_dialog()
 
 func load_dialog():
