@@ -1,0 +1,79 @@
+{
+	"behold": {
+		"stats": {
+			"health": 60
+
+		},
+		"actions": {
+			"spook": "discount",
+			"dodge": "evade 50",
+			"splatter": "attack",
+			"taunt": ""
+		},
+		"bargain": {
+			"good": "compliment",
+			"bad": "reason"
+		},
+		"loot": {
+			"blood": 8,
+			"bargain": ["blood", "flee"]
+		}
+	},
+	"spectre": {
+		"stats": {
+			"health": 160
+
+		},
+		"actions": {
+			"spook": "discount",
+			"dodge": "evade 50",
+			"assault": "attack",
+			"taunt": ""
+		},
+		"bargain": {
+			"good": "plead",
+			"bad": "threaten"
+		},
+		"loot": {
+			"blood": 22,
+			"finger": 2,
+			"bargain": ["blood", ["flee", "key"]]
+		}
+	},
+	"commandeer": {
+		"stats": {
+			"health": 100
+
+		},
+		"actions": {
+			"spook": "discount",
+			"dodge": "evade 50",
+			"assault": "attack",
+			"taunt": ""
+		}
+	},
+	"eyes_and_holes": {
+		"stats": {
+			"health": 140
+
+		},
+		"actions": {
+			"spook": "discount",
+			"dodge": "evade 50",
+			"assault": "attack",
+			"taunt": ""
+		}
+	},
+	"wiggles": {
+		"stats": {
+			"health": 200
+
+		},
+		"actions": {
+			"spook": "discount",
+			"dodge": "evade 50",
+			"assault": "attack",
+			"taunt": ""
+		}
+	}
+}

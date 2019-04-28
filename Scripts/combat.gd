@@ -2,20 +2,43 @@ extends Node
 
 #player stats stored in game manager
 signal player_sacrifice(type, ammount)
-
+signal enemy_details(data)
 var p_crit = 95
 var p_dodge = 0
 var e_dodge = 0
 var e_crit = 95
 
-var enemy_actions = []
+var enemy_data = {}
+var enemy_action_definitions = {}
+var battleJSON = "res://Assets/monster_actions.json"
+var enemy_type = ""
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	setup()
 
-func init():
-	pass
+func load_enemy_actions():
+	var file = File.new()
+	file.open(battleJSON, file.READ)
+	var fileJSON = JSON.parse(file.get_as_text())
+	
+	var tempDialogStore = {}
+	
+	if fileJSON.error == OK:
+		tempDialogStore = fileJSON.result
+	
+	enemy_data = tempDialogStore
+	print(enemy_data)
+
+func set_enemy(enemy_in):
+	if enemy_in in enemy_data.keys():
+		print("valid enemy")
+		enemy_action_definitions = enemy_data[enemy_in]
+		emit_signal("enemy_details", enemy_action_definitions)
+		
+func setup():
+	load_enemy_actions()
 	#setup enemy and player stats
+	print(enemy_data.keys())
 
 func handle_player_action(action):
 	match action:

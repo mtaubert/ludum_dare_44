@@ -31,7 +31,8 @@ var turn: int  = 0#tracks the combat turn
 var player_active = true
 
 var current_menu = "battle"
-
+var enemy = ""
+var enemy_attacks = 0
 
 func _ready():
 	update_player_dmg()
@@ -42,17 +43,45 @@ func _ready():
 		print(randomDemon)
 		$enemy_character/enemy.frames = Demon_Manager.randomEncounterDemons[randomDemon]["encounter_animations"]
 		$enemy_character/enemy.animation = "default"
+		match randomDemon:
+			"1":
+				enemy = "commandeer"
+			"2":
+				enemy = "spectre"
+			"3":
+				enemy = "behold"
+			"4":
+				enemy = "eyes_and_holes"
+			_:
+				print("demon out of range!")
 	else:
 		#Grabs the current demon and loads their encounter frames
 		$enemy_character/enemy.frames = Demon_Manager.demons[String(Game_Manager.specificEnemy)]["encounter_animations"]
 		$enemy_character/enemy.animation = "default"
+		print(Game_Manager.specificEnemy)
+		match Game_Manager.specificEnemy:
+			1:
+				enemy = "wiggles"
+			_:
+				print("demon out of range!")
 	
 	$TextureRect.texture = get("backdrop_" + str(randi() % 2))
 	
 	init_player_actions()
 	
 	combat.connect("player_sacrifice", self, "player_sacrifice")
-
+	combat.connect("enemy_details", self, "setup_enemy")
+	combat.set_enemy(enemy)
+	
+	
+func setup_enemy(details):
+	print(details)
+	$enemy_character/enemy_health.max_value = details["stats"]["health"]
+	$enemy_character/enemy_health.value = details["stats"]["health"]
+	print($enemy_character/enemy_health.value)
+	enemy_attacks = details["actions"].keys()
+	print(enemy_attacks)
+	
 #go through for each valid action in the game managerand add a button
 func init_player_actions():
 	for item in Game_Manager.attack_actions:
@@ -142,6 +171,7 @@ func hit_enemy(damage):
 
 func _on_damage_tween_tween_completed(object, key):
 	#check enemy health for low health or death
+	print("enemy health")
 	print($enemy_character/enemy_health.value)
 	if $enemy_character/enemy_health.value <= 0:
 		enemy_death()
@@ -226,8 +256,35 @@ func player_sacrifice(type, ammount):
 	Game_Manager.player_sacrifice(type, ammount)
 	$CanvasLayer/the_man_stats.set_blood(Game_Manager.blood)
 	update_player_dmg()
-	print("update a log?")
+	player_log("ow!")
+	yield(get_tree().create_timer(0.5), "timeout")
+	enemy_log("ahh precious " + type + "!")
+	
+	yield(get_tree().create_timer(5), "timeout")
+	hide_player_log()
+	hide_enemy_log()
+	
+	
+func player_log(text):
+	$player/speech.visible = true
+	$player/speech/RichTextLabel.text = ""
+	for c in text:
+		$player/speech/RichTextLabel.text += c
+		yield(get_tree().create_timer(0.01), "timeout")
+	return true
+	
+func enemy_log(text):
+	$enemy_character/enemy_speech.visible = true
+	$enemy_character/enemy_speech/RichTextLabel.text = ""
+	for c in text:
+		$enemy_character/enemy_speech/RichTextLabel.text += c
+		yield(get_tree().create_timer(0.01), "timeout")
 		
+func hide_player_log():
+	$player/speech.visible = false		
+	
+func hide_enemy_log():
+	$enemy_character/enemy_speech.visible = false	
 ##--------------------------------------------------------------------
 ##battle logic
 ##--------------------------------------------------------------------
@@ -251,11 +308,28 @@ func player_action(action):
 		print("inactive, cant take an action")
 	
 func enemy_action(action):
-	match action:
-		"spook":
-			spook()
-		_:
-			pass
+	print("--enemy action--")
+	print(action)
+	#delay half a second
+	yield(get_tree().create_timer(0.5), "timeout")
+	#check if the enemy is still alive
+	if $enemy_character/enemy_health.value > 0:
+		match action:
+			"spook":
+				$enemy_character/enemy/combat_animator.play(action)
+			"dodge":
+				$enemy_character/enemy/combat_animator.play(action)
+			"assault":
+				$enemy_character/enemy/combat_animator.play(action)
+			"taunt":
+				$enemy_character/enemy/combat_animator.play(action)
+			"splatter":
+				$enemy_character/enemy/combat_animator.play(action)
+			_:
+				print("undefined action")
+				$enemy_character/enemy/combat_anima
+				.play("delay")
+			#pass_turn()
 	
 	
 func pass_turn():
@@ -268,7 +342,9 @@ func pass_turn():
 	else:
 		player_active = false
 		#its the enemies go
-		enemy_action("spook")
+		#choose a random action from the availiable attacks
+		randomize()
+		enemy_action(enemy_attacks[randi()%len(enemy_attacks)])
 		#lock ui
 		
 	turn += 1
@@ -276,7 +352,7 @@ func pass_turn():
 #enemy actions
 #---------------------------------------
 func spook():
-	$enemy_character/enemy/combat_animator.play("delay")
+	pass
 
 #demon anim finished pass the turn back
 func _on_combat_animator_animation_finished(anim_name):
