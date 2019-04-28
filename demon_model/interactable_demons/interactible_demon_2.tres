@@ -1,0 +1,14 @@
+[gd_resource type="SpriteFrames" load_steps=4 format=2]
+
+[ext_resource path="res://demon_model/interactable_demons/interactable_demon_2_map_2.png" type="Texture" id=1]
+[ext_resource path="res://demon_model/interactable_demons/interactable_demon_2_map_5.png" type="Texture" id=2]
+[ext_resource path="res://demon_model/interactable_demons/interactable_demon_2_map_3.png" type="Texture" id=3]
+
+[resource]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 5.0
+} ]
+

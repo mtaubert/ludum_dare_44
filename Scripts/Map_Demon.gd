@@ -30,6 +30,7 @@ var dialog = {
 
 func _ready():
 	$Highlight.hide()
+	frames = load("res://demon_model/interactable_demons/interactible_demon_" + String(demonID) + ".tres")
 
 func interact():
 	Game_Manager.start_dialog(demonName, demonID, dialog)
