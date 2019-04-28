@@ -36,6 +36,8 @@ func _ready():
 	$TextureRect.texture = get("backdrop_" + str(randi() % 2))
 	
 	init_player_actions()
+	
+	combat.connect("player_sacrifice", self, "player_sacrifice")
 
 #go through for each valid action in the game managerand add a button
 func init_player_actions():
@@ -200,6 +202,12 @@ func end_battle():
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "battle_end":
 		Game_Manager.end_encounter()
+		
+func player_sacrifice(type, ammount):
+	Game_Manager.player_sacrifice(type, ammount)
+	$CanvasLayer/the_man_stats.set_blood(Game_Manager.blood)
+	print("update a log?")
+		
 ##--------------------------------------------------------------------
 ##battle logic
 ##--------------------------------------------------------------------

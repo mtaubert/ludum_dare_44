@@ -1,11 +1,13 @@
 {
 	"struggle": {
 		"stats": {
-			"damage": 13,
-			"blood_risk": [3, 5],
-			"finger_risk": [1, 1],
-			"toe_risk": [1, 1]
+			"damage": 13
 
+		},
+		"risk": {
+			"blood": [13, 5],
+			"finger": [12, 1],
+			"toe": [11, 1]
 		},
 		"text": "tustle with the muscle, slight risk of hurting yourself"
 	},

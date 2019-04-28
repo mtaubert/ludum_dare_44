@@ -37,9 +37,16 @@ func load_battle_actions():
 	print(action_definitions)
 	
 	
-func get_player_var(name):
-	return get(name)
+func get_player_var(name_in):
+	return get(name_in)
 
+func player_sacrifice(name_in, ammount):
+	var tmp = get(name_in) 
+	tmp -= ammount
+	set(name_in, tmp)
+	print("you lost a " + name_in)
+	print(get(name_in))
+	
 #Mansion floor movement ---------------------------------------------------------------------------------------------------
 func go_up():
 	currentLevel += 1

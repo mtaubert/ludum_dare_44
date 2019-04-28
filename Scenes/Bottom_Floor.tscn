@@ -50,12 +50,12 @@ position = Vector2( 1120.22, 616.487 )
 position = Vector2( 1125.8, 1246.51 )
 frames = ExtResource( 7 )
 animation = "Idle"
-frame = 2
+frame = 0
 
 [node name="Map_Demon2" parent="Mansion/Sorter" instance=ExtResource( 6 )]
 position = Vector2( 1529.24, 525.906 )
 frames = ExtResource( 8 )
 animation = "Idle"
-frame = 0
+frame = 3
 demonID = 2
 
