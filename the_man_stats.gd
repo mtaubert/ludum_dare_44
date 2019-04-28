@@ -39,3 +39,11 @@ func update_blood():
 func _on_blood_pressed():
 	emit_signal("blood_paid", 5)
 	update_blood()
+	
+func disable_buttons():
+	for item in $MarginContainer/VBoxContainer.get_children():
+		item.disabled = true
+		
+func enable_buttons():
+	for item in $MarginContainer/VBoxContainer.get_children():
+		item.disabled = false

@@ -1,0 +1,31 @@
+{
+	"struggle": {
+		"stats": {
+			"damage": 13,
+			"blood_risk": [3, 5],
+			"finger_risk": [1, 1],
+			"toe_risk": [1, 1]
+
+		},
+		"text": "tustle with the muscle, slight risk of hurting yourself"
+	},
+	"dodge": {
+		"stats": {
+			"evade": 50
+
+		},
+		"text": "avoid enemy attacks"
+	},
+	"reason": {
+			"text": "try to negotiate"
+		},
+	"plead": {
+			"text": "beg for your safety"
+		},
+	"compliment": {
+			"text": "appeal to their soft side"
+		},
+	"threaten": {
+			"text": "intimidate the fool"
+		}
+}

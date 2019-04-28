@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://battle.gd" type="Script" id=1]
 [ext_resource path="res://Assets/battle_backdrop.png" type="Texture" id=2]
@@ -8,10 +8,15 @@
 [ext_resource path="res://animation/low_health_enemy.tres" type="Animation" id=6]
 [ext_resource path="res://scenery/battle_stand.png" type="Texture" id=7]
 [ext_resource path="res://demon_model/beholder_sheet.tres" type="SpriteFrames" id=8]
-[ext_resource path="res://character_model/player_battle_sprite.png" type="Texture" id=9]
-[ext_resource path="res://animation/battle_start.tres" type="Animation" id=10]
-[ext_resource path="res://the_man_stats.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Assets/audio/ableton_battle.wav" type="AudioStream" id=12]
+[ext_resource path="res://animation/demon_combat_delay.tres" type="Animation" id=9]
+[ext_resource path="res://animation/enemy_defeated.tres" type="Animation" id=10]
+[ext_resource path="res://character_model/player_battle_sprite.png" type="Texture" id=11]
+[ext_resource path="res://animation/dodge.tres" type="Animation" id=12]
+[ext_resource path="res://animation/struggle.tres" type="Animation" id=13]
+[ext_resource path="res://animation/battle_end.tres" type="Animation" id=14]
+[ext_resource path="res://animation/battle_start.tres" type="Animation" id=15]
+[ext_resource path="res://the_man_stats.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Assets/audio/ableton_battle.wav" type="AudioStream" id=17]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -23,13 +28,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 2 )
 
-[node name="ColorRect" type="ColorRect" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = -2.3327
-margin_bottom = -2.3327
-color = Color( 1, 1, 1, 0 )
-
 [node name="battle_menu" type="MarginContainer" parent="."]
 anchor_left = 1.0
 anchor_top = 1.0
@@ -38,7 +36,7 @@ anchor_bottom = 1.0
 margin_left = -500.0
 margin_top = -200.0
 margin_right = -0.00183105
-margin_bottom = 0.000427246
+margin_bottom = 0.00134277
 theme = ExtResource( 3 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="battle_menu"]
@@ -133,19 +131,28 @@ frames = ExtResource( 8 )
 frame = 1
 playing = true
 
+[node name="combat_animator" type="AnimationPlayer" parent="enemy_character/enemy"]
+anims/delay = ExtResource( 9 )
+anims/enemy_defeated = ExtResource( 10 )
+
 [node name="player" type="Sprite" parent="."]
 position = Vector2( 303.251, 441.985 )
 scale = Vector2( 0.8, 0.8 )
-texture = ExtResource( 9 )
+texture = ExtResource( 11 )
+
+[node name="player_combat_animator" type="AnimationPlayer" parent="player"]
+anims/dodge = ExtResource( 12 )
+anims/struggle = ExtResource( 13 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "battle_start"
-anims/battle_start = ExtResource( 10 )
+anims/battle_end = ExtResource( 14 )
+anims/battle_start = ExtResource( 15 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 5
 
-[node name="the_man_stats" parent="CanvasLayer" instance=ExtResource( 11 )]
+[node name="the_man_stats" parent="CanvasLayer" instance=ExtResource( 16 )]
 margin_left = -200.0
 margin_top = 70.434
 margin_right = -200.0
@@ -154,11 +161,19 @@ margin_bottom = 70.434
 [node name="man_tween" type="Tween" parent="CanvasLayer/the_man_stats"]
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 12 )
+stream = ExtResource( 17 )
 volume_db = -5.0
 autoplay = true
 
 [node name="menu_tween" type="Tween" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -2.3327
+margin_bottom = -2.3327
+mouse_filter = 2
+color = Color( 1, 1, 1, 0 )
 
 [connection signal="pressed" from="battle_menu/VBoxContainer/HBoxContainer/fight" to="." method="_on_fight_pressed"]
 [connection signal="pressed" from="battle_menu/VBoxContainer/HBoxContainer/talk" to="." method="_on_talk_pressed"]
@@ -167,5 +182,8 @@ autoplay = true
 [connection signal="back" from="talk_menu" to="." method="_on_talk_menu_back"]
 [connection signal="back" from="fight_menu" to="." method="_on_fight_menu_back"]
 [connection signal="tween_completed" from="enemy_character/enemy_health/damage_tween" to="." method="_on_damage_tween_tween_completed"]
+[connection signal="animation_finished" from="enemy_character/enemy/combat_animator" to="." method="_on_combat_animator_animation_finished"]
+[connection signal="animation_finished" from="player/player_combat_animator" to="." method="_on_player_combat_animator_animation_finished"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="blood_paid" from="CanvasLayer/the_man_stats" to="." method="_on_the_man_stats_blood_paid"]
 [connection signal="tween_completed" from="menu_tween" to="." method="_on_menu_tween_tween_completed"]
