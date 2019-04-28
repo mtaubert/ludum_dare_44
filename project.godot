@@ -24,6 +24,7 @@ config/icon="res://icon.png"
 Game_Manager="*res://Scripts/Game_Manager.gd"
 Demon_Manager="*res://Scripts/Demon_Manager.gd"
 combat="*res://Scripts/combat.gd"
+Item_Manager="*res://Scripts/Item_Manager.gd"
 
 [display]
 

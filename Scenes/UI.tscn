@@ -1,13 +1,71 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://demon_model/interactable_demons/interactable_demon_1.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Demon_Dialoge.gd" type="Script" id=2]
-[ext_resource path="res://Assets/generic_box_style.tres" type="StyleBox" id=3]
-[ext_resource path="res://Assets/fonts/dynamicfont.tres" type="DynamicFont" id=4]
-[ext_resource path="res://Assets/battle_theme.tres" type="Theme" id=5]
+[ext_resource path="res://Assets/fonts/Gold Box 8x16 Monospaced.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Assets/generic_box_style.tres" type="StyleBox" id=4]
+[ext_resource path="res://Assets/fonts/dynamicfont.tres" type="DynamicFont" id=5]
+[ext_resource path="res://Assets/battle_theme.tres" type="Theme" id=6]
 
-[sub_resource type="Animation" id=1]
-resource_name = "demon_arrives"
+[sub_resource type="DynamicFont" id=1]
+size = 30
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+font_data = ExtResource( 3 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "bargain_begins"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Shop:rect_position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -660, -750 ), Vector2( -660, -200 ), Vector2( -660, -250 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Demon_Talking_Panel:rect_size")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.15932, 1 ),
+"update": 0,
+"values": [ Vector2( 828, 230.002 ), Vector2( 828, 60 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Demon_Talking_Panel:rect_position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.15932, 1 ),
+"update": 0,
+"values": [ Vector2( -724, 70 ), Vector2( -724, 240 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Name:rect_position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.164939, 1 ),
+"update": 0,
+"values": [ Vector2( -710, 30 ), Vector2( -710, 200 ) ]
+}
+
+[sub_resource type="Animation" id=3]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:position")
@@ -16,7 +74,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1.3 ),
+"times": PoolRealArray( 0, 0.9 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 1350, 300 ), Vector2( 724, 300 ) ]
@@ -28,10 +86,22 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1.3, 1.5, 1.8 ),
+"times": PoolRealArray( 0, 1.2, 1.5, 1.8 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( -724, 400 ), Vector2( -724, 400 ), Vector2( -724, 50 ), Vector2( -724, 70 ) ]
+"values": [ Vector2( -724, 400 ), Vector2( -724, 400 ), Vector2( -724, 60 ), Vector2( -724, 70 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Name:rect_position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.9, 1.4, 1.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -710, 350 ), Vector2( -710, 350 ), Vector2( -710, 0 ), Vector2( -710, 30 ) ]
 }
 
 [node name="UI" type="Control"]
@@ -40,25 +110,33 @@ anchor_bottom = 1.0
 mouse_filter = 2
 
 [node name="Demon_Dialoge" type="Sprite" parent="."]
-visible = false
 position = Vector2( 1350, 300 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
+
+[node name="Name" type="Label" parent="Demon_Dialoge"]
+margin_left = -710.0
+margin_top = 350.0
+margin_right = -526.0
+margin_bottom = 388.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.556863, 0, 0, 1 )
+text = "DEMON NAME"
 
 [node name="Demon_Talking_Panel" type="Panel" parent="Demon_Dialoge"]
 margin_left = -724.0
 margin_top = 400.0
 margin_right = 104.0
-margin_bottom = 630.001
+margin_bottom = 630.002
 mouse_filter = 2
-custom_styles/panel = ExtResource( 3 )
+custom_styles/panel = ExtResource( 4 )
 
-[node name="Label" type="Label" parent="Demon_Dialoge/Demon_Talking_Panel"]
+[node name="Text" type="Label" parent="Demon_Dialoge/Demon_Talking_Panel"]
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 818.0
 margin_bottom = 220.0
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 5 )
 text = "Blah"
 autowrap = true
 clip_text = true
@@ -67,7 +145,7 @@ clip_text = true
 margin_left = 840.0
 margin_right = 1012.0
 margin_bottom = 48.0
-theme = ExtResource( 5 )
+theme = ExtResource( 6 )
 text = "Accept"
 
 [node name="Decline" type="Button" parent="Demon_Dialoge/Demon_Talking_Panel"]
@@ -75,11 +153,18 @@ margin_left = 840.0
 margin_top = 58.0
 margin_right = 1012.0
 margin_bottom = 106.0
-theme = ExtResource( 5 )
+theme = ExtResource( 6 )
 text = "Decline"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Demon_Dialoge"]
-anims/demon_arrives = SubResource( 1 )
+anims/bargain_begins = SubResource( 2 )
+anims/demon_arrives = SubResource( 3 )
+
+[node name="Shop" type="HBoxContainer" parent="Demon_Dialoge"]
+margin_left = -660.0
+margin_top = -750.0
+margin_right = 40.0
+margin_bottom = -350.0
 
 [connection signal="pressed" from="Demon_Dialoge/Demon_Talking_Panel/Accept" to="Demon_Dialoge" method="_on_Accept_pressed"]
 [connection signal="pressed" from="Demon_Dialoge/Demon_Talking_Panel/Decline" to="Demon_Dialoge" method="_on_Decline_pressed"]

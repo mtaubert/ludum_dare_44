@@ -1,4 +1,5 @@
 {
+
 	"1": {
 		"opener": {
 			"text": "Puny mortal, why did you come here?",
@@ -15,11 +16,17 @@
 			"decline_text": "I'm good"
 		},
 		"final": {
-			"text": "Fine, then leave me.",
-			"accept": null,
+			"text": "Fine, how about a peak at what I can offer. It'll only cost you a finger.",
+			"accept": 2,
 			"decline": null,
-			"accept_text": null,
-			"decline_text": null
+			"accept_text": "Why not",
+			"decline_text": "Nope"
+		},
+		"shop": {
+			"text": "Here are the goods"
+		},
+		"taunt": {
+			"text": "Fight me you coward"
 		}
 	}
 }
