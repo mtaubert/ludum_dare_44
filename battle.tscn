@@ -51,9 +51,15 @@ margin_bottom = 200.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="battle_menu/VBoxContainer"]
+[node name="Container" type="Container" parent="battle_menu/VBoxContainer"]
 margin_right = 499.0
 margin_bottom = 98.0
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="battle_menu/VBoxContainer"]
+margin_top = 102.0
+margin_right = 499.0
+margin_bottom = 200.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -71,26 +77,6 @@ margin_bottom = 98.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "talk"
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="battle_menu/VBoxContainer"]
-margin_top = 102.0
-margin_right = 499.0
-margin_bottom = 200.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="sacrifice" type="Button" parent="battle_menu/VBoxContainer/HBoxContainer2"]
-margin_right = 247.0
-margin_bottom = 98.0
-size_flags_horizontal = 3
-text = "sacrifice"
-
-[node name="flee" type="Button" parent="battle_menu/VBoxContainer/HBoxContainer2"]
-margin_left = 251.0
-margin_right = 499.0
-margin_bottom = 98.0
-size_flags_horizontal = 3
-text = "flee"
 
 [node name="talk_menu" parent="." instance=ExtResource( 4 )]
 margin_left = 19.3555
@@ -134,7 +120,7 @@ texture = ExtResource( 7 )
 position = Vector2( -0.793213, -124.073 )
 scale = Vector2( 0.6, 0.6 )
 frames = ExtResource( 8 )
-frame = 3
+frame = 5
 playing = true
 
 [node name="combat_animator" type="AnimationPlayer" parent="enemy_character/enemy"]
@@ -214,8 +200,6 @@ color = Color( 1, 1, 1, 0 )
 
 [connection signal="pressed" from="battle_menu/VBoxContainer/HBoxContainer/fight" to="." method="_on_fight_pressed"]
 [connection signal="pressed" from="battle_menu/VBoxContainer/HBoxContainer/talk" to="." method="_on_talk_pressed"]
-[connection signal="pressed" from="battle_menu/VBoxContainer/HBoxContainer2/sacrifice" to="." method="_on_sacrifice_pressed"]
-[connection signal="pressed" from="battle_menu/VBoxContainer/HBoxContainer2/flee" to="." method="_on_flee_pressed"]
 [connection signal="back" from="talk_menu" to="." method="_on_talk_menu_back"]
 [connection signal="back" from="fight_menu" to="." method="_on_fight_menu_back"]
 [connection signal="tween_completed" from="enemy_character/enemy_health/damage_tween" to="." method="_on_damage_tween_tween_completed"]

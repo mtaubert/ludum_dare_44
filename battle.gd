@@ -202,8 +202,6 @@ func lock_ui():
 		button.disabled = true
 	for item in $battle_menu/VBoxContainer/HBoxContainer.get_children():
 		item.disabled = true
-	for item in $battle_menu/VBoxContainer/HBoxContainer2.get_children():
-		item.disabled = true
 		$CanvasLayer/the_man_stats.disable_buttons()
 	#hide ui
 	hide_menu(current_menu)
@@ -214,8 +212,6 @@ func unlock_ui():
 	for button in get_tree().get_nodes_in_group("talk_button"):
 		button.disabled = false
 	for item in $battle_menu/VBoxContainer/HBoxContainer.get_children():
-		item.disabled = false
-	for item in $battle_menu/VBoxContainer/HBoxContainer2.get_children():
 		item.disabled = false
 		$CanvasLayer/the_man_stats.enable_buttons()
 	#reveal ui
