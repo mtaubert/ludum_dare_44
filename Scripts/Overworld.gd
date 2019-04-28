@@ -119,7 +119,7 @@ func _process(delta):
 #moves player to the next tile
 func move_player(direction:Vector2):
 	var newPlayerPos = playerPos + direction
-	player.set_facing(direction)
+	#player.set_facing(direction)
 	
 	match $Mansion.get_cellv(newPlayerPos):
 		1,3,7: #Floor and grass and hell tile

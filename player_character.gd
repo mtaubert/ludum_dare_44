@@ -31,19 +31,19 @@ func move_player(location:Vector2, direction:Vector2):
 	$Movement_Tween.start()
 	#set_facing(direction)
 	#look in the direction moved
-	if direction != dir:
-		if direction.x:
-			$AnimationPlayer.play("walk_x")
-			if direction.x > 0:
-				sprite.flip_h = true
-			else:
-				sprite.flip_h = false
-				
-		if direction.y:
-			if direction.y > 0:
-				$AnimationPlayer.play("walk_down")
-			else:
-				$AnimationPlayer.play("walk_up")
+	#if direction != dir:
+	if direction.x:
+		$AnimationPlayer.play("walk_x")
+		if direction.x > 0:
+			sprite.flip_h = true
+		else:
+			sprite.flip_h = false
+			
+	if direction.y:
+		if direction.y > 0:
+			$AnimationPlayer.play("walk_down")
+		else:
+			$AnimationPlayer.play("walk_up")
 	
 	dir = direction
 	
@@ -64,6 +64,7 @@ func set_facing(direction):
 	
 #Called when tween finishes
 func movement_done(object, key):
+	print($AnimationPlayer.current_animation)
 	emit_signal("movement_done")
 	if not Input.is_action_pressed("ui_down") and not Input.is_action_pressed("ui_up") and not Input.is_action_pressed("ui_left") and not Input.is_action_pressed("ui_right"):
 		$AnimationPlayer.stop()
