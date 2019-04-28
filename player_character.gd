@@ -97,8 +97,7 @@ func _on_stats_tween_tween_completed(object, key):
 
 func update_blood():
 	$Camera2D/CanvasLayer/the_man_stats.update_blood()
-	
-	
+
 func _on_the_man_stats_blood_paid(ammount):
 	var can_pay = Game_Manager.blood > ammount 
 	if Game_Manager.blood > ammount:
