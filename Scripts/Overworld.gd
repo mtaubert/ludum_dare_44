@@ -100,7 +100,13 @@ func _process(delta):
 			move_player(Vector2(0, Input.get_action_strength("ui_down")-Input.get_action_strength("ui_up")))
 		elif Input.is_action_pressed("ui_right") or Input.is_action_pressed("ui_left"):
 			move_player(Vector2(Input.get_action_strength("ui_right")-Input.get_action_strength("ui_left"), 0))
-		
+		else:
+			player.set_facing(player.dir)
+			#this function returns to idle
+		if Input.is_action_pressed("ui_up") and Input.is_action_pressed("ui_down"):
+			player.set_facing(player.dir)
+		if Input.is_action_pressed("ui_right") and Input.is_action_pressed("ui_left"):
+			player.set_facing(player.dir)
 	
 	if Input.is_action_pressed("ui_select"):
 		if currentEntity != null and currentState == PLAYERSTATE.IDLE: #Only works if facing an entity

@@ -49,6 +49,7 @@ func move_player(location:Vector2, direction:Vector2):
 	
 #set the player to face their direction
 func set_facing(direction):
+	$AnimationPlayer.stop()
 	if direction.x:
 		if direction.x > 0:
 			sprite.frame = 2
