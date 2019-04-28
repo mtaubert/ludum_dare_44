@@ -4,6 +4,7 @@ extends Node
 signal player_sacrifice(type, ammount)
 signal enemy_risk(type, ammount)
 signal enemy_details(data)
+signal miss(target)
 var p_crit = 95
 var p_dodge = 0
 var e_dodge = 0
@@ -42,6 +43,8 @@ func setup():
 	print(enemy_data.keys())
 
 func handle_player_action(action):
+	#reset temp stats
+	p_dodge = 0
 	match action:
 		"struggle":
 			randomize()
@@ -49,7 +52,7 @@ func handle_player_action(action):
 			handle_risk(action, attack)
 			return int(attack(attack, Game_Manager.action_definitions[action]["stats"]["damage"]))
 		"dodge":
-			pass
+			p_dodge = 50
 		_:
 			pass
 	
@@ -80,12 +83,16 @@ func handle_enemy_risk(type, roll):
 		cumf += val
 
 func handle_enemy_action(action):
+	e_dodge = 0
+	#reset temporary variables
 	match action:
 		"splatter", "assault":
 			randomize()
 			var attack =  randi() % 101
 			handle_enemy_risk(action, attack)
 			return int(enemy_attack(attack, Game_Manager.action_definitions[action]["stats"]["damage"]))
+		"dodge":
+			e_dodge = 50
 		_:
 			pass
 
@@ -97,6 +104,7 @@ func enemy_attack(attack, damage_in):
 		dmg *= 2
 	if attack < p_dodge:
 		dmg = 0
+		emit_signal("miss", "player")
 	return dmg
 	
 
@@ -109,4 +117,5 @@ func attack(attack, damage_in):
 		dmg *= 2
 	if attack < e_dodge:
 		dmg = 0
+		emit_signal("miss", "enemy")
 	return dmg

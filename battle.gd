@@ -69,6 +69,7 @@ func _ready():
 	combat.connect("player_sacrifice", self, "player_sacrifice")
 	combat.connect("enemy_details", self, "setup_enemy")
 	combat.connect("enemy_risk", self, "enemy_risk")
+	combat.connect("miss", self, "miss")
 	combat.set_enemy(enemy)
 	
 	
@@ -263,6 +264,19 @@ func hide_player_log():
 	
 func hide_enemy_log():
 	$enemy_character/enemy_speech.visible = false	
+	
+func miss(target):
+	match target:
+		"player":
+			enemy_log("curses he dodged me!")
+			yield(get_tree().create_timer(5), "timeout")
+		"enemy":
+			player_log("damn I missed")
+			yield(get_tree().create_timer(5), "timeout")
+		_:
+			print("error in miss signal")
+	hide_player_log()
+	hide_enemy_log()
 ##--------------------------------------------------------------------
 ##battle logic
 ##--------------------------------------------------------------------
