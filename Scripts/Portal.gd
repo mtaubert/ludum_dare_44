@@ -6,8 +6,10 @@ func _ready():
 	unhighlight()
 
 func interact():
-	pass
-	#Go to hell
+	if Game_Manager.currentLevel >= 0:
+		Game_Manager.go_to_hell()
+	else:
+		Game_Manager.go_up()
 
 func highlight():
 	$Highlight.show()

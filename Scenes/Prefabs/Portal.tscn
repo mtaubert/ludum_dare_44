@@ -87,8 +87,8 @@ process_material = SubResource( 3 )
 texture = ExtResource( 4 )
 
 [node name="Highlight" type="Sprite" parent="."]
-position = Vector2( 0, -66.991 )
-scale = Vector2( 0.797363, 1.06112 )
+position = Vector2( 0, -60.6756 )
+scale = Vector2( 0.620215, 0.645389 )
 texture = ExtResource( 5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

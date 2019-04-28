@@ -48,6 +48,8 @@ func go_up():
 			playerSpawn = Vector2(10,1)
 		1:
 			playerSpawn = Vector2(19,10)
+		0:
+			playerSpawn = Vector2(14,11)
 	get_tree().change_scene("res://Scenes/" + houseLevels[currentLevel] + ".tscn")
 
 func go_down():
@@ -58,6 +60,11 @@ func go_down():
 		0:
 			playerSpawn = Vector2(10,1)
 	get_tree().change_scene("res://Scenes/" + houseLevels[currentLevel] + ".tscn")
+
+func go_to_hell():
+	currentLevel -= 1
+	playerSpawn = Vector2(13,10)
+	get_tree().change_scene("res://Scenes/Hell.tscn")
 #Mansion floor movement ---------------------------------------------------------------------------------------------------
 
 #Encounters ---------------------------------------------------------------------------------------------------------------
