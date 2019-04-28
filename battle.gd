@@ -1,8 +1,5 @@
 extends Control
 
-var show_the_man = false
-onready var tween = get_node("CanvasLayer/the_man_stats/man_tween")
-
 onready var backdrop_0 = load("res://Assets/battle_backdrop.png")
 onready var backdrop_1 = load("res://Assets/battle_backdrop_2.png")
 # Called when the node enters the scene tree for the first time.
@@ -71,6 +68,7 @@ func _ready():
 	
 	combat.connect("player_sacrifice", self, "player_sacrifice")
 	combat.connect("enemy_details", self, "setup_enemy")
+	combat.connect("enemy_risk", self, "enemy_risk")
 	combat.set_enemy(enemy)
 	
 	
@@ -111,26 +109,9 @@ func show_details(action):
 		$fight_menu.show_details(action)
 	#update the details viewer
 	
-	
-func _on_sacrifice_pressed():
-	show_the_man = not show_the_man
-	if show_the_man:
-		$CanvasLayer/the_man_stats.toggle_buttons(true)
-		var target = $CanvasLayer/the_man_stats.rect_position
-		target.x = 80
-		tween.interpolate_property($CanvasLayer/the_man_stats, "rect_position", $CanvasLayer/the_man_stats.rect_position,  target, 0.5, Tween.TRANS_SINE, Tween.EASE_OUT)
-	else:
-		
-		$CanvasLayer/the_man_stats.toggle_buttons(false)
-		var target = $CanvasLayer/the_man_stats.rect_position
-		target.x = -200
-		tween.interpolate_property($CanvasLayer/the_man_stats, "rect_position", $CanvasLayer/the_man_stats.rect_position,  target, 0.5, Tween.TRANS_SINE, Tween.EASE_OUT)
-	tween.start()
 
 #hide the combat meu and reveal the selected menu
 func hide_menu(type):
-	
-	hide_the_man()
 	var menu = get_node(type + "_menu")
 	var target = Vector2()
 	match type:
@@ -151,7 +132,6 @@ func _on_fight_pressed():
 
 
 func _on_flee_pressed():
-	hide_the_man()
 	end_battle()
 
 func update_player_dmg():
@@ -182,9 +162,6 @@ func _on_damage_tween_tween_completed(object, key):
 func enemy_death():
 	$enemy_character/enemy/combat_animator.play("enemy_defeated")
 		
-func hide_the_man():
-	if show_the_man:
-		_on_sacrifice_pressed()
 
 
 func _on_talk_pressed():
@@ -205,7 +182,6 @@ func _on_fight_menu_back(this):
 
 # brinc the named menu into the view spot
 func reveal_menu(name):
-	hide_the_man()
 	var menu = get_node(name + "_menu")
 	$menu_tween.interpolate_property(menu, "rect_position", menu.rect_position,  menu_loc, 0.5, Tween.TRANS_SINE, Tween.EASE_OUT)
 	$menu_tween.start()
@@ -264,6 +240,12 @@ func player_sacrifice(type, ammount):
 	hide_player_log()
 	hide_enemy_log()
 	
+func enemy_risk(type, ammount):
+	hit_enemy(ammount)
+	print("enemy took recoil")
+	#enemy_log("ahh curses!")
+	##yield(get_tree().create_timer(5), "timeout")
+	#hide_enemy_log()
 	
 func player_log(text):
 	$player/speech.visible = true
@@ -360,7 +342,9 @@ func _on_combat_animator_animation_finished(anim_name):
 		"enemy_defeated":
 			end_battle()
 		_:
-			combat.handle_enemy_action(anim_name)
+			var damage = combat.handle_enemy_action(anim_name)
+			if damage:
+				player_sacrifice("blood", damage)
 			pass_turn()
 
 #process the player attack and pass the turn

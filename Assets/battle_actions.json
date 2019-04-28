@@ -18,6 +18,26 @@
 		},
 		"text": "avoid enemy attacks"
 	},
+	"splatter": {
+		"stats": {
+			"damage": 5
+
+		},
+		"risk": {
+			"blood": [100, 5],
+		},
+		"text": "a very dangerous action for squishy creatures"
+	},
+	"assault": {
+		"stats": {
+			"damage": 20
+
+		},
+		"risk": {
+			"blood": [100, 5],
+		},
+		"text": "a vicous assault from a nasty creature"
+	},
 	"reason": {
 			"text": "try to negotiate"
 		},

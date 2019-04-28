@@ -2,6 +2,7 @@ extends Node
 
 #player stats stored in game manager
 signal player_sacrifice(type, ammount)
+signal enemy_risk(type, ammount)
 signal enemy_details(data)
 var p_crit = 95
 var p_dodge = 0
@@ -65,9 +66,39 @@ func handle_risk(type, roll):
 			emit_signal("player_sacrifice", item, Game_Manager.action_definitions[type]["risk"][item][1])
 		cumf += val
 	
+func handle_enemy_risk(type, roll):
+	var risks = Game_Manager.action_definitions[type]["risk"]
+	print(risks)
+	var cumf = 0
+	for item in risks:
+		var val = Game_Manager.action_definitions[type]["risk"][item][0]
+		print(str(cumf) + " " +str(roll) + " " + str(cumf + val))
+		if roll <= cumf + val and roll >= cumf:
+			print("ouch")
+			#player loses
+			emit_signal("enemy_risk", item, Game_Manager.action_definitions[type]["risk"][item][1])
+		cumf += val
 
 func handle_enemy_action(action):
-	pass
+	match action:
+		"splatter", "assault":
+			randomize()
+			var attack =  randi() % 101
+			handle_enemy_risk(action, attack)
+			return int(enemy_attack(attack, Game_Manager.action_definitions[action]["stats"]["damage"]))
+		_:
+			pass
+
+func enemy_attack(attack, damage_in):
+	var dmg = damage_in
+	
+	if attack > e_crit:
+		print("crit!")
+		dmg *= 2
+	if attack < p_dodge:
+		dmg = 0
+	return dmg
+	
 
 func attack(attack, damage_in):
 	print(damage_in)

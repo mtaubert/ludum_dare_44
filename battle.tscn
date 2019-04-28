@@ -134,7 +134,7 @@ texture = ExtResource( 7 )
 position = Vector2( -0.793213, -124.073 )
 scale = Vector2( 0.6, 0.6 )
 frames = ExtResource( 8 )
-frame = 5
+frame = 3
 playing = true
 
 [node name="combat_animator" type="AnimationPlayer" parent="enemy_character/enemy"]
@@ -192,12 +192,10 @@ anims/battle_start = ExtResource( 21 )
 layer = 5
 
 [node name="the_man_stats" parent="CanvasLayer" instance=ExtResource( 22 )]
-margin_left = -200.0
-margin_top = 70.434
-margin_right = -200.0
-margin_bottom = 70.434
-
-[node name="man_tween" type="Tween" parent="CanvasLayer/the_man_stats"]
+margin_left = 67.7396
+margin_top = 65.6976
+margin_right = 67.7396
+margin_bottom = 65.6976
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 23 )
