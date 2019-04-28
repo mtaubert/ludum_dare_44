@@ -46,11 +46,11 @@ var encounterLocations = []
 func set_random_encounter_locations(floorCells, entityLocations, torchLocations):
 	encounterLocations.clear()
 	for entityLoc in entityLocations:
-		var neighbors = [entityLoc+Vector2(-1,-1), entityLoc+Vector2(0,-1), entityLoc+Vector2(1,-1), entityLoc+Vector2(1,0), entityLoc+Vector2(1,1), entityLoc+Vector2(0,1), entityLoc+Vector2(-1,1), entityLoc+Vector2(-1,0)]
+		var neighbors = [entityLoc, entityLoc+Vector2(-1,-1), entityLoc+Vector2(0,-1), entityLoc+Vector2(1,-1), entityLoc+Vector2(1,0), entityLoc+Vector2(1,1), entityLoc+Vector2(0,1), entityLoc+Vector2(-1,1), entityLoc+Vector2(-1,0)]
 		for neighbor in neighbors:
 			floorCells.erase(neighbor)
 	for torchLoc in torchLocations:
-		var neighbors = [torchLoc+Vector2(-1,-1), torchLoc+Vector2(0,-1), torchLoc+Vector2(1,-1), torchLoc+Vector2(1,0), torchLoc+Vector2(1,1), torchLoc+Vector2(0,1), torchLoc+Vector2(-1,1), torchLoc+Vector2(-1,0)]
+		var neighbors = [torchLoc, torchLoc+Vector2(-1,-1), torchLoc+Vector2(0,-1), torchLoc+Vector2(1,-1), torchLoc+Vector2(1,0), torchLoc+Vector2(1,1), torchLoc+Vector2(0,1), torchLoc+Vector2(-1,1), torchLoc+Vector2(-1,0)]
 		for neighbor in neighbors:
 			floorCells.erase(neighbor)
 	encounterLocations = floorCells
@@ -84,8 +84,8 @@ func start_encounter():
 	get_tree().change_scene("res://battle.tscn")
 
 #Starts a specific encounter
-func start_encounter_against(enemy):
-	specificEnemy = enemy
+func start_encounter_against(demonID):
+	specificEnemy = demonID
 	get_tree().change_scene("res://battle.tscn")
 
 func end_encounter():
@@ -112,8 +112,8 @@ func can_pay_blood():
 signal demon_dialog_start()
 signal chat_done()
 
-func start_dialog(demonName, demonID, dialog):
-	emit_signal("demon_dialog_start", demonName, demonID, dialog)
+func start_dialog(demonID):
+	emit_signal("demon_dialog_start", demonID)
 
 func dialog_over():
 	emit_signal("chat_done")

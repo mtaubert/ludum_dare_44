@@ -22,6 +22,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Game_Manager="*res://Scripts/Game_Manager.gd"
+Demon_Manager="*res://Scripts/Demon_Manager.gd"
 
 [input]
 
