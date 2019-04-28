@@ -116,7 +116,7 @@ func _input(event):
 				currentEntity.stop_interact()
 	
 	if Input.is_action_pressed("menu"):
-		$Mansion/Sorter/player_character.toggle_stats_view()
+		player.toggle_stats_view()
 
 #moves player to the next tile
 func move_player(direction:Vector2):
@@ -150,8 +150,10 @@ func move_player(direction:Vector2):
 				yield(get_tree().create_timer(0.3), "timeout") #Moves again to get out of doorway
 				move_player(direction)
 		5: #Stairs up
+			currentState = PLAYERSTATE.MOVING
 			Game_Manager.go_up()
 		6: #Stairs down
+			currentState = PLAYERSTATE.MOVING
 			Game_Manager.go_down()
 		_:
 			pass
