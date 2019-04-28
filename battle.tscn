@@ -128,7 +128,7 @@ texture = ExtResource( 7 )
 position = Vector2( -0.793213, -124.073 )
 scale = Vector2( 0.6, 0.6 )
 frames = ExtResource( 8 )
-frame = 5
+frame = 1
 playing = true
 
 [node name="combat_animator" type="AnimationPlayer" parent="enemy_character/enemy"]

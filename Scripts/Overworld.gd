@@ -50,6 +50,8 @@ func place_walls():
 		var newWall = wall.instance()
 		$Mansion/Sorter.add_child(newWall)
 		newWall.position = $Mansion.map_to_world(pos) + tileOffset
+		if Game_Manager.currentLevel < 0:
+			newWall.modulate = Color("#8B0000")
 	for pos in $Mansion.get_used_cells_by_id(2): #Doors
 		var newDoor = door.instance()
 		$Mansion/Sorter.add_child(newDoor)
@@ -124,7 +126,7 @@ func move_player(direction:Vector2):
 	check_for_entities(direction) #Checks if the player is moving towards an entity
 	
 	match $Mansion.get_cellv(newPlayerPos):
-		1,3: #Floor and grass
+		1,3,7: #Floor and grass
 			if currentEntity == null: #Stops player from walking onto entities
 				playerPos = newPlayerPos
 				player.move_player($Mansion.map_to_world(playerPos) + tileOffset, direction)

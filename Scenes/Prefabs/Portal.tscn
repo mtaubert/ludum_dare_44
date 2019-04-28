@@ -87,17 +87,17 @@ process_material = SubResource( 3 )
 texture = ExtResource( 4 )
 
 [node name="Highlight" type="Sprite" parent="."]
-position = Vector2( 0, -73.7783 )
-scale = Vector2( 0.931981, 1.20652 )
+position = Vector2( 0, -60.6756 )
+scale = Vector2( 0.620215, 0.645389 )
 texture = ExtResource( 5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Highlight = SubResource( 1 )
 
 [node name="Light2D" type="Light2D" parent="."]
+position = Vector2( -0.71698, 0 )
 texture = ExtResource( 6 )
 texture_scale = 8.0
-color = Color( 0.466667, 0.00392157, 0.32549, 1 )
-energy = 0.5
+color = Color( 0.6, 0, 0.207843, 1 )
 shadow_enabled = true
 
