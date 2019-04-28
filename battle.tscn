@@ -1,16 +1,17 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://battle.gd" type="Script" id=1]
 [ext_resource path="res://Assets/battle_backdrop.png" type="Texture" id=2]
 [ext_resource path="res://Assets/battle_theme.tres" type="Theme" id=3]
-[ext_resource path="res://scenery/health_radial.png" type="Texture" id=4]
-[ext_resource path="res://animation/low_health_enemy.tres" type="Animation" id=5]
-[ext_resource path="res://scenery/battle_stand.png" type="Texture" id=6]
-[ext_resource path="res://demon_model/keeper_demon_sheet.tres" type="SpriteFrames" id=7]
-[ext_resource path="res://character_model/player_battle_sprite.png" type="Texture" id=8]
-[ext_resource path="res://animation/battle_start.tres" type="Animation" id=9]
-[ext_resource path="res://the_man_stats.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Assets/audio/ableton_battle.wav" type="AudioStream" id=11]
+[ext_resource path="res://Scenes/Prefabs/combat_menu.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenery/health_radial.png" type="Texture" id=5]
+[ext_resource path="res://animation/low_health_enemy.tres" type="Animation" id=6]
+[ext_resource path="res://scenery/battle_stand.png" type="Texture" id=7]
+[ext_resource path="res://demon_model/beholder_sheet.tres" type="SpriteFrames" id=8]
+[ext_resource path="res://character_model/player_battle_sprite.png" type="Texture" id=9]
+[ext_resource path="res://animation/battle_start.tres" type="Animation" id=10]
+[ext_resource path="res://the_man_stats.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Assets/audio/ableton_battle.wav" type="AudioStream" id=12]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -87,6 +88,18 @@ margin_bottom = 98.0
 size_flags_horizontal = 3
 text = "flee"
 
+[node name="talk_menu" parent="." instance=ExtResource( 4 )]
+margin_left = 19.3555
+margin_top = 331.239
+margin_right = 519.354
+margin_bottom = 531.239
+
+[node name="fight_menu" parent="." instance=ExtResource( 4 )]
+margin_left = 20.7159
+margin_top = 329.879
+margin_right = 520.714
+margin_bottom = 529.879
+
 [node name="enemy_character" type="Node2D" parent="."]
 position = Vector2( 769.953, 278.92 )
 
@@ -97,8 +110,8 @@ margin_right = 296.399
 margin_bottom = 299.723
 mouse_filter = 2
 value = 100.0
-texture_under = ExtResource( 4 )
-texture_progress = ExtResource( 4 )
+texture_under = ExtResource( 5 )
+texture_progress = ExtResource( 5 )
 fill_mode = 5
 tint_under = Color( 0, 0, 0, 1 )
 tint_over = Color( 0, 0, 0, 1 )
@@ -107,32 +120,33 @@ tint_progress = Color( 1, 0, 0, 1 )
 [node name="damage_tween" type="Tween" parent="enemy_character/enemy_health"]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="enemy_character/enemy_health"]
-anims/low_health_enemy = ExtResource( 5 )
+anims/low_health_enemy = ExtResource( 6 )
 
 [node name="battle_stand" type="Sprite" parent="enemy_character"]
 position = Vector2( -1.72449, -2.02316 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 
 [node name="enemy" type="AnimatedSprite" parent="enemy_character"]
 position = Vector2( -0.793213, -124.073 )
 scale = Vector2( 0.6, 0.6 )
-frames = ExtResource( 7 )
-frame = 2
+frames = ExtResource( 8 )
+animation = "beholder_sheet"
+frame = 3
 playing = true
 
 [node name="player" type="Sprite" parent="."]
 position = Vector2( 303.251, 441.985 )
 scale = Vector2( 0.8, 0.8 )
-texture = ExtResource( 8 )
+texture = ExtResource( 9 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "battle_start"
-anims/battle_start = ExtResource( 9 )
+anims/battle_start = ExtResource( 10 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 5
 
-[node name="the_man_stats" parent="CanvasLayer" instance=ExtResource( 10 )]
+[node name="the_man_stats" parent="CanvasLayer" instance=ExtResource( 11 )]
 margin_left = -200.0
 margin_top = 70.434
 margin_right = -200.0
@@ -141,12 +155,18 @@ margin_bottom = 70.434
 [node name="man_tween" type="Tween" parent="CanvasLayer/the_man_stats"]
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 11 )
+stream = ExtResource( 12 )
 volume_db = -5.0
 autoplay = true
 
+[node name="menu_tween" type="Tween" parent="."]
+
 [connection signal="pressed" from="battle_menu/VBoxContainer/HBoxContainer/fight" to="." method="_on_fight_pressed"]
+[connection signal="pressed" from="battle_menu/VBoxContainer/HBoxContainer/talk" to="." method="_on_talk_pressed"]
 [connection signal="pressed" from="battle_menu/VBoxContainer/HBoxContainer2/sacrifice" to="." method="_on_sacrifice_pressed"]
 [connection signal="pressed" from="battle_menu/VBoxContainer/HBoxContainer2/flee" to="." method="_on_flee_pressed"]
+[connection signal="back" from="talk_menu" to="." method="_on_talk_menu_back"]
+[connection signal="back" from="fight_menu" to="." method="_on_fight_menu_back"]
 [connection signal="tween_completed" from="enemy_character/enemy_health/damage_tween" to="." method="_on_damage_tween_tween_completed"]
 [connection signal="blood_paid" from="CanvasLayer/the_man_stats" to="." method="_on_the_man_stats_blood_paid"]
+[connection signal="tween_completed" from="menu_tween" to="." method="_on_menu_tween_tween_completed"]

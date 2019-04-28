@@ -1,0 +1,15 @@
+[gd_resource type="SpriteFrames" load_steps=5 format=2]
+
+[ext_resource path="res://demon_model/behold_4.png" type="Texture" id=1]
+[ext_resource path="res://demon_model/behold_3.png" type="Texture" id=2]
+[ext_resource path="res://demon_model/behold_2.png" type="Texture" id=3]
+[ext_resource path="res://demon_model/behold_1.png" type="Texture" id=4]
+
+[resource]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "beholder_sheet",
+"speed": 10.0
+} ]
+
