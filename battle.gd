@@ -45,6 +45,8 @@ func _on_sacrifice_pressed():
 
 #hide the combat meu and reveal the selected menu
 func hide_menu(type):
+	
+	hide_the_man()
 	var menu = get_node(type + "_menu")
 	var target = Vector2()
 	match type:
@@ -85,6 +87,9 @@ func _on_damage_tween_tween_completed(object, key):
 	if $enemy_character/enemy_health.value <= 10:
 		$enemy_character/enemy_health/AnimationPlayer.play("low_health_enemy")
 	
+func hide_the_man():
+	if show_the_man:
+		_on_sacrifice_pressed()
 
 
 func _on_talk_pressed():
@@ -107,6 +112,7 @@ func _on_fight_menu_back(this):
 
 # brinc the named menu into the view spot
 func reveal_menu(name):
+	hide_the_man()
 	var menu = get_node(name + "_menu")
 	$menu_tween.interpolate_property(menu, "rect_position", menu.rect_position,  menu_loc, 0.5, Tween.TRANS_SINE, Tween.EASE_OUT)
 	$menu_tween.start()
