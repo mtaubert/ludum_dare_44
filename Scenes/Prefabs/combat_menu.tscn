@@ -27,13 +27,6 @@ margin_bottom = 200.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="option(make_scene" type="Button" parent="HBoxContainer2/VBoxContainer"]
-margin_right = 247.0
-margin_bottom = 200.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-text = "talk"
-
 [node name="HBoxContainer" type="VBoxContainer" parent="HBoxContainer2"]
 margin_left = 251.0
 margin_right = 499.0

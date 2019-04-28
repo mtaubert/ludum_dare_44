@@ -13,6 +13,10 @@ export var mind = 1
 export var finger = 10
 export var toe = 10
 
+var attack_actions = ["struggle", "dodge"]
+var talk_actions = ["reason", "plead", "threaten", "compliment"]
+
+
 func _ready():
 	randomize()
 

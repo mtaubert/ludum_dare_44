@@ -18,6 +18,9 @@ var menu_queue = []
 var menu_loc = Vector2(524, 400)
 var menu_hide_loc = Vector2(1224, 400)
 var sub_menu_loc = Vector2(524, 640)
+
+var button = load("res://Scenes/Prefabs/battle_button.tscn")
+
 func _ready():
 	randomize()
 	
@@ -27,8 +30,39 @@ func _ready():
 		$enemy_character/enemy.frames = get(Game_Manager.specificEnemy)
 	
 	$TextureRect.texture = get("backdrop_" + str(randi() % 2))
+	
+	init_player_actions()
 
-
+#go through for each valid action in the game managerand add a button
+func init_player_actions():
+	for item in Game_Manager.attack_actions:
+		var action = button.instance()
+		action.init(item)
+		$fight_menu.add_button(action)
+		
+	for item in Game_Manager.talk_actions:
+		var action = button.instance()
+		action.init(item)
+		$talk_menu.add_button(action)
+		
+	for button in get_tree().get_nodes_in_group("battle_button"):
+		button.connect("battle_action",self,"battle_action")
+		button.connect("show_details",self,"show_details")
+		
+		
+func battle_action(action):
+	print(action)
+	#excecute the chosen battle action then pass the turn
+	
+func show_details(action):
+	print(action)
+	if action in Game_Manager.talk_actions:
+		$talk_menu.show_details(action)
+	if action in Game_Manager.attack_actions:
+		$fight_menu.show_details(action)
+	#update the details viewer
+	
+	
 func _on_sacrifice_pressed():
 	show_the_man = not show_the_man
 	if show_the_man:
