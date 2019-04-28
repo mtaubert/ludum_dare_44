@@ -15,11 +15,28 @@ export var toe = 10
 
 var attack_actions = ["struggle", "dodge"]
 var talk_actions = ["reason", "plead", "threaten", "compliment"]
-
-
+var battleJSON = "res://Assets/battle_actions.json"
+var action_definitions = {}
 func _ready():
 	randomize()
+	load_battle_actions()
 
+
+#load battle action details
+func load_battle_actions():
+	var file = File.new()
+	file.open(battleJSON, file.READ)
+	var fileJSON = JSON.parse(file.get_as_text())
+	
+	var tempDialogStore = {}
+	
+	if fileJSON.error == OK:
+		tempDialogStore = fileJSON.result
+	
+	action_definitions = tempDialogStore
+	print(action_definitions)
+	
+	
 func get_player_var(name):
 	return get(name)
 

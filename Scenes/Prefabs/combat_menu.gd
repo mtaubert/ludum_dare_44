@@ -14,4 +14,7 @@ func _on_back_pressed():
 	emit_signal("back", self)
 	
 func show_details(action):
-	$HBoxContainer2/HBoxContainer/details.text = action
+	if Game_Manager.action_definitions.has(action):
+		$HBoxContainer2/HBoxContainer/details.text = Game_Manager.action_definitions[action]["text"]
+	else:
+		$HBoxContainer2/HBoxContainer/details.text = action
