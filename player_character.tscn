@@ -59,9 +59,8 @@ anims/demon_rising = ExtResource( 3 )
 [node name="Sprite" type="Sprite" parent="KinematicBody2D"]
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 4 )
-flip_h = true
 hframes = 7
-frame = 3
+frame = 1
 region_enabled = true
 region_rect = Rect2( 5, 0, 1000, 250 )
 
