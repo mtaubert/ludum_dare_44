@@ -47,6 +47,11 @@ func move_player(location:Vector2, direction:Vector2):
 	
 	dir = direction
 	
+#set facing only if already in a mutable idle
+func soft_set_facing(direction):
+	if sprite.frame < 3:
+		set_facing(direction)
+		dir = direction
 #set the player to face their direction
 func set_facing(direction):
 	$AnimationPlayer.stop()
