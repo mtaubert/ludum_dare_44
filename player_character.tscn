@@ -59,6 +59,7 @@ anims/demon_rising = ExtResource( 3 )
 [node name="Sprite" type="Sprite" parent="KinematicBody2D"]
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 4 )
+flip_h = true
 hframes = 7
 frame = 3
 region_enabled = true
@@ -104,6 +105,7 @@ occluder = SubResource( 3 )
 [connection signal="tween_completed" from="Camera2D/CanvasLayer/stats_tween" to="." method="_on_stats_tween_tween_completed"]
 [connection signal="blood_paid" from="Camera2D/CanvasLayer/the_man_stats" to="." method="_on_the_man_stats_blood_paid"]
 [connection signal="tween_completed" from="Movement_Tween" to="." method="movement_done"]
+[connection signal="animation_changed" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_changed"]
 [connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_AudioStreamPlayer2D_finished"]
 
 [editable path="Camera2D/CanvasLayer/the_man_stats"]

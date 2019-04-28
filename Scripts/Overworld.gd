@@ -94,40 +94,36 @@ func update_entities():
 
 #Input and movement -------------------------------------------------------------------------------------------------------
 #Checks for player input
-func _input(event):
+func _process(delta):
 	if currentState == PLAYERSTATE.IDLE:
-		if Input.is_action_pressed("ui_right"):
-			move_player(Vector2(1,0))
-		elif Input.is_action_pressed("ui_left"):
-			move_player(Vector2(-1,0))
-		elif Input.is_action_pressed("ui_up"):
-			move_player(Vector2(0,-1))
-		elif Input.is_action_pressed("ui_down"):
-			move_player(Vector2(0,1))
-		elif Input.is_action_pressed("ui_select"):
-			if currentEntity != null: #Only works if facing an entity
-				currentEntity.interact()
-				if currentEntity.type == "Demon": #Talking to demon state
-					Game_Manager.update_player_spawn(playerPos) #Safety in case of fight
-					currentState = PLAYERSTATE.TALKING_WITH_DEMON
-		elif Input.is_action_just_released("ui_select"):
-			if currentEntity != null:
-				if currentEntity.type == "Fountain":
-					currentEntity.stop_interact()
+		if Input.is_action_pressed("ui_up") or Input.is_action_pressed("ui_down"):
+			move_player(Vector2(0, Input.get_action_strength("ui_down")-Input.get_action_strength("ui_up")))
+		elif Input.is_action_pressed("ui_right") or Input.is_action_pressed("ui_left"):
+			move_player(Vector2(Input.get_action_strength("ui_right")-Input.get_action_strength("ui_left"), 0))
+		
+	
+	if Input.is_action_pressed("ui_select"):
+		if currentEntity != null and currentState == PLAYERSTATE.IDLE: #Only works if facing an entity
+			currentEntity.interact()
+			if currentEntity.type == "Demon": #Talking to demon state
+				Game_Manager.update_player_spawn(playerPos) #Safety in case of fight
+				currentState = PLAYERSTATE.TALKING_WITH_DEMON
+	elif Input.is_action_just_released("ui_select"):
+		if currentEntity != null and currentState == PLAYERSTATE.IDLE:
+			if currentEntity.type == "Fountain":
+				currentEntity.stop_interact()
 	
 	if Input.is_action_pressed("menu"):
-		$Mansion/Sorter/player_character.toggle_stats_view()
+		player.toggle_stats_view()
 
 #moves player to the next tile
 func move_player(direction:Vector2):
 	var newPlayerPos = playerPos + direction
 	player.set_facing(direction)
 	
-	check_for_entities(direction) #Checks if the player is moving towards an entity
-	
 	match $Mansion.get_cellv(newPlayerPos):
-		1,3,7: #Floor and grass
-			if currentEntity == null: #Stops player from walking onto entities
+		1,3,7: #Floor and grass and hell tile
+			if !entities.has(newPlayerPos): #Stops player from walking onto entities
 				playerPos = newPlayerPos
 				player.move_player($Mansion.map_to_world(playerPos) + tileOffset, direction)
 				currentState = PLAYERSTATE.MOVING
@@ -136,23 +132,24 @@ func move_player(direction:Vector2):
 		2: #Doors
 			playerPos = newPlayerPos
 			doors[playerPos].open_door(direction)
-			player.move_player($Mansion.map_to_world(playerPos) + tileOffset, direction)
+			playerPos += direction
+			player.move_player($Mansion.map_to_world(playerPos) + tileOffset, direction*2)
 			currentState = PLAYERSTATE.MOVING
-			yield(get_tree().create_timer(0.3), "timeout") #Moves again to get out of doorway
-			move_player(direction)
 		4: #Exit
 			if entities[newPlayerPos].open:
 				playerPos = newPlayerPos
-				player.move_player($Mansion.map_to_world(playerPos) + tileOffset, direction)
+				player.move_player($Mansion.map_to_world(playerPos) + tileOffset, direction*2)
 				currentState = PLAYERSTATE.MOVING
-				yield(get_tree().create_timer(0.3), "timeout") #Moves again to get out of doorway
-				move_player(direction)
 		5: #Stairs up
+			currentState = PLAYERSTATE.MOVING
 			Game_Manager.go_up()
 		6: #Stairs down
+			currentState = PLAYERSTATE.MOVING
 			Game_Manager.go_down()
 		_:
 			pass
+		
+	check_for_entities(direction) #Checks if the player is moving towards an entity
 
 #Checks the tile the player is facing for an entity
 func check_for_entities(direction:Vector2):

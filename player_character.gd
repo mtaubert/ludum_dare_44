@@ -22,22 +22,28 @@ func _ready():
 
 #Moves player to a new location
 func move_player(location:Vector2, direction:Vector2):
-	$Movement_Tween.interpolate_property(self, "position", self.position, location, 0.3, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	
+	var tweenSpeed = 0.3
+	if abs(direction.x) > 1 or abs(direction.y) > 1: #Doors need twice the speed
+		tweenSpeed *= 2
+	
+	$Movement_Tween.interpolate_property(self, "position", self.position, location, tweenSpeed, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	$Movement_Tween.start()
 	#set_facing(direction)
 	#look in the direction moved
-	if direction.x:
-		$AnimationPlayer.play("walk_x")
-		if direction.x > 0:
-			sprite.flip_h = true
-		else:
-			sprite.flip_h = false
-			
-	if direction.y:
-		if direction.y > 0:
-			$AnimationPlayer.play("walk_down")
-		else:
-			$AnimationPlayer.play("walk_up")
+	if direction != dir:
+		if direction.x:
+			$AnimationPlayer.play("walk_x")
+			if direction.x > 0:
+				sprite.flip_h = true
+			else:
+				sprite.flip_h = false
+				
+		if direction.y:
+			if direction.y > 0:
+				$AnimationPlayer.play("walk_down")
+			else:
+				$AnimationPlayer.play("walk_up")
 	
 	dir = direction
 	
@@ -59,8 +65,9 @@ func set_facing(direction):
 #Called when tween finishes
 func movement_done(object, key):
 	emit_signal("movement_done")
-	$AnimationPlayer.stop()
-	set_facing(dir)
+	if not Input.is_action_pressed("ui_down") and not Input.is_action_pressed("ui_up") and not Input.is_action_pressed("ui_left") and not Input.is_action_pressed("ui_right"):
+		$AnimationPlayer.stop()
+		set_facing(dir)
 	
 #show the man/ hide the man
 func toggle_stats_view():
@@ -97,8 +104,7 @@ func _on_stats_tween_tween_completed(object, key):
 
 func update_blood():
 	$Camera2D/CanvasLayer/the_man_stats.update_blood()
-	
-	
+
 func _on_the_man_stats_blood_paid(ammount):
 	var can_pay = Game_Manager.blood > ammount 
 	if Game_Manager.blood > ammount:
