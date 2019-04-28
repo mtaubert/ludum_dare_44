@@ -49,4 +49,5 @@ position = Vector2( 1120.22, 616.487 )
 position = Vector2( 1125.8, 1246.51 )
 frames = ExtResource( 7 )
 animation = "Idle"
+frame = 3
 

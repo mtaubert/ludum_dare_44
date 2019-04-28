@@ -94,15 +94,13 @@ func update_entities():
 
 #Input and movement -------------------------------------------------------------------------------------------------------
 #Checks for player input
-func _input(event):
-	if Input.is_action_pressed("ui_right"):
-		move_player(Vector2(1,0))
-	if Input.is_action_pressed("ui_left"):
-		move_player(Vector2(-1,0))
-	if Input.is_action_pressed("ui_up"):
-		move_player(Vector2(0,-1))
-	if Input.is_action_pressed("ui_down"):
-		move_player(Vector2(0,1))
+func _process(delta):
+	if currentState == PLAYERSTATE.IDLE:
+		if Input.is_action_pressed("ui_up") or Input.is_action_pressed("ui_down"):
+			move_player(Vector2(0, Input.get_action_strength("ui_down")-Input.get_action_strength("ui_up")))
+		elif Input.is_action_pressed("ui_right") or Input.is_action_pressed("ui_left"):
+			move_player(Vector2(Input.get_action_strength("ui_right")-Input.get_action_strength("ui_left"), 0))
+		
 	
 	if Input.is_action_pressed("ui_select"):
 		if currentEntity != null and currentState == PLAYERSTATE.IDLE: #Only works if facing an entity
@@ -120,10 +118,6 @@ func _input(event):
 
 #moves player to the next tile
 func move_player(direction:Vector2):
-	
-	if currentState != PLAYERSTATE.IDLE:
-		return
-	
 	var newPlayerPos = playerPos + direction
 	player.set_facing(direction)
 	
@@ -138,17 +132,14 @@ func move_player(direction:Vector2):
 		2: #Doors
 			playerPos = newPlayerPos
 			doors[playerPos].open_door(direction)
-			player.move_player($Mansion.map_to_world(playerPos) + tileOffset, direction)
+			playerPos += direction
+			player.move_player($Mansion.map_to_world(playerPos) + tileOffset, direction*2)
 			currentState = PLAYERSTATE.MOVING
-			yield(get_tree().create_timer(0.3), "timeout") #Moves again to get out of doorway
-			move_player(direction)
 		4: #Exit
 			if entities[newPlayerPos].open:
 				playerPos = newPlayerPos
-				player.move_player($Mansion.map_to_world(playerPos) + tileOffset, direction)
+				player.move_player($Mansion.map_to_world(playerPos) + tileOffset, direction*2)
 				currentState = PLAYERSTATE.MOVING
-				yield(get_tree().create_timer(0.3), "timeout") #Moves again to get out of doorway
-				move_player(direction)
 		5: #Stairs up
 			currentState = PLAYERSTATE.MOVING
 			Game_Manager.go_up()
