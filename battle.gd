@@ -7,6 +7,19 @@ onready var backdrop_0 = load("res://Assets/battle_backdrop.png")
 onready var backdrop_1 = load("res://Assets/battle_backdrop_2.png")
 # Called when the node enters the scene tree for the first time.
 
+#player_damagesprites
+onready var player10 = load("res://character_model/player_battle_sprite.png")
+onready var player9 = load("res://character_model/player_battle_sprite_dmg_1.png")
+onready var player8 = load("res://character_model/player_battle_sprite_dmg_2.png")
+onready var player7 = load("res://character_model/player_battle_sprite_dmg_3.png")
+onready var player6 = load("res://character_model/player_battle_sprite_dmg_4.png")
+onready var player5 = load("res://character_model/player_battle_sprite_dmg_5.png")
+onready var player4 = load("res://character_model/player_battle_sprite_dmg_6.png")
+onready var player3 = load("res://character_model/player_battle_sprite_dmg_7.png")
+onready var player2 = load("res://character_model/player_battle_sprite_dmg_8.png")
+onready var player1 = load("res://character_model/player_battle_sprite_dmg_9.png")
+
+
 var menu_queue = []
 var menu_loc = Vector2(524, 400)
 var menu_hide_loc = Vector2(1224, 400)
@@ -21,6 +34,7 @@ var current_menu = "battle"
 
 
 func _ready():
+	update_player_dmg()
 	randomize()
 	
 	if Game_Manager.specificEnemy == null:
@@ -111,11 +125,16 @@ func _on_flee_pressed():
 	hide_the_man()
 	end_battle()
 
+func update_player_dmg():
+	var blood = Game_Manager.blood
+	if int(blood/10) > 0:
+		$player.texture = get("player" + str(int(blood/10)))
 
 func _on_the_man_stats_blood_paid(ammount):
 	if Game_Manager.blood > ammount:
 		Game_Manager.blood -= ammount
 	$CanvasLayer/the_man_stats.set_blood(Game_Manager.blood)
+	update_player_dmg()
 
 func hit_enemy(damage):
 	$enemy_character/enemy_health/damage_tween.interpolate_property($enemy_character/enemy_health, "value", $enemy_character/enemy_health.value,  $enemy_character/enemy_health.value - damage, 0.2, Tween.TRANS_BACK, Tween.EASE_IN)
@@ -206,6 +225,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 func player_sacrifice(type, ammount):
 	Game_Manager.player_sacrifice(type, ammount)
 	$CanvasLayer/the_man_stats.set_blood(Game_Manager.blood)
+	update_player_dmg()
 	print("update a log?")
 		
 ##--------------------------------------------------------------------
