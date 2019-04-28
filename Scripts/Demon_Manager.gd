@@ -27,6 +27,9 @@ var randomEncounterDemons = {
 	},
 	"3": {
 		"encounter_animations": load("res://demon_model/beholder_sheet.tres")
+	},
+	"4": {
+		"encounter_animations": load("res://demon_model/eyes_and_holes_sheet.tres")
 	}
 }
 
