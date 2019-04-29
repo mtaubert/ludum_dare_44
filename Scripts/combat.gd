@@ -67,6 +67,7 @@ func handle_player_action(action):
 			var damage = int(attack(attack, Game_Manager.action_definitions[action]["stats"]["damage"]))
 			if damage > 0:
 				if randi()%101 > 25:
+					emit_signal("combat_log", "nice, you got a toe!")
 					Game_Manager.player_gain("toe", 1)
 			
 			return damage
@@ -77,6 +78,7 @@ func handle_player_action(action):
 			var damage = int(attack(attack, Game_Manager.action_definitions[action]["stats"]["damage"]))
 			if damage > 0:
 				if randi()%101 > 25:
+					emit_signal("combat_log", "sweet, you got a finger!")
 					Game_Manager.player_gain("finger", 1)
 			
 			return damage

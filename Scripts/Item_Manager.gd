@@ -64,7 +64,7 @@ var currencies = {
 }
 
 func _ready():
-	playerInventory = debugInv
+	#playerInventory = debugInv
 	playerInventory.sort()
 	emit_signal("item_purchased")
 	pass

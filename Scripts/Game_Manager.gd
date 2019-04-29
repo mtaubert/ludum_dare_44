@@ -141,8 +141,10 @@ func encounter_chance(location:Vector2):
 		if randi()%100 < encounterChance: #Trigger encounter
 			playerSpawn = location
 			player.play_encounter_start()
+			encounterChance = 2
 			return true
 		else:
+			encounterChance +=1
 			return false
 
 #Starts a random encounter

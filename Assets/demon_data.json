@@ -9,7 +9,7 @@
 			"decline_text": null
 		},
 		"follow_up": {
-			"text": "Whay are you here? Did you want to fight me?",
+			"text": "Why are you here? Did you want to fight me?",
 			"accept": 1,
 			"decline": "final",
 			"accept_text": "Sure, thing",
