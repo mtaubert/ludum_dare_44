@@ -154,6 +154,8 @@ func _on_the_man_stats_blood_paid(ammount):
 func hit_enemy(damage):
 	$enemy_character/enemy_health/damage_tween.interpolate_property($enemy_character/enemy_health, "value", $enemy_character/enemy_health.value,  $enemy_character/enemy_health.value - damage, 0.2, Tween.TRANS_BACK, Tween.EASE_IN)
 	$enemy_character/enemy_health/damage_tween.start()
+	$AudioStreamPlayersfx.stream = load("res://Assets/audio/minor_dmg.wav")
+	$AudioStreamPlayersfx.play()
 
 func _on_damage_tween_tween_completed(object, key):
 	#check enemy health for low health or death
@@ -235,6 +237,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		Game_Manager.end_encounter()
 		
 func player_sacrifice(type, ammount):
+	$AudioStreamPlayersfx.stream = load("res://Assets/audio/demon_damage.wav")
 	Game_Manager.player_sacrifice(type, ammount)
 	$CanvasLayer/the_man_stats.set_blood(Game_Manager.blood)
 	update_player_dmg()
