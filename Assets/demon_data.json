@@ -28,5 +28,45 @@
 		"taunt": {
 			"text": "Fight me you coward"
 		}
+	},
+	"2": {
+		"opener": {
+			"text": "Groooooaaaaaaan...",
+			"accept": "what do you want",
+			"decline": null,
+			"accept_text": "Excuse me?",
+			"decline_text": "Ew, bye"
+		},
+		"what do you want": {
+			"text": "What do you want. I'm busy counting my toe collection.",
+			"accept": "Interest",
+			"decline": "Offend",
+			"accept_text": "Can I see?",
+			"decline_text": "Gross"
+		},
+		"Offend": {
+			"text": "It is not gorss. Toes are magnificent. Come here you, I'll take yours too for the collection!",
+			"accept": 1,
+			"decline": null,
+			"accept_text": "Back off",
+			"decline_text": null
+		},
+		"Interest": {
+			"text": "I see, another man of culture. However my collection is not complete. I will show you some day if you wish. For now would you like to see my collection of random junk?",
+			"accept": 2,
+			"decline": "final",
+			"accept_text": "Love to",
+			"decline_text": "No thanks"
+		},
+		"final": {
+			"text": "Well, if you change your mind I will be here, counting toes...",
+			"accept": null,
+			"decline": null,
+			"accept_text": null,
+			"decline_text": null
+		},
+		"shop": {
+			"text": "My collection..."
+		}	
 	}
 }

@@ -336,6 +336,9 @@ func enemy_action(action):
 	if combat.offer_bargain:
 		combat.offer_bargain = false
 		action = "delay"
+	if combat.e_stunned:
+		combat.e_stunned = false
+		action = "stunned"
 	#delay half a second
 	yield(get_tree().create_timer(0.5), "timeout")
 	#check if the enemy is still alive

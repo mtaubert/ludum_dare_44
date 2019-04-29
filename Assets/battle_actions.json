@@ -40,7 +40,11 @@
 			"damage": 5
 
 		},
-		"risk": {},
+		"risk": {
+			"blood": [50, 15],
+			"finger": [15, 1],
+			"toe": [15, 1]
+		},
 		"text": "ringing the bell stuns the beast from hell"
 	},
 	"dodge": {
