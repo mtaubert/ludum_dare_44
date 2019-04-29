@@ -108,7 +108,7 @@ func _process(delta):
 		if Input.is_action_pressed("ui_right") and Input.is_action_pressed("ui_left"):
 			player.set_facing(player.dir)
 	
-	if Input.is_action_pressed("ui_select"):
+	if Input.is_action_just_pressed("ui_select"):
 		if currentEntity != null and currentState == PLAYERSTATE.IDLE: #Only works if facing an entity
 			currentEntity.interact()
 			if currentEntity.type == "Demon": #Talking to demon state
