@@ -5,6 +5,8 @@ signal player_sacrifice(type, ammount)
 signal enemy_risk(type, ammount)
 signal enemy_details(data)
 signal miss(target)
+signal combat_log(text)
+
 var p_crit = 95
 var p_dodge = 0
 var e_dodge = 0
@@ -64,6 +66,7 @@ func handle_risk(type, roll):
 		var val = Game_Manager.action_definitions[type]["risk"][item][0]
 		print(str(cumf) + " " +str(roll) + " " + str(cumf + val))
 		if roll <= cumf + val and roll >= cumf:
+			emit_signal("combat_log", "you lose " + str(Game_Manager.action_definitions[type]["risk"][item][1]) + " " + str(item))
 			print("ouch")
 			#player loses
 			emit_signal("player_sacrifice", item, Game_Manager.action_definitions[type]["risk"][item][1])
@@ -90,21 +93,27 @@ func handle_enemy_action(action):
 			randomize()
 			var attack =  randi() % 101
 			handle_enemy_risk(action, attack)
+			emit_signal("combat_log", "the enemy attacks!")
 			return int(enemy_attack(attack, Game_Manager.action_definitions[action]["stats"]["damage"]))
 		"dodge":
 			e_dodge = 50
+			emit_signal("combat_log", "the enemy is trying to dodge.")
 		_:
-			pass
+			emit_signal("combat_log", "enemy performs a " + action)
 
 func enemy_attack(attack, damage_in):
 	var dmg = damage_in
 	
 	if attack > e_crit:
+		emit_signal("combat_log", "the enemey scores a critical hit!")
 		print("crit!")
 		dmg *= 2
 	if attack < p_dodge:
 		dmg = 0
 		emit_signal("miss", "player")
+		emit_signal("combat_log", "the enemy misses you")
+		
+	emit_signal("combat_log", "the enemy deals " + str(dmg) + " damage!")
 	return dmg
 	
 
@@ -114,8 +123,11 @@ func attack(attack, damage_in):
 	
 	if attack > p_crit:
 		print("crit!")
+		emit_signal("combat_log", "A critical hit!")
 		dmg *= 2
 	if attack < e_dodge:
 		dmg = 0
 		emit_signal("miss", "enemy")
+		emit_signal("combat_log", "you miss the enemy")
+	emit_signal("combat_log", "you deal " + str(dmg) + " damage!")
 	return dmg
