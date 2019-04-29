@@ -7,9 +7,9 @@ extends Control
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if Game_Manager.won:
-		$ColorRect/MarginContainer/VBoxContainer/Label.text = "Eventually Johnny made it out.\nafter all the bargains.\nhe was finally free!"
+		$ColorRect/MarginContainer/VBoxContainer/Label.text = "Eventually Johnny made it out.\nAfter all the bargains.\nHe was finally free!"
 	else:
-		$ColorRect/MarginContainer/VBoxContainer/Label.text = "Alas, Johnny fell.\nall his life spent away.\nis this how the story went?"
+		$ColorRect/MarginContainer/VBoxContainer/Label.text = "Alas, Johnny fell.\nAll his life spent away.\nIs this how the story went?"
 
 
 func _on_Button_pressed():

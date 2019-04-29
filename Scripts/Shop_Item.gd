@@ -32,6 +32,6 @@ func check_availability(inInventory):
 		$Availability.show()
 
 func check_funds():
-	if not Item_Manager.can_purchase(itemName):
+	if not Item_Manager.can_purchase(itemName) and !$Availability.visible:
 		disabled = true
 		$Lacking_Funds.show()

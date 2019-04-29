@@ -40,8 +40,8 @@ offset = Vector2( 0, -20 )
 script = ExtResource( 2 )
 
 [node name="Highlight" type="Sprite" parent="."]
-position = Vector2( 0, -153.9 )
-scale = Vector2( 2.3667, 2.15464 )
+position = Vector2( 0, -169.108 )
+scale = Vector2( 3.64152, 2.71386 )
 texture = ExtResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
