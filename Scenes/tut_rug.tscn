@@ -1,0 +1,81 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/battle_theme.tres" type="Theme" id=1]
+[ext_resource path="res://Assets/rug.png" type="Texture" id=2]
+
+[node name="Node2D" type="TextureRect"]
+theme = ExtResource( 1 )
+texture = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 163.201
+margin_top = 94.2055
+margin_right = 203.201
+margin_bottom = 120.206
+text = "W"
+align = 1
+
+[node name="Label7" type="Label" parent="."]
+margin_left = 80.6537
+margin_top = 215.654
+margin_right = 307.654
+margin_bottom = 262.654
+text = "Move"
+align = 1
+
+[node name="Label8" type="Label" parent="."]
+margin_left = 85.2976
+margin_top = 331.089
+margin_right = 312.298
+margin_bottom = 378.089
+text = "Interact"
+align = 1
+
+[node name="Label9" type="Label" parent="."]
+margin_left = 81.9806
+margin_top = 455.811
+margin_right = 308.981
+margin_bottom = 502.811
+text = "View stats"
+align = 1
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 89.5616
+margin_top = 163.865
+margin_right = 129.562
+margin_bottom = 189.865
+text = "A"
+align = 1
+
+[node name="Label3" type="Label" parent="."]
+margin_left = 168.508
+margin_top = 161.211
+margin_right = 208.508
+margin_bottom = 187.211
+text = "S"
+align = 1
+
+[node name="Label4" type="Label" parent="."]
+margin_left = 258.07
+margin_top = 163.201
+margin_right = 298.07
+margin_bottom = 189.201
+text = "D"
+align = 1
+
+[node name="Label5" type="Label" parent="."]
+margin_left = 164.528
+margin_top = 282.617
+margin_right = 204.528
+margin_bottom = 308.617
+text = "F"
+align = 1
+
+[node name="Label6" type="Label" parent="."]
+margin_left = 171.826
+margin_top = 398.052
+margin_right = 211.826
+margin_bottom = 424.052
+text = "Tab"
+align = 1
+

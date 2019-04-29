@@ -67,7 +67,7 @@ func update_entities():
 			"Fountain":
 				fountainPos = $Mansion.world_to_map(child.position)
 				entities[$Mansion.world_to_map(child.position)] = child
-				child.position = $Mansion.map_to_world(fountainPos) + tileOffset
+				child.position = $Mansion.map_to_world(fountainPos) + tileOffset + Vector2(0,-1)
 			"Torch":
 				child.position = $Mansion.map_to_world($Mansion.world_to_map(child.position)) + tileOffset + Vector2(0,-1)
 				torches.append($Mansion.world_to_map(child.position))
