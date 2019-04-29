@@ -44,6 +44,7 @@ func _ready():
 onready var wall = load("res://Scenes/Prefabs/Wall.tscn")
 onready var door = load("res://Scenes/Prefabs/Door.tscn")
 onready var exit = load("res://Scenes/Prefabs/Exit.tscn")
+onready var item = load("res://Scenes/Prefabs/Overworld_Item.tscn")
 
 func place_walls():
 	for pos in $Mansion.get_used_cells_by_id(0): #Walls
@@ -78,6 +79,18 @@ func update_entities():
 				child.position = $Mansion.map_to_world($Mansion.world_to_map(child.position)) + tileOffset + Vector2(0,-1)
 				entities[$Mansion.world_to_map(child.position)] = child
 	
+	print(Game_Manager.floor_items[Game_Manager.currentLevel])
+	
+	for itemPos in Game_Manager.floor_items[Game_Manager.currentLevel]:
+		print(Game_Manager.pickedUpItems)
+		if !Game_Manager.pickedUpItems[Game_Manager.currentLevel+1].has(itemPos):
+			var newItem = item.instance()
+			$Mansion/Sorter.add_child(newItem)
+			newItem.position = $Mansion.map_to_world(itemPos) + tileOffset
+			newItem.setup(Game_Manager.floor_items[Game_Manager.currentLevel][itemPos][0],Game_Manager.floor_items[Game_Manager.currentLevel][itemPos][1])
+			entities[itemPos] = newItem
+			newItem.connect("picked_up", self, "picked_up_item")
+	
 	#Exit placement
 	if $Mansion.get_used_cells_by_id(4).size() > 0: #Checks if any exit tiles exists, only needs the first one
 		var exitLoc = $Mansion.get_used_cells_by_id(4)[0]
@@ -90,6 +103,15 @@ func update_entities():
 		entities[exitLoc + Vector2(1,0)] = newExit
 
 	Game_Manager.set_random_encounter_locations($Mansion.get_used_cells_by_id(1) + $Mansion.get_used_cells_by_id(7), entities.keys(), torches)
+
+func picked_up_item(pos):
+	print("picked up " + str(pos))
+	var item = entities[$Mansion.world_to_map(pos)]
+	entities.erase($Mansion.world_to_map(pos))
+	currentEntity = null
+	item.queue_free()
+	Game_Manager.pickedUpItems[Game_Manager.currentLevel+1].append($Mansion.world_to_map(pos))
+
 #Setup --------------------------------------------------------------------------------------------------------------------
 
 #Input and movement -------------------------------------------------------------------------------------------------------
@@ -110,13 +132,16 @@ func _process(delta):
 	
 	if Input.is_action_just_pressed("ui_select"):
 		if currentEntity != null and currentState == PLAYERSTATE.IDLE: #Only works if facing an entity
-			currentEntity.interact()
-			if currentEntity.type == "Demon": #Talking to demon state
-				Game_Manager.update_player_spawn(playerPos) #Safety in case of fight
-				currentState = PLAYERSTATE.TALKING_WITH_DEMON
-				if $Mansion/Sorter/player_character.stats_pos != -140:
-					$Mansion/Sorter/player_character.toggle_stats_view()
-				$Mansion/Sorter/player_character.hide_tip()
+			if currentEntity.type == "Item":
+				currentEntity.interact()
+			else:
+				currentEntity.interact()
+				if currentEntity.type == "Demon": #Talking to demon state
+					Game_Manager.update_player_spawn(playerPos) #Safety in case of fight
+					currentState = PLAYERSTATE.TALKING_WITH_DEMON
+					if $Mansion/Sorter/player_character.stats_pos != -140:
+						$Mansion/Sorter/player_character.toggle_stats_view()
+					$Mansion/Sorter/player_character.hide_tip()
 	elif Input.is_action_just_released("ui_select"):
 		if currentEntity != null and currentState == PLAYERSTATE.IDLE:
 			if currentEntity.type == "Fountain":
