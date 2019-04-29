@@ -151,6 +151,14 @@ func end_encounter():
 	player.fade_in()
 	inEncounter = false
 	emit_signal("encounter_state", inEncounter)
+	
+func player_death():
+	get_tree().change_scene("res://Scenes/game_over.tscn")
+	
+	yield(get_tree().create_timer(1), "timeout")
+	player.fade_in()
+	inEncounter = false
+	emit_signal("encounter_state", inEncounter)
 #Encounters ---------------------------------------------------------------------------------------------------------------
 
 #Sacrifices ---------------------------------------------------------------------------------------------------------------
