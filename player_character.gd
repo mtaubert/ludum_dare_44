@@ -35,6 +35,8 @@ func move_player(location:Vector2, direction:Vector2):
 	#if direction != dir:
 	if direction.x:
 		$AnimationPlayer.play("walk_x")
+		
+		$AudioStreamPlayer2D2.play()
 		if direction.x > 0:
 			sprite.flip_h = true
 		else:
@@ -43,9 +45,14 @@ func move_player(location:Vector2, direction:Vector2):
 	if direction.y:
 		if direction.y > 0:
 			$AnimationPlayer.play("walk_down")
+			
+			$AudioStreamPlayer2D2.play()
 		else:
 			$AnimationPlayer.play("walk_up")
+			
+			$AudioStreamPlayer2D2.play()
 	
+	#if not $AudioStreamPlayer2D2.playing:
 	dir = direction
 	
 #set facing only if already in a mutable idle

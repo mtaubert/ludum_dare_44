@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://player_character.gd" type="Script" id=1]
 [ext_resource path="res://Assets/smoke.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://animation/walk_up.tres" type="Animation" id=9]
 [ext_resource path="res://animation/walk_x.tres" type="Animation" id=10]
 [ext_resource path="res://Assets/audio/ambient.wav" type="AudioStream" id=11]
+[ext_resource path="res://Assets/audio/walk.wav" type="AudioStream" id=12]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 18.9361
@@ -125,6 +126,10 @@ autoplay = true
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource( 4 )
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 12 )
+volume_db = -6.0
 
 [connection signal="animation_finished" from="KinematicBody2D/Character_Effect/AnimationPlayer" to="." method="_on_demon_rising_finished"]
 [connection signal="tween_completed" from="Camera2D/CanvasLayer/stats_tween" to="." method="_on_stats_tween_tween_completed"]
