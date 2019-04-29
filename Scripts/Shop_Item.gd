@@ -4,6 +4,7 @@ var itemName
 
 func _ready():
 	Item_Manager.connect("item_purchased", self, "check_funds")
+	Item_Manager.connect("consumable_used", self, "check_funds")
 
 func setup(item, inInventory):
 	

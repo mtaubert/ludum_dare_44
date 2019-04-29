@@ -34,6 +34,7 @@ func update_man(item):
 	$counter.text = str(Game_Manager.get_player_var(item.name))
 	
 func update_blood():
+	set_blood(Game_Manager.get_player_var("blood"))
 	$counter.text = str(Game_Manager.get_player_var("blood"))
 
 func _on_blood_pressed():
