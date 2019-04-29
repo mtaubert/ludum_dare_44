@@ -11,6 +11,54 @@
 		},
 		"text": "tustle with the muscle, slight risk of hurting yourself"
 	},
+	"nick finger": {
+		"stats": {
+			"damage": 13
+
+		},
+		"risk": {
+			"blood": [13, 5],
+			"finger": [12, 1],
+			"toe": [11, 1]
+		},
+		"text": "steal back a finger, it's rightfully yours"
+	},
+	"nab toe": {
+		"stats": {
+			"damage": 13
+
+		},
+		"risk": {
+			"blood": [13, 5],
+			"finger": [12, 1],
+			"toe": [11, 1]
+		},
+		"text": "grab a toe, not like it needs it"
+	},
+	"siphon blood": {
+		"stats": {
+			"damage": 13
+
+		},
+		"risk": {
+			"blood": [13, 5],
+			"finger": [12, 1],
+			"toe": [11, 1]
+		},
+		"text": "I wonder how it ends up back in me"
+	},
+	"stun demon": {
+		"stats": {
+			"damage": 13
+
+		},
+		"risk": {
+			"blood": [13, 5],
+			"finger": [12, 1],
+			"toe": [11, 1]
+		},
+		"text": "ringing the bell stuns the beast from hell"
+	},
 	"dodge": {
 		"stats": {
 			"evade": 50

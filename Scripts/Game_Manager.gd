@@ -14,7 +14,7 @@ export var mind = 1
 export var finger = 10
 export var toe = 10
 
-var attack_actions = ["struggle", "dodge"]
+var attack_actions = ["struggle", "dodge","nab toe","nick finger","stun demon","siphon blood"]
 var talk_actions = ["reason", "plead", "threaten", "compliment"]
 var battleJSON = "res://Assets/battle_actions.json"
 var action_definitions = {}
@@ -87,6 +87,7 @@ func go_to_hell():
 #Mansion floor movement ---------------------------------------------------------------------------------------------------
 
 #Encounters ---------------------------------------------------------------------------------------------------------------
+signal encounter_state()
 var encounterLocations = []
 
 #Initilises the encounter locations for the floor
@@ -105,6 +106,7 @@ func set_random_encounter_locations(floorCells, entityLocations, torchLocations)
 var encounterChance = 2
 var player
 var specificEnemy = null
+var inEncounter = false
 
 func set_player(p):
 	player = p
@@ -119,11 +121,9 @@ func encounter_chance(location:Vector2):
 		if randi()%100 < encounterChance: #Trigger encounter
 			playerSpawn = location
 			player.play_encounter_start()
-			encounterChance = 10
 			return true
 		else:
 			return false
-			encounterChance +=0
 
 #Starts a random encounter
 func start_encounter():
@@ -131,6 +131,8 @@ func start_encounter():
 	player.fade_out()
 	yield(get_tree().create_timer(1), "timeout")
 	get_tree().change_scene("res://battle.tscn")
+	inEncounter = true
+	emit_signal("encounter_state", inEncounter)
 
 #Starts a specific encounter
 func start_encounter_against(demonID):
@@ -138,12 +140,16 @@ func start_encounter_against(demonID):
 	player.fade_out()
 	yield(get_tree().create_timer(1), "timeout")
 	get_tree().change_scene("res://battle.tscn")
+	inEncounter = true
+	emit_signal("encounter_state", inEncounter)
 
 func end_encounter():
 	get_tree().change_scene("res://Scenes/" + houseLevels[currentLevel] + ".tscn")
 	
 	yield(get_tree().create_timer(1), "timeout")
 	player.fade_in()
+	inEncounter = false
+	emit_signal("encounter_state", inEncounter)
 #Encounters ---------------------------------------------------------------------------------------------------------------
 
 #Sacrifices ---------------------------------------------------------------------------------------------------------------
@@ -170,6 +176,13 @@ func use_consumable(consumable):
 				if blood > 100: #Can't go above 100 blood
 					blood = 100
 				emit_signal("update_blood")
+				Item_Manager.remove_item_from_inventory(consumable)
+		"Holy Water":
+			if inEncounter:
+				Item_Manager.remove_item_from_inventory(consumable)
+		"Demon Candle":
+			if !inEncounter:
+				player.play_encounter_start()
 				Item_Manager.remove_item_from_inventory(consumable)
 #Consumables --------------------------------------------------------------------------------------------------------------
 

@@ -3,44 +3,54 @@ extends Node
 signal item_purchased()
 signal consumable_used()
 
-var playerInventory = ["Blood Bag","Blood Bag","Blood Bag"]
+var playerInventory = []
+var debugInv = ["Blood Bag","Blood Bag","Blood Bag","Demon Candle","Demon Candle","Demon Candle","Holy Water","Holy Water","Holy Water","Toe Knife","Finger Sickle","Blood Scepter","Demon Bell"]
 
 var items = {
 	"Finger Sickle": {
 		"image": load("res://Assets/items/finger_sickle.png"),
 		"cost": [4, "finger"],
 		"unique": true,
-		"effect":  "Nick finger"
+		"effect":  "nick finger"
 	},
 	"Toe Knife": {
 		"image": load("res://Assets/items/toe_knife.png"),
 		"cost": [1, "toe"],
 		"unique": true,
-		"effect":  "Nab toe"
+		"effect":  "nab toe"
 	},
 	"Blood Scepter": {
 		"image": load("res://Assets/items/blood_scepter.png"),
 		"cost": [99, "blood"],
 		"unique": true,
-		"effect":  "Siphon blood"
+		"effect":  "siphon blood"
 	},
 	"Demon Bell": {
 		"image": load("res://Assets/items/demon_bell.png"),
 		"cost": [1, "soul"],
 		"unique": true,
-		"effect":  "Stun demon"
+		"effect":  "stun demon"
 	},
 	"Blood Bag": {
 		"image": load("res://Assets/items/blood_bag.png"),
 		"cost": [1, "finger"],
 		"unique": false,
-		"effect":  20
+		"effect":  20,
+		"encounter_use": null
 	},
 	"Holy Water": {
 		"image": load("res://Assets/items/holy_water.png"),
 		"cost": [1, "toe"],
 		"unique": false,
-		"effect": 33
+		"effect": 33,
+		"encounter_use": true
+	},
+	"Demon Candle": {
+		"image": load("res://Assets/items/demon_candle.png"),
+		"cost": [1, "toe"],
+		"unique": false,
+		"effect": null,
+		"encounter_use": false
 	}
 }
 
@@ -52,6 +62,9 @@ var currencies = {
 	"soul": load("res://Assets/items/soul.png"),
 	"heart": load("res://Assets/items/heart.png")
 }
+
+func _ready():
+	playerInventory = debugInv
 
 #purchases an item
 func purchase_item(item):

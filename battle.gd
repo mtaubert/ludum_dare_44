@@ -16,7 +16,6 @@ onready var player3 = load("res://character_model/player_battle_sprite_dmg_7.png
 onready var player2 = load("res://character_model/player_battle_sprite_dmg_8.png")
 onready var player1 = load("res://character_model/player_battle_sprite_dmg_9.png")
 
-
 var menu_queue = []
 var menu_loc = Vector2(524, 400)
 var menu_hide_loc = Vector2(1224, 400)
@@ -90,6 +89,11 @@ func init_player_actions():
 	for item in Game_Manager.attack_actions:
 		var action = button.instance()
 		action.init(item)
+		$fight_menu.add_button(action)
+		
+	for item in Item_Manager.get_unique_items():
+		var action = button.instance()
+		action.init(Item_Manager.items[item]["effect"])
 		$fight_menu.add_button(action)
 		
 	for item in Game_Manager.talk_actions:
