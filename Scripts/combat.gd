@@ -10,6 +10,7 @@ signal player_speak(type)
 signal enemy_speak(type)
 signal offer_bargain(details)
 
+var prepare_attack = false
 var p_crit = 95
 var p_dodge = 0
 var e_dodge = 0
@@ -155,6 +156,7 @@ func handle_enemy_action(action):
 			randomize()
 			var attack =  randi() % 101
 			handle_enemy_risk(action, attack)
+			e_risk_mod = 0
 			emit_signal("combat_log", "the enemy attacks!")
 			return int(enemy_attack(attack, Game_Manager.action_definitions[action]["stats"]["damage"]))
 		"dodge":
@@ -168,6 +170,7 @@ func handle_enemy_action(action):
 			#the enemies next attack has no risk
 			emit_signal("combat_log", "the enemy spooks you, their next attack has no risk")
 			e_risk_mod = 100
+			prepare_attack = true
 		"delay", "stunned":
 			pass
 		_:

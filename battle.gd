@@ -387,7 +387,14 @@ func pass_turn():
 		#its the enemies go
 		#choose a random action from the availiable attacks
 		randomize()
-		enemy_action(enemy_attacks[randi()%len(enemy_attacks)])
+		if combat.prepare_attack:
+			combat.prepare_attack = false
+			if "splatter" in enemy_attacks:
+				enemy_action("splatter")
+			elif "assault" in enemy_attacks:
+				enemy_action("assault")
+		else:
+			enemy_action(enemy_attacks[randi()%len(enemy_attacks)])
 		#lock ui
 		
 	turn += 1
