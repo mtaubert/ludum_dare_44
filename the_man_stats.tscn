@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://the_man_stats.gd" type="Script" id=1]
 [ext_resource path="res://character_model/the_man_stats.png" type="Texture" id=2]
 [ext_resource path="res://scenery/mask.png" type="Texture" id=3]
 [ext_resource path="res://Assets/battle_theme.tres" type="Theme" id=4]
+[ext_resource path="res://Scenes/Prefabs/Inventory.tscn" type="PackedScene" id=5]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.34902, 0, 0, 1 )
@@ -116,5 +117,7 @@ margin_right = 50.0
 margin_bottom = 106.0
 theme = ExtResource( 4 )
 align = 1
+
+[node name="Inventory" parent="." instance=ExtResource( 5 )]
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/blood" to="." method="_on_blood_pressed"]

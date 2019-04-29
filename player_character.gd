@@ -9,7 +9,7 @@ export var speed = 1000
 export var limits = [0, 0, 1280, 1024]
 onready var sprite = get_node("KinematicBody2D/Sprite")
 onready var stats_tween = get_node("Camera2D/CanvasLayer/stats_tween")
-var stats_pos = -80
+var stats_pos = -140
 var can_open_menu = true
 
 # Called when the node enters the scene tree for the first time.
@@ -83,13 +83,13 @@ func toggle_stats_view():
 		can_open_menu = false
 		var the_man = $Camera2D/CanvasLayer/the_man_stats
 		var target = the_man.rect_position
-		if stats_pos == -80:
+		if stats_pos == -140:
 			stats_pos = 80
 			the_man.toggle_buttons(true)
 		else:
 			
 			the_man.toggle_buttons(false)
-			stats_pos = -80
+			stats_pos = -140
 		target.x = stats_pos
 		stats_tween.interpolate_property(the_man, "rect_position", the_man.rect_position,  target, 0.5, Tween.TRANS_SINE, Tween.EASE_OUT)
 		stats_tween.start()

@@ -33,7 +33,7 @@ scale = 0.3
 scale_random = 0.16
 color = Color( 0.0941176, 0.0941176, 0.0941176, 1 )
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 resource_name = "fade_out"
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:color")
@@ -48,7 +48,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ) ]
 }
 
-[sub_resource type="OccluderPolygon2D" id=3]
+[sub_resource type="OccluderPolygon2D" id=4]
 polygon = PoolVector2Array( -2.2178, -1.68722, -7.34684, -1.16385, -10.2777, -0.0124321, -10.2777, 2.81377, -7.34684, 5.01194, -3.57857, 5.74466, 0.29438, 6.3727, 3.64396, 5.95401, 7.30756, 4.48856, 9.81974, 2.81377, 9.61039, 0.301594, 7.62158, -1.16385, -0.0196457, -1.89657 )
 
 [node name="player_character" type="Node2D"]
@@ -93,9 +93,9 @@ layer = 5
 
 [node name="the_man_stats" parent="Camera2D/CanvasLayer" instance=ExtResource( 6 )]
 editor/display_folded = true
-margin_left = -80.0
+margin_left = -140.0
 margin_top = 80.0
-margin_right = -80.0
+margin_right = -140.0
 margin_bottom = 80.0
 
 [node name="MarginContainer" parent="Camera2D/CanvasLayer/the_man_stats" index="4"]
@@ -109,7 +109,7 @@ color = Color( 0, 0, 0, 1 )
 
 [node name="scene_animator" type="AnimationPlayer" parent="Camera2D/CanvasLayer/swipe"]
 anims/fade_in = ExtResource( 7 )
-anims/fade_out = SubResource( 4 )
+anims/fade_out = SubResource( 3 )
 
 [node name="Movement_Tween" type="Tween" parent="."]
 
@@ -124,7 +124,7 @@ volume_db = -10.0
 autoplay = true
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-occluder = SubResource( 3 )
+occluder = SubResource( 4 )
 
 [connection signal="animation_finished" from="KinematicBody2D/Character_Effect/AnimationPlayer" to="." method="_on_demon_rising_finished"]
 [connection signal="tween_completed" from="Camera2D/CanvasLayer/stats_tween" to="." method="_on_stats_tween_tween_completed"]
