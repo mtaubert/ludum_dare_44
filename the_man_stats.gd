@@ -7,6 +7,7 @@ onready var toe = load("res://character_model/man_toes.png")
 onready var soul = load("res://character_model/man_soul.png")
 onready var default = load("res://character_model/the_man_Stats.png")
 onready var tween = get_node("Tween")
+var cost = 0
 
 signal blood_paid(ammount)
 
@@ -27,6 +28,7 @@ func _ready():
 		item.connect("mouse_entered", self, "update_man", [item])
 	print(Game_Manager.get_player_var("blood"))
 	$ProgressBar.value = Game_Manager.get_player_var("blood")
+	disable_buttons()
 		
 func update_man(item):
 	print(item.name)
@@ -42,9 +44,15 @@ func _on_blood_pressed():
 	update_blood()
 	
 func disable_buttons():
+	cost = 0
 	for item in $MarginContainer/VBoxContainer.get_children():
 		item.disabled = true
 		
-func enable_buttons():
-	for item in $MarginContainer/VBoxContainer.get_children():
-		item.disabled = false
+#func enable_buttons():
+#	for item in $MarginContainer/VBoxContainer.get_children():
+#		item.disabled = false
+		
+func enable_button(button, cost_in):
+	cost = cost_in
+	var node = get_node("MarginContainer/VBoxContainer/" + button)
+	node.disabled = false

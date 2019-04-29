@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://battle.gd" type="Script" id=1]
 [ext_resource path="res://Assets/battle_backdrop.png" type="Texture" id=2]
@@ -6,28 +6,29 @@
 [ext_resource path="res://Assets/standard_button.tres" type="StyleBox" id=4]
 [ext_resource path="res://Scenes/Prefabs/combat_menu.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenery/health_radial.png" type="Texture" id=6]
-[ext_resource path="res://animation/low_health_enemy.tres" type="Animation" id=7]
-[ext_resource path="res://scenery/battle_stand.png" type="Texture" id=8]
-[ext_resource path="res://demon_model/beholder_sheet.tres" type="SpriteFrames" id=9]
-[ext_resource path="res://animation/assault.tres" type="Animation" id=10]
-[ext_resource path="res://animation/demon_combat_delay.tres" type="Animation" id=11]
-[ext_resource path="res://dodge.tres" type="Animation" id=12]
-[ext_resource path="res://animation/enemy_defeated.tres" type="Animation" id=13]
-[ext_resource path="res://animation/splatter.tres" type="Animation" id=14]
-[ext_resource path="res://spook.tres" type="Animation" id=15]
-[ext_resource path="res://animation/taunt.tres" type="Animation" id=16]
-[ext_resource path="res://Assets/speech_box.tres" type="StyleBox" id=17]
-[ext_resource path="res://character_model/player_battle_sprite.png" type="Texture" id=18]
-[ext_resource path="res://animation/compliment.tres" type="Animation" id=19]
-[ext_resource path="res://animation/dodge_player.tres" type="Animation" id=20]
-[ext_resource path="res://animation/plead.tres" type="Animation" id=21]
-[ext_resource path="res://animation/reason.tres" type="Animation" id=22]
-[ext_resource path="res://animation/struggle.tres" type="Animation" id=23]
-[ext_resource path="res://animation/threaten.tres" type="Animation" id=24]
-[ext_resource path="res://animation/battle_end.tres" type="Animation" id=25]
-[ext_resource path="res://animation/battle_start.tres" type="Animation" id=26]
-[ext_resource path="res://the_man_stats.tscn" type="PackedScene" id=27]
-[ext_resource path="res://Assets/audio/ableton_battle.wav" type="AudioStream" id=28]
+[ext_resource path="res://animation/bargain.tres" type="Animation" id=7]
+[ext_resource path="res://animation/low_health_enemy.tres" type="Animation" id=8]
+[ext_resource path="res://scenery/battle_stand.png" type="Texture" id=9]
+[ext_resource path="res://demon_model/beholder_sheet.tres" type="SpriteFrames" id=10]
+[ext_resource path="res://animation/assault.tres" type="Animation" id=11]
+[ext_resource path="res://animation/demon_combat_delay.tres" type="Animation" id=12]
+[ext_resource path="res://dodge.tres" type="Animation" id=13]
+[ext_resource path="res://animation/enemy_defeated.tres" type="Animation" id=14]
+[ext_resource path="res://animation/splatter.tres" type="Animation" id=15]
+[ext_resource path="res://spook.tres" type="Animation" id=16]
+[ext_resource path="res://animation/taunt.tres" type="Animation" id=17]
+[ext_resource path="res://Assets/speech_box.tres" type="StyleBox" id=18]
+[ext_resource path="res://character_model/player_battle_sprite.png" type="Texture" id=19]
+[ext_resource path="res://animation/compliment.tres" type="Animation" id=20]
+[ext_resource path="res://animation/dodge_player.tres" type="Animation" id=21]
+[ext_resource path="res://animation/plead.tres" type="Animation" id=22]
+[ext_resource path="res://animation/reason.tres" type="Animation" id=23]
+[ext_resource path="res://animation/struggle.tres" type="Animation" id=24]
+[ext_resource path="res://animation/threaten.tres" type="Animation" id=25]
+[ext_resource path="res://animation/battle_end.tres" type="Animation" id=26]
+[ext_resource path="res://animation/battle_start.tres" type="Animation" id=27]
+[ext_resource path="res://the_man_stats.tscn" type="PackedScene" id=28]
+[ext_resource path="res://Assets/audio/ableton_battle.wav" type="AudioStream" id=29]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -120,27 +121,28 @@ tint_progress = Color( 1, 0, 0, 1 )
 [node name="damage_tween" type="Tween" parent="enemy_character/enemy_health"]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="enemy_character/enemy_health"]
-anims/low_health_enemy = ExtResource( 7 )
+anims/bargain = ExtResource( 7 )
+anims/low_health_enemy = ExtResource( 8 )
 
 [node name="battle_stand" type="Sprite" parent="enemy_character"]
 position = Vector2( -1.72449, -2.02316 )
-texture = ExtResource( 8 )
+texture = ExtResource( 9 )
 
 [node name="enemy" type="AnimatedSprite" parent="enemy_character"]
 position = Vector2( -0.793213, -124.073 )
 scale = Vector2( 0.6, 0.6 )
-frames = ExtResource( 9 )
-frame = 5
+frames = ExtResource( 10 )
+frame = 3
 playing = true
 
 [node name="combat_animator" type="AnimationPlayer" parent="enemy_character/enemy"]
-anims/assault = ExtResource( 10 )
-anims/delay = ExtResource( 11 )
-anims/dodge = ExtResource( 12 )
-anims/enemy_defeated = ExtResource( 13 )
-anims/splatter = ExtResource( 14 )
-anims/spook = ExtResource( 15 )
-anims/taunt = ExtResource( 16 )
+anims/assault = ExtResource( 11 )
+anims/delay = ExtResource( 12 )
+anims/dodge = ExtResource( 13 )
+anims/enemy_defeated = ExtResource( 14 )
+anims/splatter = ExtResource( 15 )
+anims/spook = ExtResource( 16 )
+anims/taunt = ExtResource( 17 )
 
 [node name="enemy_speech" type="Panel" parent="enemy_character"]
 visible = false
@@ -149,7 +151,7 @@ margin_top = -265.351
 margin_right = 41.6486
 margin_bottom = -205.351
 theme = ExtResource( 3 )
-custom_styles/panel = ExtResource( 17 )
+custom_styles/panel = ExtResource( 18 )
 
 [node name="RichTextLabel" type="RichTextLabel" parent="enemy_character/enemy_speech"]
 anchor_right = 1.0
@@ -159,16 +161,16 @@ scroll_active = false
 [node name="player" type="Sprite" parent="."]
 position = Vector2( 303.251, 441.985 )
 scale = Vector2( 0.8, 0.8 )
-texture = ExtResource( 18 )
+texture = ExtResource( 19 )
 
 [node name="player_combat_animator" type="AnimationPlayer" parent="player"]
-anims/compliment = ExtResource( 19 )
-anims/dodge = ExtResource( 20 )
-anims/idle = ExtResource( 19 )
-anims/plead = ExtResource( 21 )
-anims/reason = ExtResource( 22 )
-anims/struggle = ExtResource( 23 )
-anims/threaten = ExtResource( 24 )
+anims/compliment = ExtResource( 20 )
+anims/dodge = ExtResource( 21 )
+anims/idle = ExtResource( 20 )
+anims/plead = ExtResource( 22 )
+anims/reason = ExtResource( 23 )
+anims/struggle = ExtResource( 24 )
+anims/threaten = ExtResource( 25 )
 
 [node name="speech" type="Panel" parent="player"]
 visible = false
@@ -177,7 +179,7 @@ margin_top = -240.57
 margin_right = 46.3629
 margin_bottom = -180.57
 theme = ExtResource( 3 )
-custom_styles/panel = ExtResource( 17 )
+custom_styles/panel = ExtResource( 18 )
 
 [node name="RichTextLabel" type="RichTextLabel" parent="player/speech"]
 anchor_right = 1.0
@@ -186,20 +188,20 @@ scroll_active = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "battle_start"
-anims/battle_end = ExtResource( 25 )
-anims/battle_start = ExtResource( 26 )
+anims/battle_end = ExtResource( 26 )
+anims/battle_start = ExtResource( 27 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 5
 
-[node name="the_man_stats" parent="CanvasLayer" instance=ExtResource( 27 )]
+[node name="the_man_stats" parent="CanvasLayer" instance=ExtResource( 28 )]
 margin_left = 67.7396
 margin_top = 65.6976
 margin_right = 67.7396
 margin_bottom = 65.6976
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 28 )
+stream = ExtResource( 29 )
 volume_db = -5.0
 autoplay = true
 

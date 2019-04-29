@@ -8,6 +8,7 @@ signal miss(target)
 signal combat_log(text)
 signal player_speak(type)
 signal enemy_speak(type)
+signal offer_bargain(details)
 
 var p_crit = 95
 var p_dodge = 0
@@ -18,6 +19,7 @@ var enemy_data = {}
 var enemy_action_definitions = {}
 var battleJSON = "res://Assets/monster_actions.json"
 var enemy_type = ""
+var offer_bargain = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	setup()
@@ -67,8 +69,9 @@ func talk(action):
 		
 		result = "(good)"
 		print("good")
+		offer_bargain = true
+		emit_signal("offer_bargain", enemy_action_definitions["bargain"]["offer"])
 	elif enemy_action_definitions["bargain"]["bad"] == action:
-		
 		result = "(bad)"
 		print("bad")
 	else:
@@ -112,6 +115,7 @@ func handle_enemy_risk(type, roll):
 func handle_enemy_action(action):
 	e_dodge = 0
 	#reset temporary variables
+	print(action)
 	match action:
 		"splatter", "assault":
 			randomize()
@@ -130,6 +134,8 @@ func handle_enemy_action(action):
 			#the enemies next attack has no risk
 			emit_signal("combat_log", "the enemy spooks you, their next attack has no risk")
 			e_risk_mod = 100
+		"delay":
+			pass
 		_:
 			emit_signal("combat_log", "enemy performs a " + action)
 

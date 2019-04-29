@@ -14,10 +14,11 @@
 			"taunt": "there's no sense trying to reason with me, fool.",
 			"good": "compliment",
 			"bad": "reason",
-			"compliment" : ["a compliment","a response"],
-			"reason": ["a compliment","a response"],
-			"plead": ["a compliment","a response"],
-			"threaten": ["a compliment","a response"]
+			"compliment" : ["you have a beautiful eye?","really? so sweet :) I'll let you go for a toe"],
+			"reason": ["you clearly need medical attention let me help","(angry squelching noises)"],
+			"plead": ["please don't hurt me","(puzzled look)"],
+			"threaten": ["I'm gonna poke you in the eye","(it shrugs somehow)"],
+			"offer": ["toe", 1]
 		},
 		"loot": {
 			"blood": 8,
@@ -42,7 +43,8 @@
 			"compliment" : ["a compliment","a response"],
 			"reason": ["a compliment","a response"],
 			"plead": ["a compliment","a response"],
-			"threaten": ["a compliment","a response"]
+			"threaten": ["a compliment","a response"],
+			"offer": ["toe", 3]
 		},
 		"loot": {
 			"blood": 22,
@@ -68,7 +70,8 @@
 			"compliment" : ["a compliment","a response"],
 			"reason": ["a compliment","a response"],
 			"plead": ["a compliment","a response"],
-			"threaten": ["a compliment","a response"]
+			"threaten": ["a compliment","a response"],
+			"offer": ["toe", 3]
 		},
 	},
 	"eyes_and_holes": {
@@ -89,7 +92,8 @@
 			"compliment" : ["a compliment","a response"],
 			"reason": ["a compliment","a response"],
 			"plead": ["a compliment","a response"],
-			"threaten": ["a compliment","a response"]
+			"threaten": ["a compliment","a response"],
+			"offer": ["toe", 3]
 		},
 	},
 	"wiggles": {
@@ -110,7 +114,8 @@
 			"compliment" : ["a compliment","a response"],
 			"reason": ["a compliment","a response"],
 			"plead": ["a compliment","a response"],
-			"threaten": ["a compliment","a response"]
+			"threaten": ["a compliment","a response"],
+			"offer": ["toe", 3]
 		},
 	}
 }

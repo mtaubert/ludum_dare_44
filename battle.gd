@@ -73,6 +73,7 @@ func _ready():
 	combat.connect("combat_log", self, "combat_log")
 	combat.connect("enemy_speak", self, "enemy_speak")
 	combat.connect("player_speak", self, "player_speak")
+	combat.connect("offer_bargain", self, "bargain")
 	combat.set_enemy(enemy)
 	
 	
@@ -208,6 +209,9 @@ func lock_ui():
 	for item in $battle_menu/VBoxContainer/HBoxContainer.get_children():
 		item.disabled = true
 		$CanvasLayer/the_man_stats.disable_buttons()
+		if $enemy_character/enemy_health/AnimationPlayer.current_animation == "bargain":
+			$enemy_character/enemy_health/AnimationPlayer.stop()
+			$enemy_character/enemy_health.tint_progress = Color("ff0000")
 	#hide ui
 	hide_menu(current_menu)
 	menu_queue.append("battle")
@@ -219,7 +223,7 @@ func unlock_ui():
 		button.disabled = false
 	for item in $battle_menu/VBoxContainer/HBoxContainer.get_children():
 		item.disabled = false
-		$CanvasLayer/the_man_stats.enable_buttons()
+		#$CanvasLayer/the_man_stats.enable_buttons()
 	#reveal ui
 	#reveal_menu("battle")
 	
@@ -288,6 +292,14 @@ func miss(target):
 			print("error in miss signal")
 	hide_player_log()
 	hide_enemy_log()
+	
+	
+func bargain(details):
+	print(details)
+	$enemy_character/enemy_health/AnimationPlayer.play("bargain")
+	$CanvasLayer/the_man_stats.enable_button(details[0], details[1])
+	print(details[1])
+	combat_log("you will be spared in exchange for " + str(details[1]) + " " + (details[0]))
 ##--------------------------------------------------------------------
 ##battle logic
 ##--------------------------------------------------------------------
@@ -313,6 +325,10 @@ func player_action(action):
 func enemy_action(action):
 	print("--enemy action--")
 	print(action)
+	
+	if combat.offer_bargain:
+		combat.offer_bargain = false
+		action = "delay"
 	#delay half a second
 	yield(get_tree().create_timer(0.5), "timeout")
 	#check if the enemy is still alive
