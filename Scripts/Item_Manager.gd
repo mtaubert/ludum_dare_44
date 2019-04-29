@@ -61,3 +61,24 @@ func can_purchase(item):
 	if Game_Manager.get_player_var(items[item]["cost"][1]) > items[item]["cost"][0]:
 		return true
 	return false
+
+func get_unique_items():
+	var uniques = []
+	
+	for item in playerInventory:
+		if items[item]["unique"]:
+			uniques.append(item)
+	
+	return uniques
+
+func get_consumables():
+	var consumbles = {}
+	
+	for item in playerInventory:
+		if !items[item]["unique"]:
+			if consumbles.has(item):
+				consumbles[item] += 1
+			else:
+				consumbles[item] = 1
+	
+	return consumbles
