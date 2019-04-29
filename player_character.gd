@@ -147,6 +147,15 @@ func fade_out():
 	
 func loot(items):
 	print(items)
+	var desc = "you gained: " 
+	
+	
 	randomize()
 	for item in items:
-		Item_Manager.give_item(item, randi() % int(items[item]) + 1)
+		var ammount = randi() % int(items[item]) + 1
+		desc += ammount + " " + item + ", "
+		Item_Manager.give_item(item, ammount)
+	desc.erase(desc.length())
+	desc += "."
+	$Camera2D/CanvasLayer/UI.tooltip(desc)
+	
