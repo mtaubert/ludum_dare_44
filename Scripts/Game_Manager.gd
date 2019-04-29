@@ -1,6 +1,25 @@
 extends Node
 
 var houseLevels = ["Basement", "Bottom_Floor", "Top_Floor"]
+
+var floor_items = {
+	-1: {
+		
+	},
+	0: {
+		
+	},
+	1: {
+		Vector2(15,15): ["blood", 10],
+		Vector2(16,15): ["Holy Water", 2]
+	},
+	2: {
+		
+	}
+}
+
+var pickedUpItems = [[],[],[],[]]
+
 var bloodSacrificeLevel = 0
 var currentLevel = 1
 var playerSpawn = Vector2(16,19)
@@ -40,6 +59,7 @@ func reset():
 	finger = 10
 	toe = 10
 	won = false
+	pickedUpItems = [[],[],[],[]]
 
 #load battle action details
 func load_battle_actions():

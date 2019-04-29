@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Assets/battle_theme.tres" type="Theme" id=1]
-[ext_resource path="res://Scripts/game_over.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/game_start.gd" type="Script" id=2]
 [ext_resource path="res://game_over_idle.tres" type="Animation" id=3]
 
-[node name="end_game" type="Control"]
+[node name="Start_game" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
@@ -32,17 +32,17 @@ margin_right = 424.0
 margin_bottom = 165.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "Alas, Johnny fell.
-all his life spent away.
-is this how the story went?"
+text = "Johnny came to the 666 bnb.
+He only wanted a bed for the night.
+He was about to find out what a bargain this place was..."
 
 [node name="Button" type="Button" parent="ColorRect/MarginContainer/VBoxContainer"]
-margin_left = 161.0
+margin_left = 176.0
 margin_top = 169.0
-margin_right = 262.0
+margin_right = 247.0
 margin_bottom = 199.0
 size_flags_horizontal = 4
-text = "goodbye"
+text = "begin"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "game_over_idle"
