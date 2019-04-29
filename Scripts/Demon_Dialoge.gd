@@ -37,11 +37,9 @@ onready var shopItem = load("res://Scenes/Prefabs/Shop_Item.tscn")
 #Addes items to the shop
 func setup_shop(items):
 	for item in items:
-		if not Item_Manager.playerInventory.has(item):
-			var newShopItem = shopItem.instance()
-			newShopItem.setup(item)
-			$Shop.add_child(newShopItem)
-			
+		var newShopItem = shopItem.instance()
+		newShopItem.setup(item, Item_Manager.playerInventory.has(item))
+		$Shop.add_child(newShopItem)
 
 #Writes the demon dialog to the text box
 func demon_talking():
@@ -53,7 +51,8 @@ func print_dialog(text):
 	for c in text:
 		$Demon_Talking_Panel/Text.text += c
 		yield(get_tree().create_timer(0.01), "timeout")
-	show_buttons()
+	if not bargaining:
+		show_buttons()
 
 func show_buttons():
 	if dialoge[currentDialogKey]["accept_text"] != null:

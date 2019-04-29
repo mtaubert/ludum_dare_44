@@ -8,7 +8,7 @@ var demons = {
 		"map_animations": load("res://demon_model/interactable_demons/interactible_demon_1.tres"),
 		"name": "Wiggles",
 		"encounter_animations": load("res://demon_model/wiggles_sheet.tres"),
-		"bargain_items": ["Finger Sickle", "Toe Knife", "Blood Scepter", "Demon Bell"]
+		"bargain_items": ["Finger Sickle", "Toe Knife", "Holy Water", "Blood Bag"]
 	},
 	"2": {
 		"dialog": {},
