@@ -9,31 +9,31 @@ var debugInv = ["Blood Bag","Blood Bag","Blood Bag","Demon Candle","Demon Candle
 var items = {
 	"Finger Sickle": {
 		"image": load("res://Assets/items/finger_sickle.png"),
-		"cost": [4, "finger"],
+		"cost": [5, "finger"],
 		"unique": true,
 		"effect":  "nick finger"
 	},
 	"Toe Knife": {
 		"image": load("res://Assets/items/toe_knife.png"),
-		"cost": [1, "toe"],
+		"cost": [5, "toe"],
 		"unique": true,
 		"effect":  "nab toe"
 	},
 	"Blood Scepter": {
 		"image": load("res://Assets/items/blood_scepter.png"),
-		"cost": [99, "blood"],
+		"cost": [1, "mind"],
 		"unique": true,
 		"effect":  "siphon blood"
 	},
 	"Demon Bell": {
 		"image": load("res://Assets/items/demon_bell.png"),
-		"cost": [1, "soul"],
+		"cost": [1, "heart"],
 		"unique": true,
 		"effect":  "stun demon"
 	},
 	"Blood Bag": {
 		"image": load("res://Assets/items/blood_bag.png"),
-		"cost": [1, "finger"],
+		"cost": [2, "finger"],
 		"unique": false,
 		"effect":  20,
 		"encounter_use": null
