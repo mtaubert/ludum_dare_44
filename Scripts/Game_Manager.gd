@@ -21,10 +21,22 @@ var attack_actions = ["struggle", "dodge"]
 var talk_actions = ["reason", "plead", "threaten", "compliment"]
 var battleJSON = "res://Assets/battle_actions.json"
 var action_definitions = {}
+
 func _ready():
 	randomize()
 	load_battle_actions()
 
+func reset():
+	bloodSacrificeLevel = 0
+	currentLevel = 1
+	playerSpawn = Vector2(16,19)
+	Item_Manager.playerInventory.clear()
+	blood = 100
+	heart = 1
+	soul = 1
+	mind = 1
+	finger = 10
+	toe = 10
 
 #load battle action details
 func load_battle_actions():

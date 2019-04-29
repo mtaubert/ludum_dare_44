@@ -48,18 +48,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ) ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("../the_man_stats:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
 
 [sub_resource type="OccluderPolygon2D" id=4]
 polygon = PoolVector2Array( -2.2178, -1.68722, -7.34684, -1.16385, -10.2777, -0.0124321, -10.2777, 2.81377, -7.34684, 5.01194, -3.57857, 5.74466, 0.29438, 6.3727, 3.64396, 5.95401, 7.30756, 4.48856, 9.81974, 2.81377, 9.61039, 0.301594, 7.62158, -1.16385, -0.0196457, -1.89657 )
@@ -89,7 +77,7 @@ anims/demon_rising = ExtResource( 3 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 4 )
 hframes = 7
-frame = 1
+frame = 3
 region_enabled = true
 region_rect = Rect2( 5, 0, 1000, 250 )
 
