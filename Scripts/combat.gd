@@ -64,22 +64,18 @@ func handle_player_action(action):
 			
 func talk(action):
 	print("this is some talking")
-	var result = "(average)"
 	if enemy_action_definitions["bargain"]["good"] == action:
 		
-		result = "(good)"
-		print("good")
 		offer_bargain = true
 		emit_signal("offer_bargain", enemy_action_definitions["bargain"]["offer"])
-	elif enemy_action_definitions["bargain"]["bad"] == action:
-		result = "(bad)"
-		print("bad")
+	elif enemy_action_definitions["bargain"]["bad"] == action: #handle bad action
+		pass
 	else:
 		print("harmless")
 		print(enemy_action_definitions["bargain"][action])
 	emit_signal("player_speak", enemy_action_definitions["bargain"][action][0])	
 	yield(get_tree().create_timer(1), "timeout")
-	emit_signal("enemy_speak", enemy_action_definitions["bargain"][action][1] + " " + result)
+	emit_signal("enemy_speak", enemy_action_definitions["bargain"][action][1])
 	
 	
 func handle_risk(type, roll):

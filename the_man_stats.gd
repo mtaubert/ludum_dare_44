@@ -56,6 +56,7 @@ func disable_buttons():
 #		item.disabled = false
 		
 func sacrifice(item):
+	disable_buttons()
 	print("sacrifice " + str(cost)+ " " + str(item.name))
 	if Game_Manager.get_player_var(item.name) > cost:
 		Game_Manager.player_sacrifice(item.name, cost)
