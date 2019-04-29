@@ -3,7 +3,7 @@ extends Node
 signal item_purchased()
 signal consumable_used()
 
-var playerInventory = ["Blood Bag","Blood Bag","Blood Bag"]
+var playerInventory = ["Blood Bag","Blood Bag","Blood Bag","Demon Candle","Demon Candle","Demon Candle","Holy Water","Holy Water","Holy Water"]
 
 var items = {
 	"Finger Sickle": {
@@ -34,13 +34,22 @@ var items = {
 		"image": load("res://Assets/items/blood_bag.png"),
 		"cost": [1, "finger"],
 		"unique": false,
-		"effect":  20
+		"effect":  20,
+		"encounter_use": null
 	},
 	"Holy Water": {
 		"image": load("res://Assets/items/holy_water.png"),
 		"cost": [1, "toe"],
 		"unique": false,
-		"effect": 33
+		"effect": 33,
+		"encounter_use": true
+	},
+	"Demon Candle": {
+		"image": load("res://Assets/items/demon_candle.png"),
+		"cost": [1, "toe"],
+		"unique": false,
+		"effect": null,
+		"encounter_use": false
 	}
 }
 
