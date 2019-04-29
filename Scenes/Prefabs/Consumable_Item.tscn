@@ -7,7 +7,9 @@
 [ext_resource path="res://Assets/items/holy_water.png" type="Texture" id=5]
 [ext_resource path="res://Assets/fonts/dynamicfont.tres" type="DynamicFont" id=6]
 
-[node name="Consumable_Item" type="TextureButton"]
+[node name="Consumable_Item" type="TextureButton" groups=[
+"inventory",
+]]
 margin_right = 64.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 64, 64 )
@@ -34,4 +36,5 @@ margin_bottom = 58.1495
 custom_fonts/font = ExtResource( 6 )
 text = "x10"
 
+[connection signal="mouse_entered" from="." to="." method="_on_Consumable_Item_mouse_entered"]
 [connection signal="pressed" from="." to="." method="_on_Consumable_Item_pressed"]

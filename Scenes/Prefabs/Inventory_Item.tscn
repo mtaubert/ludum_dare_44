@@ -4,11 +4,12 @@
 [ext_resource path="res://Scripts/Inventory_Item.gd" type="Script" id=2]
 [ext_resource path="res://Assets/items/blood_scepter.png" type="Texture" id=3]
 
-[node name="Inventory_Item" type="TextureRect"]
+[node name="Inventory_Item" type="TextureRect" groups=[
+"inventory",
+]]
 margin_right = 64.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 50, 50 )
-mouse_filter = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource( 1 )
@@ -20,3 +21,4 @@ scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 3 )
 centered = false
 
+[connection signal="mouse_entered" from="." to="." method="_on_Inventory_Item_mouse_entered"]

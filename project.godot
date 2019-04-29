@@ -26,10 +26,6 @@ Demon_Manager="*res://Scripts/Demon_Manager.gd"
 combat="*res://Scripts/combat.gd"
 Item_Manager="*res://Scripts/Item_Manager.gd"
 
-[display]
-
-window/size/resizable=false
-
 [input]
 
 ui_select={

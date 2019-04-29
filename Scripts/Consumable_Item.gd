@@ -1,5 +1,6 @@
 extends TextureButton
 
+signal tooltip(name_out)
 var itemName
 
 func setup(item, amount):
@@ -18,3 +19,7 @@ func setup(item, amount):
 
 func _on_Consumable_Item_pressed():
 	Game_Manager.use_consumable(itemName)
+
+
+func _on_Consumable_Item_mouse_entered():
+	emit_signal("tooltip", itemName)
