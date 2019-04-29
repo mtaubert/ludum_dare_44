@@ -12,8 +12,11 @@ onready var stats_tween = get_node("Camera2D/CanvasLayer/stats_tween")
 var stats_pos = -140
 var can_open_menu = true
 
+var won = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	won = false
 	Game_Manager.connect("loot", self, "loot")
 	fade_in()
 	$Camera2D.limit_left = limits[0]
@@ -21,6 +24,14 @@ func _ready():
 	$Camera2D.limit_right = limits[2]
 	$Camera2D.limit_bottom = limits[3]
 	set_process(false)
+
+func game_won(location:Vector2, direction:Vector2):
+	var tweenSpeed = 0.3*9
+	$Movement_Tween.interpolate_property(self, "position", self.position, location, tweenSpeed, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	$Movement_Tween.start()
+	$AnimationPlayer.play("walk_down")
+	dir = direction
+	won = true
 
 #Moves player to a new location
 func move_player(location:Vector2, direction:Vector2):
@@ -79,12 +90,14 @@ func set_facing(direction):
 	
 #Called when tween finishes
 func movement_done(object, key):
-	print($AnimationPlayer.current_animation)
-	emit_signal("movement_done")
-	if not Input.is_action_pressed("ui_down") and not Input.is_action_pressed("ui_up") and not Input.is_action_pressed("ui_left") and not Input.is_action_pressed("ui_right"):
-		$AnimationPlayer.stop()
-		set_facing(dir)
-	
+	if won:
+		Game_Manager.player_won()
+	else:
+		emit_signal("movement_done")
+		if not Input.is_action_pressed("ui_down") and not Input.is_action_pressed("ui_up") and not Input.is_action_pressed("ui_left") and not Input.is_action_pressed("ui_right"):
+			$AnimationPlayer.stop()
+			set_facing(dir)
+		
 func hide_tip():
 	if $Camera2D/CanvasLayer/UI/tooltip.visible:
 		$Camera2D/CanvasLayer/UI.hide_tip()
