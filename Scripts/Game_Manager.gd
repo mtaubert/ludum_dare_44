@@ -16,15 +16,30 @@ export var finger = 10
 export var toe = 10
 var loot_queue = {}
 
+var won = false
+
 var item_actions = ["nab toe", "nick finger", "siphon blood", "stun demon"]
 var attack_actions = ["struggle", "dodge"]
 var talk_actions = ["reason", "plead", "threaten", "compliment"]
 var battleJSON = "res://Assets/battle_actions.json"
 var action_definitions = {}
+
 func _ready():
 	randomize()
 	load_battle_actions()
 
+func reset():
+	bloodSacrificeLevel = 0
+	currentLevel = 1
+	playerSpawn = Vector2(16,19)
+	Item_Manager.playerInventory.clear()
+	blood = 100
+	heart = 1
+	soul = 1
+	mind = 1
+	finger = 10
+	toe = 10
+	won = false
 
 #load battle action details
 func load_battle_actions():
@@ -182,6 +197,10 @@ func player_death():
 	yield(get_tree().create_timer(1), "timeout")
 	inEncounter = false
 	emit_signal("encounter_state", inEncounter)
+
+func player_won():
+	won = true
+	get_tree().change_scene("res://Scenes/game_over.tscn")
 #Encounters ---------------------------------------------------------------------------------------------------------------
 
 #Sacrifices ---------------------------------------------------------------------------------------------------------------
