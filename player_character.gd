@@ -153,9 +153,8 @@ func loot(items):
 	randomize()
 	for item in items:
 		var ammount = randi() % int(items[item]) + 1
-		desc += ammount + " " + item + ", "
+		desc += str(ammount) + " " + str(item) + " "
 		Item_Manager.give_item(item, ammount)
-	desc.erase(desc.length())
 	desc += "."
 	$Camera2D/CanvasLayer/UI.tooltip(desc)
 	
