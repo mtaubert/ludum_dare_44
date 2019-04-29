@@ -71,6 +71,7 @@ func _ready():
 	combat.connect("enemy_risk", self, "enemy_risk")
 	combat.connect("miss", self, "miss")
 	combat.connect("combat_log", self, "combat_log")
+	combat.connect("enemy_speak", self, "enemy_speak")
 	combat.set_enemy(enemy)
 	
 	
@@ -302,7 +303,7 @@ func player_action(action):
 				$player/player_combat_animator.play("dodge")
 			_:
 				#if not a predefined action just pass
-				pass_turn()
+				$player/player_combat_animator.play("idle")
 		
 		lock_ui()
 	else:
@@ -328,12 +329,12 @@ func enemy_action(action):
 				$enemy_character/enemy/combat_animator.play(action)
 			_:
 				print("undefined action")
-				$enemy_character/enemy/combat_anima
-				.play("delay")
+				$enemy_character/enemy/combat_animator.play("delay")
 			#pass_turn()
 	
 	
 func pass_turn():
+	print("pass turn")
 	print(turn)
 	if turn % 2 == 1:
 		player_active = true
@@ -354,6 +355,9 @@ func pass_turn():
 #---------------------------------------
 func spook():
 	pass
+	
+func enemy_speak(type):
+	enemy_log(type)
 
 #demon anim finished pass the turn back
 func _on_combat_animator_animation_finished(anim_name):

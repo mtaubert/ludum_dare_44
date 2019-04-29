@@ -11,6 +11,7 @@
 			"taunt": ""
 		},
 		"bargain": {
+			"taunt": "there's no sense trying to reason with me, fool.",
 			"good": "compliment",
 			"bad": "reason"
 		},
@@ -31,6 +32,7 @@
 			"taunt": ""
 		},
 		"bargain": {
+			"taunt": "pathetic creature, you can't frighten me.",
 			"good": "plead",
 			"bad": "threaten"
 		},
@@ -50,7 +52,12 @@
 			"dodge": "evade 50",
 			"assault": "attack",
 			"taunt": ""
-		}
+		},
+		"bargain": {
+			"taunt": "I don't care about your opinions, cretin",
+			"good": "threaten",
+			"bad": "compliment"
+		},
 	},
 	"eyes_and_holes": {
 		"stats": {
@@ -62,7 +69,12 @@
 			"dodge": "evade 50",
 			"assault": "attack",
 			"taunt": ""
-		}
+		},
+		"bargain": {
+			"taunt": "you can beg for your life, I don't care",
+			"good": "reason",
+			"bad": "plead"
+		},
 	},
 	"wiggles": {
 		"stats": {
@@ -74,6 +86,11 @@
 			"dodge": "evade 50",
 			"assault": "attack",
 			"taunt": ""
-		}
+		},
+		"bargain": {
+			"taunt": "hey buddy, we don't have to do this",
+			"good": "compliment",
+			"bad": "threaten"
+		},
 	}
 }
