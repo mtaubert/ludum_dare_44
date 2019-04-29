@@ -70,6 +70,7 @@ func _ready():
 	combat.connect("enemy_details", self, "setup_enemy")
 	combat.connect("enemy_risk", self, "enemy_risk")
 	combat.connect("miss", self, "miss")
+	combat.connect("combat_log", self, "combat_log")
 	combat.set_enemy(enemy)
 	
 	
@@ -120,8 +121,9 @@ func hide_menu(type):
 			target = menu_hide_loc
 		_:
 			target = sub_menu_loc
-	$menu_tween.interpolate_property(menu, "rect_position", menu.rect_position,  target, 0.5, Tween.TRANS_SINE, Tween.EASE_OUT)
+	$menu_tween.interpolate_property(menu, "rect_position", menu.rect_position,  target, 0.2, Tween.TRANS_SINE, Tween.EASE_OUT)
 	$menu_tween.start()
+	empty_combat_log()
 
 func _on_fight_pressed():
 	hide_menu("battle")
@@ -184,7 +186,7 @@ func _on_fight_menu_back(this):
 # brinc the named menu into the view spot
 func reveal_menu(name):
 	var menu = get_node(name + "_menu")
-	$menu_tween.interpolate_property(menu, "rect_position", menu.rect_position,  menu_loc, 0.5, Tween.TRANS_SINE, Tween.EASE_OUT)
+	$menu_tween.interpolate_property(menu, "rect_position", menu.rect_position,  menu_loc, 0.2, Tween.TRANS_SINE, Tween.EASE_OUT)
 	$menu_tween.start()
 
 
@@ -206,6 +208,7 @@ func lock_ui():
 		$CanvasLayer/the_man_stats.disable_buttons()
 	#hide ui
 	hide_menu(current_menu)
+	menu_queue.append("battle")
 
 func unlock_ui():
 	for button in get_tree().get_nodes_in_group("battle_button"):
@@ -216,7 +219,7 @@ func unlock_ui():
 		item.disabled = false
 		$CanvasLayer/the_man_stats.enable_buttons()
 	#reveal ui
-	reveal_menu("battle")
+	#reveal_menu("battle")
 	
 func end_battle():
 	$AnimationPlayer.play("battle_end")
@@ -259,6 +262,12 @@ func enemy_log(text):
 		$enemy_character/enemy_speech/RichTextLabel.text += c
 		yield(get_tree().create_timer(0.01), "timeout")
 		
+func combat_log(text):
+	$battle_menu/VBoxContainer/combat_log/RichTextLabel.text += text + " "
+
+func empty_combat_log():
+	$battle_menu/VBoxContainer/combat_log/RichTextLabel.text = ""
+
 func hide_player_log():
 	$player/speech.visible = false		
 	
