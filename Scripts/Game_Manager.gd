@@ -112,7 +112,7 @@ func go_down():
 	
 
 func go_to_hell():
-	currentLevel -= 1
+	currentLevel = -1
 	playerSpawn = Vector2(13,10)
 	player.fade_out()
 	yield(get_tree().create_timer(1), "timeout")
@@ -181,7 +181,10 @@ func start_encounter_against(demonID):
 	emit_signal("encounter_state", inEncounter)
 
 func end_encounter():
-	get_tree().change_scene("res://Scenes/" + houseLevels[currentLevel] + ".tscn")
+	if currentLevel < 0:
+		get_tree().change_scene("res://Scenes/Hell.tscn")
+	else:
+		get_tree().change_scene("res://Scenes/" + houseLevels[currentLevel] + ".tscn")
 	
 	yield(get_tree().create_timer(1), "timeout")
 	player.fade_in()
