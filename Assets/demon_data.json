@@ -68,5 +68,14 @@
 		"shop": {
 			"text": "My collection..."
 		}	
+	},
+	"3": {
+		"opener": {
+			"text": "You dare come here mortal. I guess it's time for a more permanent stay.",
+			"accept": "1",
+			"decline": null,
+			"accept_text": "Bring it",
+			"decline_text": null
+		}
 	}
 }

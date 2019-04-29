@@ -21,9 +21,9 @@ var demons = {
 	"3": {
 		"dialog": {},
 		"dialog_animations": load("res://demon_model/interactable_demons/interactable_demon_3.png"),
-		"map_animations": load("res://demon_model/interactable_demons/interactible_demon_2.tres"),
+		"map_animations": load("res://demon_model/interactable_demons/interactible_demon_3.tres"),
 		"name": "Stan",
-		"encounter_animations": null,
+		"encounter_animations": load("res://demon_model/stan_sheet.tres"),
 		"bargain_items": []
 	}
 }
