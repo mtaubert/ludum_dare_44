@@ -367,6 +367,8 @@ func enemy_action(action):
 	
 	
 func pass_turn():
+	
+	check_player_death()
 	print("pass turn")
 	print(turn)
 	if turn % 2 == 1:
