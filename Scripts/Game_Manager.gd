@@ -7,14 +7,26 @@ var floor_items = {
 		
 	},
 	0: {
-		
+		Vector2(17,1): ["blood", 5],
+		Vector2(18,3): ["Demon Candle", 1],
+		Vector2(2,12): ["Blood Bag", 1],
+		Vector2(18,8): ["Blood Bag", 1]
 	},
 	1: {
-		Vector2(15,15): ["blood", 10],
-		Vector2(16,15): ["Holy Water", 2]
+		Vector2(14,16): ["blood", 10],
+		Vector2(7,12): ["Holy Water", 2],
+		Vector2(8,20): ["toe", 1],
+		Vector2(7,19): ["finger", 2],
+		Vector2(21,8): ["Blood Bag", 1]
 	},
 	2: {
-		
+		Vector2(17,10): ["toe",1],
+		Vector2(16,10): ["toe", 1],
+		Vector2(18,12): ["toe", 1],
+		Vector2(17,14): ["toe", 1],
+		Vector2(16,14): ["toe", 1],
+		Vector2(8,13): ["Blood Bag", 1],
+		Vector2(17,3): ["Holy Water", 2]
 	}
 }
 
@@ -117,6 +129,9 @@ func go_up():
 	yield(get_tree().create_timer(1), "timeout")
 	
 	get_tree().change_scene("res://Scenes/" + houseLevels[currentLevel] + ".tscn")
+
+func update_tooltip(item_name, ammount):
+	player.tooltip("you picked up " +str(ammount) + " " + item_name)
 
 func go_down():
 	currentLevel -= 1

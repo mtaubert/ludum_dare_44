@@ -175,6 +175,9 @@ func loot(items):
 	desc += "."
 	$Camera2D/CanvasLayer/UI.tooltip(desc)
 	
+func tooltip(string):
+	$Camera2D/CanvasLayer/UI.tooltip(string)
+	
 func check_win():
 	
 	var items = Item_Manager.get_unique_items()
