@@ -114,7 +114,7 @@ func battle_action(action):
 func show_details(action):
 	if action in Game_Manager.talk_actions:
 		$talk_menu.show_details(action)
-	if action in Game_Manager.attack_actions:
+	elif action in Game_Manager.attack_actions or action in Game_Manager.item_actions:
 		$fight_menu.show_details(action)
 	#update the details viewer
 	
