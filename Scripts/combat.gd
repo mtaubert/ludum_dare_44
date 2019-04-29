@@ -6,12 +6,13 @@ signal enemy_risk(type, ammount)
 signal enemy_details(data)
 signal miss(target)
 signal combat_log(text)
+signal enemy_speak(type)
 
 var p_crit = 95
 var p_dodge = 0
 var e_dodge = 0
 var e_crit = 95
-
+var e_risk_mod = 0 # safety from self inflicted wounds
 var enemy_data = {}
 var enemy_action_definitions = {}
 var battleJSON = "res://Assets/monster_actions.json"
@@ -76,10 +77,13 @@ func handle_enemy_risk(type, roll):
 	var risks = Game_Manager.action_definitions[type]["risk"]
 	print(risks)
 	var cumf = 0
+	roll += e_risk_mod
 	for item in risks:
 		var val = Game_Manager.action_definitions[type]["risk"][item][0]
 		print(str(cumf) + " " +str(roll) + " " + str(cumf + val))
 		if roll <= cumf + val and roll >= cumf:
+			emit_signal("combat_log", "the enemy lost " + str(Game_Manager.action_definitions[type]["risk"][item][1]) + " blood.")
+			
 			print("ouch")
 			#player loses
 			emit_signal("enemy_risk", item, Game_Manager.action_definitions[type]["risk"][item][1])
@@ -98,6 +102,14 @@ func handle_enemy_action(action):
 		"dodge":
 			e_dodge = 50
 			emit_signal("combat_log", "the enemy is trying to dodge.")
+		"taunt":
+			emit_signal("combat_log", "enemy performs a " + action)
+			emit_signal("enemy_speak", enemy_action_definitions["bargain"]["taunt"])
+			#the enemy mocks what you shouldn't do
+		"spook":
+			#the enemies next attack has no risk
+			emit_signal("combat_log", "the enemy spooks you, their next attack has no risk")
+			e_risk_mod = 100
 		_:
 			emit_signal("combat_log", "enemy performs a " + action)
 

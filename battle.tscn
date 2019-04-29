@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://battle.gd" type="Script" id=1]
 [ext_resource path="res://Assets/battle_backdrop.png" type="Texture" id=2]
@@ -19,11 +19,12 @@
 [ext_resource path="res://Assets/speech_box.tres" type="StyleBox" id=17]
 [ext_resource path="res://character_model/player_battle_sprite.png" type="Texture" id=18]
 [ext_resource path="res://animation/dodge_player.tres" type="Animation" id=19]
-[ext_resource path="res://animation/struggle.tres" type="Animation" id=20]
-[ext_resource path="res://animation/battle_end.tres" type="Animation" id=21]
-[ext_resource path="res://animation/battle_start.tres" type="Animation" id=22]
-[ext_resource path="res://the_man_stats.tscn" type="PackedScene" id=23]
-[ext_resource path="res://Assets/audio/ableton_battle.wav" type="AudioStream" id=24]
+[ext_resource path="res://idle.tres" type="Animation" id=20]
+[ext_resource path="res://animation/struggle.tres" type="Animation" id=21]
+[ext_resource path="res://animation/battle_end.tres" type="Animation" id=22]
+[ext_resource path="res://animation/battle_start.tres" type="Animation" id=23]
+[ext_resource path="res://the_man_stats.tscn" type="PackedScene" id=24]
+[ext_resource path="res://Assets/audio/ableton_battle.wav" type="AudioStream" id=25]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -159,7 +160,8 @@ texture = ExtResource( 18 )
 
 [node name="player_combat_animator" type="AnimationPlayer" parent="player"]
 anims/dodge = ExtResource( 19 )
-anims/struggle = ExtResource( 20 )
+anims/idle = ExtResource( 20 )
+anims/struggle = ExtResource( 21 )
 
 [node name="speech" type="Panel" parent="player"]
 visible = false
@@ -177,20 +179,20 @@ scroll_active = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "battle_start"
-anims/battle_end = ExtResource( 21 )
-anims/battle_start = ExtResource( 22 )
+anims/battle_end = ExtResource( 22 )
+anims/battle_start = ExtResource( 23 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 5
 
-[node name="the_man_stats" parent="CanvasLayer" instance=ExtResource( 23 )]
+[node name="the_man_stats" parent="CanvasLayer" instance=ExtResource( 24 )]
 margin_left = 67.7396
 margin_top = 65.6976
 margin_right = 67.7396
 margin_bottom = 65.6976
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 24 )
+stream = ExtResource( 25 )
 volume_db = -5.0
 autoplay = true
 
