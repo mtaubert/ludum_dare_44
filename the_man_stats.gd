@@ -23,6 +23,7 @@ func toggle_buttons(visible_in):
 		$counter.text = ""
 	
 func _ready():
+	Game_Manager.connect("update_blood", self, "update_blood")
 	for item in get_tree().get_nodes_in_group("sacrifice_button"):
 		item.connect("focus_entered", self, "update_man", [item])
 		item.connect("mouse_entered", self, "update_man", [item])
