@@ -133,6 +133,7 @@ texture = ExtResource( 9 )
 position = Vector2( -0.793213, -124.073 )
 scale = Vector2( 0.6, 0.6 )
 frames = ExtResource( 10 )
+frame = 3
 playing = true
 
 [node name="combat_animator" type="AnimationPlayer" parent="enemy_character/enemy"]
@@ -174,10 +175,10 @@ anims/threaten = ExtResource( 25 )
 
 [node name="speech" type="Panel" parent="player"]
 visible = false
-margin_left = -353.637
-margin_top = -240.57
-margin_right = 46.3629
-margin_bottom = -180.57
+margin_left = -113.637
+margin_top = -273.07
+margin_right = 286.363
+margin_bottom = -213.07
 theme = ExtResource( 3 )
 custom_styles/panel = ExtResource( 18 )
 
