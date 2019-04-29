@@ -120,4 +120,3 @@ align = 1
 
 [node name="Inventory" parent="." instance=ExtResource( 5 )]
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/blood" to="." method="_on_blood_pressed"]
