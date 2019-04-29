@@ -14,7 +14,8 @@ export var mind = 1
 export var finger = 10
 export var toe = 10
 
-var attack_actions = ["struggle", "dodge","nab toe","nick finger","stun demon","siphon blood"]
+var item_actions = ["nab toe", "nick finger", "siphon blood", "stun demon"]
+var attack_actions = ["struggle", "dodge"]
 var talk_actions = ["reason", "plead", "threaten", "compliment"]
 var battleJSON = "res://Assets/battle_actions.json"
 var action_definitions = {}

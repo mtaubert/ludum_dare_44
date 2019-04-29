@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://battle.gd" type="Script" id=1]
 [ext_resource path="res://Assets/battle_backdrop.png" type="Texture" id=2]
@@ -194,7 +194,6 @@ texture = ExtResource( 9 )
 position = Vector2( -0.793213, -124.073 )
 scale = Vector2( 0.6, 0.6 )
 frames = ExtResource( 10 )
-frame = 3
 playing = true
 
 [node name="combat_animator" type="AnimationPlayer" parent="enemy_character/enemy"]
