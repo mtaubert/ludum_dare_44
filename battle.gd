@@ -197,6 +197,7 @@ func reveal_menu(name):
 	var menu = get_node(name + "_menu")
 	$menu_tween.interpolate_property(menu, "rect_position", menu.rect_position,  menu_loc, 0.2, Tween.TRANS_SINE, Tween.EASE_OUT)
 	$menu_tween.start()
+	menu.focus_menu()
 
 
 func _on_menu_tween_tween_completed(object, key):
@@ -238,7 +239,10 @@ func end_battle():
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "battle_end":
-		Game_Manager.end_encounter()
+		if Game_Manager.blood <= 0:
+			Game_Manager.player_death()
+		else:
+			Game_Manager.end_encounter()
 		
 func player_sacrifice(type, ammount):
 	$AudioStreamPlayersfx.stream = load("res://Assets/audio/demon_damage.wav")
@@ -307,6 +311,10 @@ func bargain(details):
 	$CanvasLayer/the_man_stats.enable_button(details[0], details[1])
 	print(details[1])
 	combat_log("you will be spared in exchange for " + str(details[1]) + " " + (details[0]))
+	
+func check_player_death():
+	if Game_Manager.blood <= 0:
+		end_battle()
 ##--------------------------------------------------------------------
 ##battle logic
 ##--------------------------------------------------------------------
@@ -315,6 +323,7 @@ func bargain(details):
 ##track the turn, take a user action and pass
 #define each of the combat actions
 func player_action(action):
+	check_player_death()
 	if player_active:
 		match action:
 			"struggle":
