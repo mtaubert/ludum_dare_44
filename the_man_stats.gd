@@ -9,6 +9,7 @@ onready var default = load("res://character_model/the_man_Stats.png")
 onready var tween = get_node("Tween")
 var cost = 0
 
+signal paid_tribute(valid)
 signal blood_paid(ammount)
 
 func set_blood(val):
@@ -27,6 +28,7 @@ func _ready():
 	for item in get_tree().get_nodes_in_group("sacrifice_button"):
 		item.connect("focus_entered", self, "update_man", [item])
 		item.connect("mouse_entered", self, "update_man", [item])
+		item.connect("pressed", self, "sacrifice", [item])
 	print(Game_Manager.get_player_var("blood"))
 	$ProgressBar.value = Game_Manager.get_player_var("blood")
 	disable_buttons()
@@ -52,6 +54,15 @@ func disable_buttons():
 #func enable_buttons():
 #	for item in $MarginContainer/VBoxContainer.get_children():
 #		item.disabled = false
+		
+func sacrifice(item):
+	print("sacrifice " + str(cost)+ " " + str(item.name))
+	if Game_Manager.get_player_var(item.name) > cost:
+		Game_Manager.player_sacrifice(item.name, cost)
+		update_man(item)
+		emit_signal("paid_tribute", true)
+	else:
+		emit_signal("paid_tribute", false)
 		
 func enable_button(button, cost_in):
 	cost = cost_in

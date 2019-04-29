@@ -132,7 +132,7 @@ texture = ExtResource( 9 )
 position = Vector2( -0.793213, -124.073 )
 scale = Vector2( 0.6, 0.6 )
 frames = ExtResource( 10 )
-frame = 3
+frame = 2
 playing = true
 
 [node name="combat_animator" type="AnimationPlayer" parent="enemy_character/enemy"]
@@ -224,4 +224,5 @@ color = Color( 1, 1, 1, 0 )
 [connection signal="animation_finished" from="player/player_combat_animator" to="." method="_on_player_combat_animator_animation_finished"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="blood_paid" from="CanvasLayer/the_man_stats" to="." method="_on_the_man_stats_blood_paid"]
+[connection signal="paid_tribute" from="CanvasLayer/the_man_stats" to="." method="_on_the_man_stats_paid_tribute"]
 [connection signal="tween_completed" from="menu_tween" to="." method="_on_menu_tween_tween_completed"]

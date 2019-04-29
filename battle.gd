@@ -407,3 +407,12 @@ func _on_player_combat_animator_animation_finished(anim_name):
 
 
 		
+
+
+func _on_the_man_stats_paid_tribute(valid):
+	if valid:
+		print("paid the bargain cost")
+		end_battle()
+	else:
+		print("cant afford the bargain")
+		player_log("I don't have enough!")
