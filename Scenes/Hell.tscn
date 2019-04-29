@@ -20,10 +20,9 @@ tile_data = PoolIntArray( 2, 7, 0, 3, 7, 0, 9, 7, 0, 65537, 7, 0, 65538, 7, 0, 6
 position = Vector2( 991.392, 676.052 )
 
 [node name="Map_Demon" parent="Mansion/Sorter" instance=ExtResource( 4 )]
-position = Vector2( 223.99, 102.628 )
-frame = 5
+position = Vector2( 165.203, 734.204 )
+frame = 4
 demonID = 3
 
 [node name="player_character" parent="Mansion/Sorter" instance=ExtResource( 5 )]
-position = Vector2( 895.361, 676.797 )
 
