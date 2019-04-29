@@ -114,13 +114,17 @@ func _process(delta):
 			if currentEntity.type == "Demon": #Talking to demon state
 				Game_Manager.update_player_spawn(playerPos) #Safety in case of fight
 				currentState = PLAYERSTATE.TALKING_WITH_DEMON
+				if $Mansion/Sorter/player_character.stats_pos != -140:
+					$Mansion/Sorter/player_character.toggle_stats_view()
+				$Mansion/Sorter/player_character.hide_tip()
 	elif Input.is_action_just_released("ui_select"):
 		if currentEntity != null and currentState == PLAYERSTATE.IDLE:
 			if currentEntity.type == "Fountain":
 				currentEntity.stop_interact()
 	
 	if Input.is_action_pressed("menu"):
-		player.toggle_stats_view()
+		if not currentState == PLAYERSTATE.TALKING_WITH_DEMON:
+			player.toggle_stats_view()
 
 #moves player to the next tile
 func move_player(direction:Vector2):

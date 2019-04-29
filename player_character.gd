@@ -85,6 +85,9 @@ func movement_done(object, key):
 		$AnimationPlayer.stop()
 		set_facing(dir)
 	
+func hide_tip():
+	if $Camera2D/CanvasLayer/UI/tooltip.visible:
+		$Camera2D/CanvasLayer/UI.hide_tip()
 #show the man/ hide the man
 func toggle_stats_view():
 	if can_open_menu:
@@ -97,6 +100,7 @@ func toggle_stats_view():
 		else:
 			
 			the_man.toggle_buttons(false)
+			$Camera2D/CanvasLayer/UI.hide_tip()
 			stats_pos = -140
 		target.x = stats_pos
 		stats_tween.interpolate_property(the_man, "rect_position", the_man.rect_position,  target, 0.5, Tween.TRANS_SINE, Tween.EASE_OUT)

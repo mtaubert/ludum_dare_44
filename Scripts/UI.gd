@@ -9,8 +9,13 @@ func _ready():
 	pass # Replace with function body.
 
 func tooltip(text):
+	$tooltip.visible = true
 	$tooltip/Text.text = text
 	
 func clear():
 	$tooltip/Text.text = ""
+	
+func hide_tip():
+	$tooltip.visible = false
+	
 	
