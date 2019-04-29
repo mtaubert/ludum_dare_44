@@ -13,50 +13,34 @@
 	},
 	"nick finger": {
 		"stats": {
-			"damage": 13
+			"damage": 10
 
 		},
-		"risk": {
-			"blood": [13, 5],
-			"finger": [12, 1],
-			"toe": [11, 1]
-		},
+		"risk": {},
 		"text": "steal back a finger, it's rightfully yours"
 	},
 	"nab toe": {
 		"stats": {
-			"damage": 13
+			"damage": 10
 
 		},
-		"risk": {
-			"blood": [13, 5],
-			"finger": [12, 1],
-			"toe": [11, 1]
-		},
+		"risk": {},
 		"text": "grab a toe, not like it needs it"
 	},
 	"siphon blood": {
 		"stats": {
-			"damage": 13
+			"damage": 25
 
 		},
-		"risk": {
-			"blood": [13, 5],
-			"finger": [12, 1],
-			"toe": [11, 1]
-		},
+		"risk": {},
 		"text": "I wonder how it ends up back in me"
 	},
 	"stun demon": {
 		"stats": {
-			"damage": 13
+			"damage": 5
 
 		},
-		"risk": {
-			"blood": [13, 5],
-			"finger": [12, 1],
-			"toe": [11, 1]
-		},
+		"risk": {},
 		"text": "ringing the bell stuns the beast from hell"
 	},
 	"dodge": {
@@ -72,7 +56,7 @@
 
 		},
 		"risk": {
-			"blood": [100, 5],
+			"blood": [100, 5]
 		},
 		"text": "a very dangerous action for squishy creatures"
 	},
@@ -82,20 +66,20 @@
 
 		},
 		"risk": {
-			"blood": [100, 5],
+			"blood": [100, 5]
 		},
 		"text": "a vicous assault from a nasty creature"
 	},
 	"reason": {
-			"text": "try to negotiate"
-		},
+		"text": "try to negotiate"
+	},
 	"plead": {
-			"text": "beg for your safety"
-		},
+		"text": "beg for your safety"
+	},
 	"compliment": {
-			"text": "appeal to their soft side"
-		},
+		"text": "appeal to their soft side"
+	},
 	"threaten": {
-			"text": "intimidate the fool"
-		}
+		"text": "intimidate the fool"
+	}
 }

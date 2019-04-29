@@ -140,4 +140,6 @@ func fade_in():
 	$Camera2D/CanvasLayer/swipe/scene_animator.play("fade_in")
 	
 func fade_out():
+	can_open_menu = true
+	toggle_stats_view()
 	$Camera2D/CanvasLayer/swipe/scene_animator.play("fade_out")

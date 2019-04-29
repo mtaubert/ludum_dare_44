@@ -51,14 +51,30 @@ func setup():
 func handle_player_action(action):
 	#reset temp stats
 	p_dodge = 0
+	randomize()
 	match action:
 		"struggle":
-			randomize()
 			var attack =  randi() % 101
 			handle_risk(action, attack)
 			return int(attack(attack, Game_Manager.action_definitions[action]["stats"]["damage"]))
 		"dodge":
 			p_dodge = 50
+		"nab toe":
+			var attack =  randi() % 101
+			handle_risk(action, attack)
+			return int(attack(attack, Game_Manager.action_definitions[action]["stats"]["damage"]))
+		"nick finger":
+			var attack =  randi() % 101
+			handle_risk(action, attack)
+			return int(attack(attack, Game_Manager.action_definitions[action]["stats"]["damage"]))
+		"siphon blood":
+			var attack =  randi() % 101
+			handle_risk(action, attack)
+			return int(attack(attack, Game_Manager.action_definitions[action]["stats"]["damage"]))
+		"stun demon":
+			var attack =  randi() % 101
+			handle_risk(action, attack)
+			return int(attack(attack, Game_Manager.action_definitions[action]["stats"]["damage"]))
 		_:
 			talk(action)
 			
