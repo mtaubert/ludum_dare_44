@@ -404,6 +404,8 @@ func player_speak(type):
 func _on_combat_animator_animation_finished(anim_name):
 	match anim_name:
 		"enemy_defeated":
+			
+			Game_Manager.loot_queue = combat.enemy_action_definitions["loot"]
 			end_battle()
 		_:
 			var damage = combat.handle_enemy_action(anim_name)

@@ -21,8 +21,8 @@
 			"offer": ["blood", 3]
 		},
 		"loot": {
-			"blood": 8,
-			"bargain": ["blood", "flee"]
+			"blood": 12,
+			"Blood Bag": 1
 		}
 	},
 	"spectre": {
@@ -48,8 +48,8 @@
 		},
 		"loot": {
 			"blood": 22,
-			"finger": 2,
-			"bargain": ["blood", ["flee", "key"]]
+			"finger": 1,
+			"Demon Candle": 1	
 		}
 	},
 	"commandeer": {
@@ -73,6 +73,11 @@
 			"threaten": ["stay back foul creature!","hiss, just 1 finger and I will leave you creature"],
 			"offer": ["finger", 2]
 		},
+		"loot": {
+			"blood": 3,
+			"finger": 2,
+			"Holy Water": 1	
+		}
 	},
 	"eyes_and_holes": {
 		"stats": {
@@ -95,6 +100,10 @@
 			"threaten": ["You're going down weirdo","what?"],
 			"offer": ["toe", 2]
 		},
+		"loot": {
+			"blood": 13,
+			"heart": 1
+		}
 	},
 	"wiggles": {
 		"stats": {
@@ -117,5 +126,11 @@
 			"threaten": ["I'll smash your face in!","asshole, I'd like to see you try"],
 			"offer": ["blood", 0]
 		},
+		"loot": {
+			"blood": 23,
+			"Holy Water": 2,
+			"Finger Sickle": 1
+			"mind": 1,
+		}
 	}
 }

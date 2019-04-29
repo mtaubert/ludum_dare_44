@@ -7,12 +7,14 @@ var playerSpawn = Vector2(16,19)
 var blood_fountain_cost = 10
 
 signal update_blood()
+signal loot(item)
 export var blood = 100
 export var heart = 1
 export var soul = 1
 export var mind = 1
 export var finger = 10
 export var toe = 10
+var loot_queue = {}
 
 var item_actions = ["nab toe", "nick finger", "siphon blood", "stun demon"]
 var attack_actions = ["struggle", "dodge"]
@@ -168,6 +170,9 @@ func end_encounter():
 	player.fade_in()
 	inEncounter = false
 	emit_signal("encounter_state", inEncounter)
+	if loot_queue:
+		emit_signal("loot", loot_queue)
+		loot_queue = {}
 	
 func player_death():
 	get_tree().change_scene("res://Scenes/game_over.tscn")
@@ -191,6 +196,8 @@ func can_pay_blood():
 	return blood > blood_fountain_cost
 #Sacrifices ---------------------------------------------------------------------------------------------------------------
 
+func update_blood():
+	emit_signal("update_blood")
 #Consumables --------------------------------------------------------------------------------------------------------------
 func use_consumable(consumable):
 	match(consumable):

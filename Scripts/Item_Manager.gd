@@ -67,6 +67,34 @@ func _ready():
 	playerInventory = debugInv
 	pass
 
+func give_item(item, ammount):
+	if item in items.keys():
+		if items[item]["unique"] and not item in playerInventory:
+			playerInventory.append(item)
+			playerInventory.sort()
+		elif not items[item]["unique"]:
+			for i in ammount:
+				playerInventory.append(item)
+				playerInventory.sort()
+	else:
+		match item:
+			"blood":
+				Game_Manager.blood += ammount
+				if Game_Manager.blood > 100:
+					Game_Manager.blood = 100
+				Game_Manager.update_blood()
+			"toe":
+				Game_Manager.toe += ammount
+			"finger":
+				Game_Manager.finger += ammount
+			"heart":
+				Game_Manager.heart += ammount
+			"mind":
+				Game_Manager.mind += ammount
+			"soul":
+				Game_Manager.soul += ammount
+	emit_signal("item_purchased")
+	
 #purchases an item
 func purchase_item(item):
 	if can_purchase(item):

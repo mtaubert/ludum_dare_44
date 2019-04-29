@@ -14,6 +14,7 @@ var can_open_menu = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	Game_Manager.connect("loot", self, "loot")
 	fade_in()
 	$Camera2D.limit_left = limits[0]
 	$Camera2D.limit_top = limits[1]
@@ -143,3 +144,9 @@ func fade_out():
 	can_open_menu = true
 	toggle_stats_view()
 	$Camera2D/CanvasLayer/swipe/scene_animator.play("fade_out")
+	
+func loot(items):
+	print(items)
+	randomize()
+	for item in items:
+		Item_Manager.give_item(item, randi() % int(items[item]) + 1)
