@@ -58,6 +58,9 @@ func _ready():
 		match Game_Manager.specificEnemy:
 			1:
 				enemy = "wiggles"
+			
+			3:
+				enemy = "stan"
 			_:
 				print("demon out of range!")
 	

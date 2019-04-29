@@ -16,7 +16,7 @@ var demons = {
 		"map_animations": load("res://demon_model/interactable_demons/interactible_demon_2.tres"),
 		"name": "Wranque",
 		"encounter_animations": null,
-		"bargain_items": ["Toe Knife", "Holy Water", "Demon Candle"]
+		"bargain_items": ["Toe Knife", "Holy Water", "Demon Candle", "Demon Bell"]
 	},
 	"3": {
 		"dialog": {},

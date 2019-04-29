@@ -13,7 +13,7 @@
 	},
 	"nick finger": {
 		"stats": {
-			"damage": 10
+			"damage": 15
 
 		},
 		"risk": {},
@@ -21,7 +21,7 @@
 	},
 	"nab toe": {
 		"stats": {
-			"damage": 10
+			"damage": 15
 
 		},
 		"risk": {},
@@ -37,7 +37,7 @@
 	},
 	"stun demon": {
 		"stats": {
-			"damage": 5
+			"damage": 25
 
 		},
 		"risk": {

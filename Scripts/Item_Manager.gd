@@ -35,7 +35,7 @@ var items = {
 		"image": load("res://Assets/items/blood_bag.png"),
 		"cost": [2, "finger"],
 		"unique": false,
-		"effect":  10,
+		"effect":  25,
 		"encounter_use": null
 	},
 	"Holy Water": {

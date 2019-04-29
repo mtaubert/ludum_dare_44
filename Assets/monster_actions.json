@@ -21,7 +21,7 @@
 			"offer": ["blood", 3]
 		},
 		"loot": {
-			"blood": 12,
+			"blood": 15,
 			"Blood Bag": 1
 		}
 	},
@@ -47,8 +47,8 @@
 			"offer": ["blood", 15]
 		},
 		"loot": {
-			"blood": 22,
-			"finger": 1,
+			"blood": 30,
+			"finger": 4,
 			"Demon Candle": 1
 		}
 	},
@@ -74,7 +74,7 @@
 			"offer": ["finger", 1]
 		},
 		"loot": {
-			"blood": 3,
+			"blood": 20,
 			"finger": 2,
 			"Holy Water": 1
 		}
@@ -102,6 +102,7 @@
 		},
 		"loot": {
 			"blood": 13,
+			"toe": 4,
 			"heart": 1
 		}
 	},
@@ -132,5 +133,34 @@
 			"Finger Sickle": 1,
 			"mind": 1
 		}
-	}
+	},
+	"stan": {
+		"stats": {
+			"health": 300
+
+		},
+		"actions": {
+			"spook": "discount",
+			"dodge": "evade 50",
+			"assault": "attack",
+			"taunt": "",
+			"splatter": ""
+		},
+		"bargain": {
+			"taunt": "you are beneath me vermin!",
+			"good": "plead",
+			"bad": "threaten",
+			"compliment": ["you must lift so much."],
+			"reason": ["surely we can come to some agreement"],
+			"plead": ["let me out of this place!", "you're a terrible listener"],
+			"threaten": ["I'll smash your face in!", "asshole, I'd like to see you try"],
+			"offer": ["heart", 1]
+		},
+		"loot": {
+			"blood": 100,
+			"Blood Bag": 2,
+			"Blood Scepter": 1,
+			"soul": 1
+		}
+	}	
 }

@@ -2,18 +2,18 @@
 
 	"1": {
 		"opener": {
-			"text": "Puny mortal, why did you come here?",
+			"text": "You'd better get hunting for some extra fleshy bits if you want to make it out of here alive",
 			"accept": "follow_up",
 			"decline": null,
 			"accept_text": "What?",
 			"decline_text": null
 		},
 		"follow_up": {
-			"text": "Why are you here? Did you want to fight me?",
+			"text": "anyway, enough of that. Did you want to fight me?",
 			"accept": 1,
 			"decline": "final",
 			"accept_text": "Sure, thing",
-			"decline_text": "I'm good"
+			"decline_text": "No thankyou."
 		},
 		"final": {
 			"text": "Fine, how about a peak at what I can offer. It'll only cost you a finger.",
