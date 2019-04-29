@@ -57,5 +57,5 @@ position = Vector2( 1186.38, 667.944 )
 [node name="Map_Demon" parent="Mansion/Sorter" instance=ExtResource( 7 )]
 position = Vector2( 1125.8, 1246.51 )
 frames = ExtResource( 8 )
-frame = 0
+frame = 3
 

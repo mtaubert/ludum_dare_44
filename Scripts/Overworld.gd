@@ -89,7 +89,7 @@ func update_entities():
 		entities[exitLoc] = newExit
 		entities[exitLoc + Vector2(1,0)] = newExit
 
-	Game_Manager.set_random_encounter_locations($Mansion.get_used_cells_by_id(1), entities.keys(), torches)
+	Game_Manager.set_random_encounter_locations($Mansion.get_used_cells_by_id(1) + $Mansion.get_used_cells_by_id(7), entities.keys(), torches)
 #Setup --------------------------------------------------------------------------------------------------------------------
 
 #Input and movement -------------------------------------------------------------------------------------------------------
@@ -150,8 +150,9 @@ func move_player(direction:Vector2):
 			currentState = PLAYERSTATE.MOVING
 		4: #Exit
 			if entities[newPlayerPos].open:
-				playerPos = newPlayerPos + direction
-				player.move_player($Mansion.map_to_world(playerPos) + tileOffset, direction*2)
+				playerPos = newPlayerPos + direction*9
+				player.game_won($Mansion.map_to_world(playerPos) + tileOffset, direction)
+				#player.move_player($Mansion.map_to_world(playerPos) + tileOffset, direction*2)
 				currentState = PLAYERSTATE.MOVING
 		5: #Stairs up
 			currentState = PLAYERSTATE.MOVING
