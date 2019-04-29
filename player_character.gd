@@ -111,13 +111,13 @@ func _on_stats_tween_tween_completed(object, key):
 
 
 func update_blood():
+	print("updating blood")
 	$Camera2D/CanvasLayer/the_man_stats.update_blood()
 
 func _on_the_man_stats_blood_paid(ammount):
 	var can_pay = Game_Manager.blood > ammount 
 	if Game_Manager.blood > ammount:
 		Game_Manager.blood -= ammount
-	$Camera2D/CanvasLayer/the_man_stats.set_blood(Game_Manager.blood)
 	if can_pay:
 		return true
 

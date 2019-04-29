@@ -61,8 +61,6 @@ func go_up():
 	yield(get_tree().create_timer(1), "timeout")
 	
 	get_tree().change_scene("res://Scenes/" + houseLevels[currentLevel] + ".tscn")
-	
-	
 
 func go_down():
 	currentLevel -= 1
@@ -161,6 +159,18 @@ func can_pay_blood():
 	return blood > blood_fountain_cost
 #Sacrifices ---------------------------------------------------------------------------------------------------------------
 
+#Consumables --------------------------------------------------------------------------------------------------------------
+func use_consumable(consumable):
+	match(consumable):
+		"Blood Bag":
+			var bloodAmount = Item_Manager.items[consumable]["effect"]
+			if blood < 95:
+				blood += bloodAmount
+				if blood > 100: #Can't go above 100 blood
+					blood = 100
+				player.update_blood()
+				Item_Manager.remove_item_from_inventory(consumable)
+#Consumables --------------------------------------------------------------------------------------------------------------
 
 #Demon chat ---------------------------------------------------------------------------------------------------------------
 #Demon dialog signal

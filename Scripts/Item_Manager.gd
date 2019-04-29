@@ -1,39 +1,46 @@
 extends Node
 
 signal item_purchased()
+signal consumable_used()
 
-var playerInventory = []
+var playerInventory = ["Blood Bag","Blood Bag","Blood Bag"]
 
 var items = {
 	"Finger Sickle": {
 		"image": load("res://Assets/items/finger_sickle.png"),
 		"cost": [4, "finger"],
-		"unique": true
+		"unique": true,
+		"effect":  "Nick finger"
 	},
 	"Toe Knife": {
 		"image": load("res://Assets/items/toe_knife.png"),
 		"cost": [1, "toe"],
-		"unique": true
+		"unique": true,
+		"effect":  "Nab toe"
 	},
 	"Blood Scepter": {
 		"image": load("res://Assets/items/blood_scepter.png"),
 		"cost": [99, "blood"],
-		"unique": true
+		"unique": true,
+		"effect":  "Siphon blood"
 	},
 	"Demon Bell": {
 		"image": load("res://Assets/items/demon_bell.png"),
 		"cost": [1, "soul"],
-		"unique": true
+		"unique": true,
+		"effect":  "Stun demon"
 	},
 	"Blood Bag": {
 		"image": load("res://Assets/items/blood_bag.png"),
 		"cost": [1, "finger"],
-		"unique": false
+		"unique": false,
+		"effect":  20
 	},
 	"Holy Water": {
 		"image": load("res://Assets/items/holy_water.png"),
 		"cost": [1, "toe"],
-		"unique": false
+		"unique": false,
+		"effect": 33
 	}
 }
 
@@ -82,3 +89,7 @@ func get_consumables():
 				consumbles[item] = 1
 	
 	return consumbles
+
+func remove_item_from_inventory(consumable):
+	playerInventory.erase(consumable)
+	emit_signal("consumable_used")
