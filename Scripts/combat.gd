@@ -62,15 +62,30 @@ func handle_player_action(action):
 		"nab toe":
 			var attack =  randi() % 101
 			handle_risk(action, attack)
-			return int(attack(attack, Game_Manager.action_definitions[action]["stats"]["damage"]))
+			
+			var damage = int(attack(attack, Game_Manager.action_definitions[action]["stats"]["damage"]))
+			if damage > 0:
+				if randi()%101 > 25:
+					Game_Manager.player_gain("toe", 1)
+			
+			return damage
 		"nick finger":
 			var attack =  randi() % 101
 			handle_risk(action, attack)
-			return int(attack(attack, Game_Manager.action_definitions[action]["stats"]["damage"]))
+			
+			var damage = int(attack(attack, Game_Manager.action_definitions[action]["stats"]["damage"]))
+			if damage > 0:
+				if randi()%101 > 25:
+					Game_Manager.player_gain("finger", 1)
+			
+			return damage
 		"siphon blood":
 			var attack =  randi() % 101
 			handle_risk(action, attack)
-			return int(attack(attack, Game_Manager.action_definitions[action]["stats"]["damage"]))
+			
+			var bloodSiphoned = int(attack(attack, Game_Manager.action_definitions[action]["stats"]["damage"]))
+			Game_Manager.player_gain("blood", bloodSiphoned)
+			return bloodSiphoned
 		"stun demon":
 			var attack =  randi() % 101
 			handle_risk(action, attack)

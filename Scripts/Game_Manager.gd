@@ -48,7 +48,24 @@ func player_sacrifice(name_in, ammount):
 	set(name_in, tmp)
 	print("you lost a " + name_in)
 	print(get(name_in))
+
+func player_gain(name_in, ammount):
+	var tmp = get(name_in)
+	tmp += ammount
+	set(name_in, tmp)
 	
+	match(name_in):
+		"blood":
+			if blood > 100:
+				blood = 100
+			emit_signal("update_blood")
+		"finger":
+			if finger > 10:
+				finger = 10
+		"toe":
+			if toe > 10:
+				toe = 10
+
 #Mansion floor movement ---------------------------------------------------------------------------------------------------
 func go_up():
 	currentLevel += 1
