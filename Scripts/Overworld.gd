@@ -154,6 +154,8 @@ func move_player(direction:Vector2):
 				player.game_won($Mansion.map_to_world(playerPos) + tileOffset, direction)
 				#player.move_player($Mansion.map_to_world(playerPos) + tileOffset, direction*2)
 				currentState = PLAYERSTATE.MOVING
+			else:
+				$Mansion/Sorter/player_character.check_win()
 		5: #Stairs up
 			currentState = PLAYERSTATE.MOVING
 			Game_Manager.go_up()

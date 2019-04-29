@@ -175,3 +175,22 @@ func loot(items):
 	desc += "."
 	$Camera2D/CanvasLayer/UI.tooltip(desc)
 	
+func check_win():
+	
+	var items = Item_Manager.get_unique_items()
+	if not items.has("Finger Sickle"):
+		$Camera2D/CanvasLayer/UI.tooltip("You need the Finger Sickle, ask Wiggles")
+	elif not items.has("Toe Knife"):
+		$Camera2D/CanvasLayer/UI.tooltip("You need the toe knife, ask Wranque upstairs")
+	elif not items.has("Demon Bell"):
+		$Camera2D/CanvasLayer/UI.tooltip("you need the demon bell which requires a heart")
+	elif Game_Manager.heart < 2:
+		$Camera2D/CanvasLayer/UI.tooltip("you need an extra heart")
+	elif Game_Manager.mind < 2:
+		$Camera2D/CanvasLayer/UI.tooltip("you need an extra mind, try fighting wiggles")	
+	elif Game_Manager.soul < 2:
+		$Camera2D/CanvasLayer/UI.tooltip("the fountain requires an extra soul. Found in the depths of hell")
+	elif not items.has("Blood Scepter"):
+		$Camera2D/CanvasLayer/UI.tooltip("the fountain requires an extra soul. Found in the depths of hell")
+	elif Game_Manager.bloodSacrificeLevel < 20:
+		$Camera2D/CanvasLayer/UI.tooltip("the fountain requires more blood")
