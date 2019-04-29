@@ -65,6 +65,7 @@ var currencies = {
 
 func _ready():
 	playerInventory = debugInv
+	pass
 
 #purchases an item
 func purchase_item(item):
@@ -72,6 +73,7 @@ func purchase_item(item):
 		Game_Manager.player_sacrifice((items[item]["cost"][1]), items[item]["cost"][0])
 		playerInventory.append(item)
 		emit_signal("item_purchased")
+		playerInventory.sort()
 		return true
 	else:
 		return false
@@ -106,3 +108,4 @@ func get_consumables():
 func remove_item_from_inventory(consumable):
 	playerInventory.erase(consumable)
 	emit_signal("consumable_used")
+	playerInventory.sort()

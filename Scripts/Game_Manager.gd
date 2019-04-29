@@ -204,6 +204,7 @@ func use_consumable(consumable):
 				Item_Manager.remove_item_from_inventory(consumable)
 		"Holy Water":
 			if inEncounter:
+				combat.p_crit -= 20
 				Item_Manager.remove_item_from_inventory(consumable)
 		"Demon Candle":
 			if !inEncounter:

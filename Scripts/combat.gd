@@ -20,6 +20,7 @@ var enemy_action_definitions = {}
 var battleJSON = "res://Assets/monster_actions.json"
 var enemy_type = ""
 var offer_bargain = false
+var e_stunned = false #enemy is stunned
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	setup()
@@ -89,7 +90,11 @@ func handle_player_action(action):
 		"stun demon":
 			var attack =  randi() % 101
 			handle_risk(action, attack)
-			return int(attack(attack, Game_Manager.action_definitions[action]["stats"]["damage"]))
+			var damage = int(attack(attack, Game_Manager.action_definitions[action]["stats"]["damage"]))
+			if damage > 0:
+				e_stunned = true
+			
+			return damage
 		_:
 			talk(action)
 			
@@ -161,7 +166,7 @@ func handle_enemy_action(action):
 			#the enemies next attack has no risk
 			emit_signal("combat_log", "the enemy spooks you, their next attack has no risk")
 			e_risk_mod = 100
-		"delay":
+		"delay", "stunned":
 			pass
 		_:
 			emit_signal("combat_log", "enemy performs a " + action)
@@ -195,4 +200,6 @@ func attack(attack, damage_in):
 		emit_signal("miss", "enemy")
 		emit_signal("combat_log", "you miss the enemy")
 	emit_signal("combat_log", "you deal " + str(dmg) + " damage!")
+	
+	p_crit = 95 #Resets crit chance after attacking
 	return dmg

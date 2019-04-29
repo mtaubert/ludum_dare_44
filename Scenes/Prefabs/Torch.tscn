@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/torch.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Torch.gd" type="Script" id=2]
@@ -38,6 +38,22 @@ tangential_accel_random = 1.0
 scale = 0.2
 color = Color( 0.458824, 0, 0, 1 )
 
+[sub_resource type="Animation" id=3]
+resource_name = "flicker"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Light2D:energy")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.01, 1.5, 0.7, 0.8, 0.4, 0.9, 0.6, 1.0 ]
+}
+
 [node name="Torch" type="Sprite"]
 texture = ExtResource( 1 )
 offset = Vector2( 0, -14 )
@@ -48,6 +64,7 @@ position = Vector2( 0, -26 )
 texture = ExtResource( 3 )
 texture_scale = 5.0
 color = Color( 0.447059, 0, 0, 1 )
+energy = 0.497298
 shadow_enabled = true
 
 [node name="Smoke" type="Particles2D" parent="."]
@@ -65,4 +82,7 @@ amount = 20
 speed_scale = 2.0
 process_material = SubResource( 2 )
 texture = ExtResource( 4 )
+
+[node name="Flicker" type="AnimationPlayer" parent="."]
+anims/flicker = SubResource( 3 )
 

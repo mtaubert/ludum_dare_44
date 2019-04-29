@@ -143,7 +143,7 @@ func move_player(direction:Vector2):
 			currentState = PLAYERSTATE.MOVING
 		4: #Exit
 			if entities[newPlayerPos].open:
-				playerPos = newPlayerPos
+				playerPos = newPlayerPos + direction
 				player.move_player($Mansion.map_to_world(playerPos) + tileOffset, direction*2)
 				currentState = PLAYERSTATE.MOVING
 		5: #Stairs up
