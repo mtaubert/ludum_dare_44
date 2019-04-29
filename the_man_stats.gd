@@ -42,9 +42,6 @@ func update_blood():
 	set_blood(Game_Manager.get_player_var("blood"))
 	$counter.text = str(Game_Manager.get_player_var("blood"))
 
-func _on_blood_pressed():
-	emit_signal("blood_paid", 5)
-	update_blood()
 	
 func disable_buttons():
 	cost = 0
@@ -56,11 +53,12 @@ func disable_buttons():
 #		item.disabled = false
 		
 func sacrifice(item):
-	disable_buttons()
 	print("sacrifice " + str(cost)+ " " + str(item.name))
 	if Game_Manager.get_player_var(item.name) > cost:
 		Game_Manager.player_sacrifice(item.name, cost)
 		update_man(item)
+		
+		disable_buttons()
 		emit_signal("paid_tribute", true)
 	else:
 		emit_signal("paid_tribute", false)
