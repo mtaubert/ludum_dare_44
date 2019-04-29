@@ -17,6 +17,14 @@ var demons = {
 		"name": "Wranque",
 		"encounter_animations": null,
 		"bargain_items": ["Toe Knife", "Holy Water", "Demon Candle"]
+	},
+	"3": {
+		"dialog": {},
+		"dialog_animations": load("res://demon_model/interactable_demons/interactable_demon_3.png"),
+		"map_animations": load("res://demon_model/interactable_demons/interactible_demon_2.tres"),
+		"name": "Stan",
+		"encounter_animations": null,
+		"bargain_items": []
 	}
 }
 

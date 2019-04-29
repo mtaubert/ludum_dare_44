@@ -1,18 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://demon_model/interactable_demons/interactable_demon_2_map_2.png" type="Texture" id=1]
-[ext_resource path="res://demon_model/interactable_demons/interactable_demon_2_map_5.png" type="Texture" id=2]
-[ext_resource path="res://demon_model/interactable_demons/interactable_demon_2_map_3.png" type="Texture" id=3]
-[ext_resource path="res://Scripts/Map_Demon.gd" type="Script" id=4]
-[ext_resource path="res://Assets/interact_key.png" type="Texture" id=5]
-
-[sub_resource type="SpriteFrames" id=1]
-animations = [ {
-"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 2 ) ],
-"loop": true,
-"name": "New Anim",
-"speed": 5.0
-} ]
+[ext_resource path="res://demon_model/interactable_demons/interactible_demon_2.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Scripts/Map_Demon.gd" type="Script" id=2]
+[ext_resource path="res://Assets/interact_key.png" type="Texture" id=3]
 
 [sub_resource type="Animation" id=2]
 length = 2.0
@@ -46,17 +36,17 @@ tracks/1/keys = {
 polygon = PoolVector2Array( -7, 0, -16, 1, -18, 5, -14, 8, -8, 9, -2, 9, 5, 7, 9, 6, 9, 3, 5, 1 )
 
 [node name="Map_Demon" type="AnimatedSprite"]
-frames = SubResource( 1 )
-animation = "interactible_demon_1_idle"
-frame = 4
+frames = ExtResource( 1 )
+animation = "Idle"
+frame = 3
 playing = true
 offset = Vector2( 0, -36 )
-script = ExtResource( 4 )
+script = ExtResource( 2 )
 
 [node name="Highlight" type="Sprite" parent="."]
 position = Vector2( 0, -88.0716 )
 scale = Vector2( 0.885169, 0.692585 )
-texture = ExtResource( 5 )
+texture = ExtResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Highlight = SubResource( 2 )

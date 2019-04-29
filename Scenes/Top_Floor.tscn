@@ -45,7 +45,7 @@ position = Vector2( 1190.6, 864.711 )
 position = Vector2( 153.561, 880.395 )
 frames = ExtResource( 5 )
 animation = "Idle"
-frame = 1
+frame = 2
 demonID = 2
 
 [node name="player_character" parent="Mansion/Sorter" instance=ExtResource( 6 )]
