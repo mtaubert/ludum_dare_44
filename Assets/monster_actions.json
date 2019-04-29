@@ -18,7 +18,7 @@
 			"reason": ["you clearly need medical attention let me help","(angry squelching noises)"],
 			"plead": ["please don't hurt me","(puzzled look)"],
 			"threaten": ["I'm gonna poke you in the eye","(it shrugs somehow)"],
-			"offer": ["toe", 1]
+			"offer": ["blood", 3]
 		},
 		"loot": {
 			"blood": 8,
@@ -40,11 +40,11 @@
 			"taunt": "pathetic creature, you can't frighten me.",
 			"good": "plead",
 			"bad": "threaten",
-			"compliment" : ["a compliment","a response"],
-			"reason": ["a compliment","a response"],
-			"plead": ["a compliment","a response"],
-			"threaten": ["a compliment","a response"],
-			"offer": ["toe", 3]
+			"compliment" : ["that is a very attractive robe","I care not for your pleasantries"],
+			"reason": ["you don't have to do this!","..."],
+			"plead": ["please don't hurt me, I can't take it anymore","lucky mortal, I am a generous, 15 blood and you may go free"],
+			"threaten": ["I'm gonna take you down","wretched being, I will eat your soul!"],
+			"offer": ["blood", 15]
 		},
 		"loot": {
 			"blood": 22,
@@ -67,11 +67,11 @@
 			"taunt": "I don't care about your opinions, cretin",
 			"good": "threaten",
 			"bad": "compliment",
-			"compliment" : ["a compliment","a response"],
-			"reason": ["a compliment","a response"],
-			"plead": ["a compliment","a response"],
-			"threaten": ["a compliment","a response"],
-			"offer": ["toe", 3]
+			"compliment" : ["you have delightful fluffy legs","Reeeee!"],
+			"reason": ["you had best be careful, you look rather poorly","(the sound of popping joints)"],
+			"plead": ["just leave me alone","it stares deep into your soul"],
+			"threaten": ["stay back foul creature!","hiss, just 1 finger and I will leave you creature"],
+			"offer": ["finger", 2]
 		},
 	},
 	"eyes_and_holes": {
@@ -89,11 +89,11 @@
 			"taunt": "you can beg for your life, I don't care",
 			"good": "reason",
 			"bad": "plead",
-			"compliment" : ["a compliment","a response"],
-			"reason": ["a compliment","a response"],
-			"plead": ["a compliment","a response"],
-			"threaten": ["a compliment","a response"],
-			"offer": ["toe", 3]
+			"compliment" : ["you have a real talent for levitation","pft you expect me to listen to you?"],
+			"reason": ["surely I can give you something to leave me alone","3 toes. mortal."],
+			"plead": ["please don't hurt me!","pathetic creature, I will grind you to dirt"],
+			"threaten": ["You're going down weirdo","what?"],
+			"offer": ["toe", 2]
 		},
 	},
 	"wiggles": {
@@ -111,11 +111,11 @@
 			"taunt": "hey buddy, we don't have to do this",
 			"good": "compliment",
 			"bad": "threaten",
-			"compliment" : ["a compliment","a response"],
-			"reason": ["a compliment","a response"],
-			"plead": ["a compliment","a response"],
-			"threaten": ["a compliment","a response"],
-			"offer": ["toe", 3]
+			"compliment" : ["you have a stunning smile","awh shucks man, let's not fight"],
+			"reason": ["we could work together?","ha ha ha... nah dude"],
+			"plead": ["let me out of this place!","you're a terrible listener"],
+			"threaten": ["I'll smash your face in!","asshole, I'd like to see you try"],
+			"offer": ["blood", 0]
 		},
 	}
 }
