@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/the_man_stats.png-638019c0b4986de3d8ddac3ef24d55dc.stex"
+path="res://.import/interactable_demon_3_map_4.png-5da937e1c112c21744ff8f81b2f9c430.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://character_model/the_man_stats.png"
-dest_files=[ "res://.import/the_man_stats.png-638019c0b4986de3d8ddac3ef24d55dc.stex" ]
+source_file="res://demon_model/interactable_demons/interactable_demon_3_map_4.png"
+dest_files=[ "res://.import/interactable_demon_3_map_4.png-5da937e1c112c21744ff8f81b2f9c430.stex" ]
 
 [params]
 

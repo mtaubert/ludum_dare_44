@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://demon_model/interactable_demons/interactible_demon_2.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://demon_model/interactable_demons/interactible_demon_3.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Scripts/Map_Demon.gd" type="Script" id=2]
 [ext_resource path="res://Assets/interact_key.png" type="Texture" id=3]
 
@@ -38,7 +38,7 @@ polygon = PoolVector2Array( -7, 0, -16, 1, -18, 5, -14, 8, -8, 9, -2, 9, 5, 7, 9
 [node name="Map_Demon" type="AnimatedSprite"]
 frames = ExtResource( 1 )
 animation = "Idle"
-frame = 3
+frame = 6
 playing = true
 offset = Vector2( 0, -36 )
 script = ExtResource( 2 )

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/the_man_stats.png-638019c0b4986de3d8ddac3ef24d55dc.stex"
+path="res://.import/stan5.png-4ae1ac55aec2bca3b5749b6022ec1c4d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://character_model/the_man_stats.png"
-dest_files=[ "res://.import/the_man_stats.png-638019c0b4986de3d8ddac3ef24d55dc.stex" ]
+source_file="res://demon_model/stan5.png"
+dest_files=[ "res://.import/stan5.png-4ae1ac55aec2bca3b5749b6022ec1c4d.stex" ]
 
 [params]
 
