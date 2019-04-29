@@ -13,7 +13,11 @@
 		"bargain": {
 			"taunt": "there's no sense trying to reason with me, fool.",
 			"good": "compliment",
-			"bad": "reason"
+			"bad": "reason",
+			"compliment" : ["a compliment","a response"],
+			"reason": ["a compliment","a response"],
+			"plead": ["a compliment","a response"],
+			"threaten": ["a compliment","a response"]
 		},
 		"loot": {
 			"blood": 8,
@@ -34,7 +38,11 @@
 		"bargain": {
 			"taunt": "pathetic creature, you can't frighten me.",
 			"good": "plead",
-			"bad": "threaten"
+			"bad": "threaten",
+			"compliment" : ["a compliment","a response"],
+			"reason": ["a compliment","a response"],
+			"plead": ["a compliment","a response"],
+			"threaten": ["a compliment","a response"]
 		},
 		"loot": {
 			"blood": 22,
@@ -56,7 +64,11 @@
 		"bargain": {
 			"taunt": "I don't care about your opinions, cretin",
 			"good": "threaten",
-			"bad": "compliment"
+			"bad": "compliment",
+			"compliment" : ["a compliment","a response"],
+			"reason": ["a compliment","a response"],
+			"plead": ["a compliment","a response"],
+			"threaten": ["a compliment","a response"]
 		},
 	},
 	"eyes_and_holes": {
@@ -73,7 +85,11 @@
 		"bargain": {
 			"taunt": "you can beg for your life, I don't care",
 			"good": "reason",
-			"bad": "plead"
+			"bad": "plead",
+			"compliment" : ["a compliment","a response"],
+			"reason": ["a compliment","a response"],
+			"plead": ["a compliment","a response"],
+			"threaten": ["a compliment","a response"]
 		},
 	},
 	"wiggles": {
@@ -90,7 +106,11 @@
 		"bargain": {
 			"taunt": "hey buddy, we don't have to do this",
 			"good": "compliment",
-			"bad": "threaten"
+			"bad": "threaten",
+			"compliment" : ["a compliment","a response"],
+			"reason": ["a compliment","a response"],
+			"plead": ["a compliment","a response"],
+			"threaten": ["a compliment","a response"]
 		},
 	}
 }

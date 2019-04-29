@@ -6,6 +6,7 @@ signal enemy_risk(type, ammount)
 signal enemy_details(data)
 signal miss(target)
 signal combat_log(text)
+signal player_speak(type)
 signal enemy_speak(type)
 
 var p_crit = 95
@@ -57,7 +58,26 @@ func handle_player_action(action):
 		"dodge":
 			p_dodge = 50
 		_:
-			pass
+			talk(action)
+			
+func talk(action):
+	print("this is some talking")
+	var result = "(average)"
+	if enemy_action_definitions["bargain"]["good"] == action:
+		
+		result = "(good)"
+		print("good")
+	elif enemy_action_definitions["bargain"]["bad"] == action:
+		
+		result = "(bad)"
+		print("bad")
+	else:
+		print("harmless")
+		print(enemy_action_definitions["bargain"][action])
+	emit_signal("player_speak", enemy_action_definitions["bargain"][action][0])	
+	yield(get_tree().create_timer(1), "timeout")
+	emit_signal("enemy_speak", enemy_action_definitions["bargain"][action][1] + " " + result)
+	
 	
 func handle_risk(type, roll):
 	var risks = Game_Manager.action_definitions[type]["risk"]
