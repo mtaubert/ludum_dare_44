@@ -40,6 +40,9 @@ var randomEncounterDemons = {
 	},
 	"4": {
 		"encounter_animations": load("res://demon_model/eyes_and_holes_sheet.tres")
+	},
+	"5": {
+		"encounter_animations": load("res://demon_model/clown_sheet.tres")
 	}
 }
 
