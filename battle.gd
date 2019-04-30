@@ -48,6 +48,8 @@ func _ready():
 				enemy = "behold"
 			"4":
 				enemy = "eyes_and_holes"
+			"5":
+				enemy = "clown"
 			_:
 				print("demon out of range!")
 	else:

@@ -25,6 +25,33 @@
 			"Blood Bag": 1
 		}
 	},
+	"clown": {
+		"stats": {
+			"health": 80
+
+		},
+		"actions": {
+			"spook": "discount",
+			"dodge": "evade 50",
+			"splatter": "attack",
+			"taunt": ""
+		},
+		"bargain": {
+			"taunt": "TEEHEEHEEEEEEE, I'M INSANE",
+			"good": "compliment",
+			"bad": "reason",
+			"compliment": ["love the hair", "HEEHEEHEE HAHA (thanks, please leave a finger and go)"],
+			"reason": ["you're insane", "HAHAHA HOHOHO (that's what I just said)"],
+			"plead": ["please don't do anything twisted to me", "HOHO HEEHEEHEEHEE (you have no idea...)"],
+			"threaten": ["get away or I'll poke those swirley eyes out", "HAHA HEEHEE HO HO (don't touch the eyes)"],
+			"offer": ["finger", 1]
+		},
+		"loot": {
+			"blood": 10,
+			"finger": 1,
+			"Blood Bag": 1
+		}
+	},
 	"spectre": {
 		"stats": {
 			"health": 160
