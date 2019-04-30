@@ -87,7 +87,7 @@
 		"actions": {
 			"spook": "discount",
 			"dodge": "evade 50",
-			"assault": "attack",
+			"splatter": "attack",
 			"taunt": ""
 		},
 		"bargain": {

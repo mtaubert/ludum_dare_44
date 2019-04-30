@@ -24,6 +24,7 @@ func setup(item, ammount):
 func interact():
 	Item_Manager.give_item(thisItem, itemAmmount)
 	emit_signal("picked_up", position)
+	Game_Manager.update_tooltip(thisItem, itemAmmount)
 
 func highlight():
 	$Highlight.show()

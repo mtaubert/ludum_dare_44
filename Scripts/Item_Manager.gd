@@ -40,7 +40,7 @@ var items = {
 	},
 	"Holy Water": {
 		"image": load("res://Assets/items/holy_water.png"),
-		"cost": [1, "toe"],
+		"cost": [3, "toe"],
 		"unique": false,
 		"effect": 33,
 		"encounter_use": true
